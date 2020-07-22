@@ -45,7 +45,7 @@ class NornirInventory(Inventory):
     def ngroups(self):
         data = dict()
         groups = os.listdir(os.path.expanduser(GROUPVARS))
-        groups.remove("all")
+        if "all" in groups: groups.remove("all")
 
         for group in groups:
             group_vars = yaml.load(
@@ -57,8 +57,11 @@ class NornirInventory(Inventory):
         return data
 
     def ndefaults(self):
-        default_vars = yaml.load(
-            open(os.path.expanduser(GROUPVARS) + "/all"), Loader=yaml.SafeLoader,
-        )
+        if os.path.isdir(os.path.expanduser(GROUPVARS) + "/all"):
+            default_vars = yaml.load(
+                open(os.path.expanduser(GROUPVARS) + "/all"), Loader=yaml.SafeLoader,
+            )
+        else:
+            default_vars = dict()
 
         return {"data": default_vars}

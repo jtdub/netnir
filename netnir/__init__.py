@@ -23,17 +23,19 @@ else:
         if not os.path.isdir(v):
             logging.warning(f"creating directory {v}")
             os.makedirs(v)
-    
+
     logging.warning("creating netnir.yaml config")
 
     with open("netnir.yaml", "w") as f:
         f.write(netnir_config)
 
     logging.warning("creating ./conf/nornir.yaml config")
-    
+
     with open("./conf/nornir.yaml", "w") as f:
         f.write(nornir_config)
 
-    sys.exit()
+    logging.warning("loading netnir.yaml config")
+
+    NETNIR_CONFIG = yaml.load(open("netnir.yaml"), Loader=yaml.SafeLoader)
 
 nr = InitNornir(config_file=os.path.expanduser(NETNIR_CONFIG["nornir"]["config"]))
