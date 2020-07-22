@@ -1,21 +1,18 @@
 class TextColor:
-    def __init__(self):
-        self.end = "\033[0m"
+    def blue(message):
+        return f"\033[34m{message}\033[0m"
 
-    def blue(self, message):
-        return f"\033[34m{message}{self.end}"
+    def green(message):
+        return f"\033[32m{message}\033[0m"
 
-    def green(self, message):
-        return f"\033[32m{message}{self.end}"
+    def cyan(message):
+        return f"\033[36m{message}\033[0m"
 
-    def cyan(self, message):
-        return f"\033[36m{message}{self.end}"
+    def red(message):
+        return f"\033[31m{message}\033[0m"
 
-    def red(self, message):
-        return f"\033[31m{message}{self.end}"
+    def purple(message):
+        return f"\033[35m{message}\033[0m"
 
-    def purple(self, message):
-        return f"\033[35m{message}{self.end}"
-
-    def yellow(self, message):
-        return f"\033[33m{message}{self.end}"
+    def yellow(message):
+        return f"\033[33m{message}\033[0m"
