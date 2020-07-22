@@ -1,0 +1,10 @@
+---
+bb_asn: 64512
+rax_transit: true
+dc_regions:
+- name: dc1
+  asn: 64513
+  provider: provider1
+- name: dc2
+  asn: 64514
+  provider: provider2

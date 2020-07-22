@@ -1,0 +1,6 @@
+---
+groups:
+- dc2
+os: ios
+provider: provider2 
+pop_code: 02

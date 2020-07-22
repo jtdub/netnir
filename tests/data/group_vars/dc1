@@ -1,0 +1,7 @@
+dc_asn: 64513 
+metro_name: DC1
+region_code: 07
+continent_code: 1
+pe_loopbacks:
+- prefix: "192.168.0.0/24 le 32"
+  name: "dc1"

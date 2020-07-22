@@ -1,0 +1,7 @@
+dc_asn: 64514 
+metro_name: DC2
+region_code: 08
+continent_code: 2
+pe_loopbacks:
+- prefix: "192.168.1.0/24 le 32"
+  name: "dc2"

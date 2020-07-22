@@ -1,0 +1,19 @@
+---
+directories:
+    hostvars: "./tests/data/host_vars"
+    groupvars: "./tests/data/group_vars"
+    templates: "./tests/data/templates"
+    output: "./tests/data/output"
+
+domain: "example.net"
+
+nornir:
+    config: "./tests/data/nornir.yaml"
+
+plugins:
+    setup:
+        class: netnir.core.tasks.setup.Setup
+        description: "network device authentication setup"
+    inventory:
+        class: netnir.core.tasks.inventory.Inventory
+        description: "inventory"

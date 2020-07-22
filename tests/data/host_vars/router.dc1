@@ -1,0 +1,6 @@
+---
+groups:
+- dc1
+os: iosxr
+provider: provider1
+pop_code: 01
