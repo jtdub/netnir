@@ -57,7 +57,7 @@ class NornirInventory(Inventory):
         return data
 
     def ndefaults(self):
-        if os.path.isdir(os.path.expanduser(GROUPVARS) + "/all"):
+        if os.path.isfile(os.path.expanduser(GROUPVARS) + "/all"):
             default_vars = yaml.load(
                 open(os.path.expanduser(GROUPVARS) + "/all"), Loader=yaml.SafeLoader,
             )
