@@ -21,9 +21,9 @@ default_config = {
             "class": "netnir.core.tasks.config_plan.ConfigPlan",
             "description": "config plan commands",
         },
-        "mc": {
-            "class": "netnir.core.tasks.multi_change.MultiChange",
-            "description": "multi change/show via SSH",
+        "ssh": {
+            "class": "netnir.core.tasks.ssh.Ssh",
+            "description": "command and config execution over SSH",
         },
         "fetch": {
             "class": "netnir.core.tasks.fetch.Fetch",

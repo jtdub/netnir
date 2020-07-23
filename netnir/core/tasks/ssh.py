@@ -1,6 +1,6 @@
 from netnir import nr
 from netnir.core import Networking
-from netnir.helpers import output_writer
+from netnir.helpers import output_writer, filter_type, inventory_filter
 from netnir.helpers.common_args import (
     fetch_host,
     filter_hosts,
@@ -17,7 +17,7 @@ import os
 import sys
 
 
-class MultiChange:
+class Ssh:
     def __init__(self, args):
         self.args = args
         self.nr = nr
@@ -52,15 +52,8 @@ class MultiChange:
         )
 
     def run(self):
-        if self.args.host:
-            hosts = self.nr.filter(name=self.args.host)
-        elif self.args.filter:
-            hosts = self.nr.filter(**render_filter(self.args.filter))
-        elif self.args.group:
-            hosts = self.nr.filter(F(groups__contains=self.args.group))
-        else:
-            hosts = self.nr
-
+        device_filter = filter_type(host=self.args.host, filter=self.args.filter, group=self.args.group)
+        hosts = inventory_filter(self.nr, device_filter=device_filter["data"], type=device_filter["type"])
         networking = Networking(nr=hosts)
 
         if self.args.config:
