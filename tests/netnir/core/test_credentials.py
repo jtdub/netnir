@@ -13,7 +13,7 @@ def test_credentials():
     assert creds.confirm_password == "testPassword"
     assert creds.service_name == "testService"
     assert creds.message == "netnir network authentication"
-    assert creds.status == None
+    assert creds.status is None
 
     create = creds.create()
 

@@ -24,7 +24,7 @@ else:
     netnir_config = yaml.dump(default_config)
     nornir_config = yaml.dump(nornir_defaults)
 
-    for k,v in default_config["directories"].items():
+    for k, v in default_config["directories"].items():
         if not os.path.isdir(v):
             message = TextColor.green(message=f"creating directory {v}")
             logging.warning(message)

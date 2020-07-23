@@ -12,7 +12,7 @@ def test_tasks_config_plan():
     cp.args.host = "router.dc1"
 
     assert isinstance(cp.nr, object)
-    assert cp.args.verbose == False
+    assert cp.args.verbose is False
     assert cp.args.host == "router.dc1"
     assert isinstance(cp.parser, object)
     assert (

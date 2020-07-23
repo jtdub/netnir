@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-from netnir import __version__
+
 import setuptools
 
 
 setuptools.setup(
     name="netnir",
-    version=__version__,
+    version="0.0.1",
     packages=setuptools.find_packages(),
     install_requires=[
         "pytest-runner",

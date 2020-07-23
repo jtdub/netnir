@@ -52,8 +52,12 @@ class Ssh:
         )
 
     def run(self):
-        device_filter = filter_type(host=self.args.host, filter=self.args.filter, group=self.args.group)
-        hosts = inventory_filter(self.nr, device_filter=device_filter["data"], type=device_filter["type"])
+        device_filter = filter_type(
+            host=self.args.host, filter=self.args.filter, group=self.args.group
+        )
+        hosts = inventory_filter(
+            self.nr, device_filter=device_filter["data"], type=device_filter["type"]
+        )
         networking = Networking(nr=hosts)
 
         if self.args.config:

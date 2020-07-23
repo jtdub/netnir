@@ -45,7 +45,8 @@ class NornirInventory(Inventory):
     def ngroups(self):
         data = dict()
         groups = os.listdir(os.path.expanduser(GROUPVARS))
-        if "all" in groups: groups.remove("all")
+        if "all" in groups:
+            groups.remove("all")
 
         for group in groups:
             group_vars = yaml.load(

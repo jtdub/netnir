@@ -22,10 +22,10 @@ def test_cli():
         },
     }
     cli = Cli()
-    assert cli.args.version == False
+    assert cli.args.version is False
 
     cli.args.version = True
-    assert cli.args.version == True
+    assert cli.args.version is True
     assert cli.plugins == plugins
     assert cli.setup() == creds.fetch()
 
