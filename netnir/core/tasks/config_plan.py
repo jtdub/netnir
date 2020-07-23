@@ -6,6 +6,10 @@ from netnir.helpers.nornir_config import verbose_logging
 from nornir.plugins.functions.text import print_result
 
 
+"""config plan cli commands
+"""
+
+
 class ConfigPlan:
     """
     config plan cli plugin to render configuration plans, either by
@@ -16,6 +20,9 @@ class ConfigPlan:
     """
 
     def __init__(self, args):
+        """
+        initialize the config plan class
+        """
         self.args = args
         self.nr = nr
 

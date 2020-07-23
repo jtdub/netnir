@@ -1,3 +1,5 @@
+"""default configuration
+"""
 default_config = {
     "directories": {
         "hostvars": "./host_vars",
@@ -32,6 +34,8 @@ default_config = {
     },
 }
 
+"""default nornir config
+"""
 nornir_defaults = {
     "core": {"num_workers": 20,},
     "inventory": {"plugin": "netnir.core.NornirInventory"},

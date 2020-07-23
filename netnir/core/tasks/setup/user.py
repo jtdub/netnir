@@ -3,6 +3,9 @@ from netnir.constants import SERVICE_NAME, NETNIR_USER
 from pprint import pprint
 import os
 
+"""setup user cli commands
+"""
+
 
 class User:
     """
@@ -10,10 +13,16 @@ class User:
     """
 
     def __init__(self, args):
+        """initialize the class
+        """
         self.args = args
 
     @staticmethod
     def parser(parser):
+        """parse cli arguments
+
+        :param parser: type obj
+        """
         parser.add_argument(
             "--create",
             help="create network device authentication credentials",
@@ -40,6 +49,10 @@ class User:
         )
 
     def run(self):
+        """execute cli task
+
+        :return: credentials result
+        """
         creds = Credentials(service_name=SERVICE_NAME, username=NETNIR_USER)
 
         if self.args.create:

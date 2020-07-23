@@ -5,6 +5,10 @@ import os
 import yaml
 
 
+"""dynamic inventory builder class
+"""
+
+
 class NornirInventory(Inventory):
     """
     default inventory module to dynamically create inventory objects from host_vars and group_vars
@@ -12,6 +16,9 @@ class NornirInventory(Inventory):
     """
 
     def __init__(self, **kwargs):
+        """
+        initialize the NornirInventory class and load the data into nornir
+        """
         super().__init__(
             hosts=self.nhosts(), groups=self.ngroups(), defaults=self.ndefaults()
         )

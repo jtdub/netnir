@@ -23,6 +23,10 @@ class SubCommandParser:
     title = str()
 
     def __init__(self, args):
+        """initialize class
+
+        :param args: type obj
+        """
         self.args = args
 
     @classmethod

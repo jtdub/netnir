@@ -1,3 +1,7 @@
+"""common cli arguments
+"""
+
+
 def fetch_host(parser, required=False):
     """
     common argument to display the --host flag.

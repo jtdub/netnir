@@ -4,6 +4,9 @@ from netnir.core import Networking
 from netnir import nr
 from nornir.plugins.functions.text import print_result
 
+"""fetch remove device configs
+"""
+
 
 class FetchConfig:
     """
@@ -11,16 +14,26 @@ class FetchConfig:
     """
 
     def __init__(self, args):
+        """initialize the class
+        """
         self.args = args
         self.nr = nr
 
     @staticmethod
     def parser(parser):
+        """cli command parser
+
+        :param parser: type obj
+        """
         fetch_host(parser)
         filter_group(parser)
         filter_hosts(parser)
 
     def run(self):
+        """execute the cli task
+
+        :return: nornir results
+        """
         device_filter = filter_type(
             host=self.args.host, filter=self.args.filter, group=self.args.group
         )

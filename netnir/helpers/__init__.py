@@ -1,6 +1,10 @@
 from netnir.helpers.colors import TextColor
 
 
+"""initialize netnir helpers
+"""
+
+
 def device_mapper(os_type: str):
     """
     map an os type to a netmiko device_type

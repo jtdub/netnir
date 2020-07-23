@@ -1,6 +1,9 @@
 from netnir import NETNIR_CONFIG
 import os
 
+"""a place where constants live
+"""
+
 NETNIR_DIRS = NETNIR_CONFIG["directories"]
 
 HOSTVARS = NETNIR_DIRS.get("hostvars", None)

@@ -1,3 +1,7 @@
+"""fetch plugin helpers
+"""
+
+
 def load_plugins(plugins, subparsers, parser):
     """
     fetch and load the plugins to display their commands in the cli.

@@ -4,6 +4,10 @@ from nornir.plugins.tasks.networking import netmiko_send_command, netmiko_send_c
 import os
 
 
+"""ssh networking class
+"""
+
+
 class Networking:
     """
     a networking class that utilizes nornir's netmiko plugin to interact with devices
@@ -26,6 +30,9 @@ class Networking:
     """
 
     def __init__(self, nr, port=22, num_workers=None, service_name=SERVICE_NAME):
+        """
+        initialize the networking class
+        """
         self.nr = nr
         self.creds = Credentials(service_name=service_name, username=NETNIR_USER)
         self.creds.fetch()

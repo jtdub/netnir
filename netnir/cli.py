@@ -7,7 +7,15 @@ import os
 import sys
 
 
+"""cli class to build and execute cli commands
+"""
+
+
 class Cli:
+    """
+    a class object used to setup the netnir cli.
+    """
+
     def __init__(self):
         """
         A class object used to setup the netnir cli, consume the available commands from plugins,
@@ -77,7 +85,14 @@ class Cli:
 
 
 class MyParser(argparse.ArgumentParser):
+    """
+    overwrite the argparse.ArgumentParser defaults.
+    """
+
     def error(self, message):
+        """
+        overwrite the default error
+        """
         sys.stderr.write("error: %s\n" % message)
         self.print_help()
         sys.exit(2)

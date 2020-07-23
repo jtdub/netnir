@@ -2,6 +2,10 @@ from netnir.core.tasks.fetch.config import FetchConfig
 from netnir.helpers.scaffold.subcommand import SubCommandParser
 
 
+"""fetch subcommands initialization
+"""
+
+
 class Fetch(SubCommandParser):
     """
     fetch subcommand parser
@@ -16,6 +20,8 @@ class Fetch(SubCommandParser):
     }
 
     def __init__(self, args):
+        """initialize the class
+        """
         self.args = args
 
         super().__init__(args=self.args)

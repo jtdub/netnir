@@ -3,6 +3,10 @@ from getpass import getpass
 from netnir.constants import SERVICE_NAME
 
 
+"""credentials create/fetch/delete class
+"""
+
+
 class Credentials:
     """
     a class to do credentials administration.
@@ -29,6 +33,9 @@ class Credentials:
         confirm_password=None,
         service_name=SERVICE_NAME,
     ):
+        """
+        initialize the credentials class
+        """
         self.username = username
         self.password = password
         self.confirm_password = confirm_password

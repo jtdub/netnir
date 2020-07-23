@@ -3,6 +3,10 @@ from netnir.helpers.common_args import fetch_host, filter_hosts, filter_group
 from netnir.helpers import render_filter
 
 
+"""inventory cli commands
+"""
+
+
 class Inventory:
     """
     cli based inventory search
@@ -11,6 +15,9 @@ class Inventory:
     """
 
     def __init__(self, args):
+        """
+        initialize the inventory class
+        """
         self.args = args
 
     @staticmethod

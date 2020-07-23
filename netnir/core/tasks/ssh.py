@@ -16,6 +16,9 @@ from nornir.core.filter import F
 import os
 import sys
 
+"""ssh cli commands
+"""
+
 
 class Ssh:
     """
@@ -25,6 +28,9 @@ class Ssh:
     """
 
     def __init__(self, args):
+        """
+        initialize the ssh class
+        """
         self.args = args
         self.nr = nr
 

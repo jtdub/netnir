@@ -1,6 +1,9 @@
 from netnir.core.tasks.setup.user import User
 from netnir.helpers.scaffold.subcommand import SubCommandParser
 
+"""setup subcommand initialization
+"""
+
 
 class Setup(SubCommandParser):
     """

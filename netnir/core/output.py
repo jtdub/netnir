@@ -3,6 +3,10 @@ from nornir import InitNornir
 import os
 
 
+"""ouput read/write/delete class
+"""
+
+
 class Output:
     """
     a class for writing, reading, and deleting output data to/from a file
@@ -23,6 +27,9 @@ class Output:
     """
 
     def __init__(self, host, output_file):
+        """
+        initialize the output class
+        """
         self.nr = InitNornir(NORNIR_CONFIG)
         self.hostname = self.nr.inventory.hosts[host].name
         self.output_dir = os.path.expanduser("/".join([OUTPUT_DIR, self.hostname]))
