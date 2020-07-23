@@ -46,7 +46,9 @@ class ConfigPlan:
         :return: result string
         """
         if self.args.verbose:
-            verbose_logging(nr=self.nr, state=self.args.verbose, level="DEBUG")
+            self.nr = verbose_logging(
+                nr=self.nr, state=self.args.verbose, level="DEBUG"
+            )
 
         template = CompileTemplate(
             nr=self.nr, host=self.args.host, template=template_file

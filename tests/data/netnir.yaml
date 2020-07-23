@@ -4,6 +4,7 @@ directories:
     groupvars: "./tests/data/group_vars"
     templates: "./tests/data/templates"
     output: "./tests/data/output"
+    hier: "./tests/data/hier"
 
 domain: "example.net"
 

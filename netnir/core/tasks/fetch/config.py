@@ -1,5 +1,6 @@
-from netnir.helpers.common_args import fetch_host, filter_group, filter_hosts, output
+from netnir.helpers.common_args import fetch_host, filter_group, filter_hosts, verbose
 from netnir.helpers import filter_type, inventory_filter, output_writer
+from netnir.helpers.nornir_config import verbose_logging
 from netnir.core import Networking
 from netnir import nr
 from nornir.plugins.functions.text import print_result
@@ -28,12 +29,17 @@ class FetchConfig:
         fetch_host(parser)
         filter_group(parser)
         filter_hosts(parser)
+        verbose(parser)
 
     def run(self):
         """execute the cli task
 
         :return: nornir results
         """
+
+        if self.args.verbose:
+            verbose_logging(nr=self.nr, state=self.args.verbose, level="DEBUG")
+
         device_filter = filter_type(
             host=self.args.host, filter=self.args.filter, group=self.args.group
         )

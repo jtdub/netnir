@@ -6,11 +6,11 @@ def dry_run(nr, state: bool):
     """change nornir dry-run state
     :param nr: type obj
     :param state: type bool
-    :return: dry-run state
+    :return: nornir instance
     """
     nr.state.dry_run = state
 
-    return state
+    return nr
 
 
 def verbose_logging(nr, state: bool, level: str):
@@ -18,9 +18,9 @@ def verbose_logging(nr, state: bool, level: str):
     :param nr: type obj
     :param state: type bool
     :param level: type str
-    :return: logging result
+    :return: nornir instance
     """
-    nr.config.logging.logging_level = level
+    nr.config.logging.level = level
     nr.config.logging.to_console = state
 
-    return {"level": level, "to_console": state}
+    return nr

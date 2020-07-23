@@ -10,6 +10,7 @@ from netnir.helpers.common_args import (
     num_workers,
     output,
 )
+from netnir.helpers.nornir_config import verbose_logging
 from netnir.helpers import render_filter
 from nornir.plugins.functions.text import print_result
 from nornir.core.filter import F
@@ -43,7 +44,7 @@ class Ssh:
         filter_group(parser)
         filter_hosts(parser)
         output(parser)
-        # verbose(parser)
+        verbose(parser)
         # make_changes(parser)
         # num_workers(parser)
         parser.add_argument(
@@ -70,6 +71,12 @@ class Ssh:
         """
         cli command execution
         """
+
+        if self.args.verbose:
+            self.nr = verbose_logging(
+                nr=self.nr, state=self.args.verbose, level="DEBUG"
+            )
+
         device_filter = filter_type(
             host=self.args.host, filter=self.args.filter, group=self.args.group
         )

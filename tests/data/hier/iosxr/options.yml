@@ -1,0 +1,199 @@
+style: iosxr
+
+ordering: []
+
+sectional_overwrite: []
+
+sectional_overwrite_no_negate: []
+
+parent_allows_duplicate_child: []
+
+sectional_exiting:
+- lineage:
+  - startswith: route-policy
+  exit_text: end-policy
+- lineage:
+  - startswith: prefix-set
+  exit_text: end-set
+- lineage:
+  - startswith: policy-map
+  exit_text: end-policy-map
+- lineage:
+  - startswith: class-map
+  exit_text: end-class-map
+- lineage:
+  - startswith: community-set
+  exit_text: end-set
+- lineage:
+  - startswith: extcommunity-set
+  exit_text: end-set
+- lineage:
+  - equals: rsvp
+  exit_text: exit
+- lineage:
+  - equals: mpls traffic-eng
+  exit_text: exit
+- lineage:
+  - startswith: mpls ldp
+  exit_text: exit
+- lineage:
+  - startswith: router ospf
+  exit_text: exit
+- lineage:
+  - startswith: router ospfv3
+  exit_text: exit
+- lineage:
+  - startswith: template
+  exit_text: end-template
+- lineage:
+  - startswith: interface
+  exit_text: root
+- lineage:
+  - startswith: router bgp
+  exit_text: root
+
+#adds +1 indent to lines following start_expression and removes the +1 indent for lines following end_expression
+indent_adjust:
+- start_expression: ^\s*template
+  end_expression: ^\s*end-template
+
+#substitions against the full multi-line config text
+full_text_sub: []
+
+#substitions against each line of the config text
+per_line_sub:
+- search: ^Building configuration.*
+  replace: ''
+- search: ^Current configuration.*
+  replace: ''
+- search: ^ntp clock-period .*
+  replace: ''
+- search: .*speed.*
+  replace: ''
+- search: .*duplex.*
+  replace: ''
+- search: .*negotiation auto.*
+  replace: ''
+- search: .*parity none.*
+  replace: ''
+- search: ^end-policy$
+  replace: ' end-policy'
+- search: ^end-set$
+  replace: ' end-set'
+- search: ^end$
+  replace: ''
+- search: '^\s*[#!].*'
+  replace: ''
+
+idempotent_commands_blacklist: []
+#- lineage:
+#  - lineage expression
+
+#These commands do not require negation, they simply overwrite themselves
+idempotent_commands:
+# BGP ITEMS
+- lineage:
+  - startswith: router bgp
+  - startswith: vrf
+  - startswith: address-family
+  - startswith: additional-paths selection route-policy
+- lineage:
+  - startswith: router bgp
+  - startswith: bgp router-id
+- lineage:
+  - startswith: router bgp
+  - startswith: neighbor-group
+  - startswith: address-family
+  - startswith: soft-reconfiguration inbound
+- lineage:
+  - startswith: router bgp
+  - startswith: vrf
+  - startswith: neighbor
+  - startswith: address-family
+  - startswith:
+    - soft-reconfiguration inbound
+    - maximum-prefix
+- lineage:
+  - startswith: router bgp
+  - startswith: vrf
+  - startswith: neighbor
+  - startswith:
+    - password
+    - description
+- lineage:
+  - startswith: router bgp
+  - startswith: neighbor
+  - startswith:
+    - description
+    - password
+# OSPF ITEMS
+- lineage:
+  - startswith: router ospf
+  - startswith: area
+  - startswith: interface
+  - startswith: cost
+- lineage:
+  - startswith: router ospf
+  - startswith: router-id
+- lineage:
+  - startswith: router ospf
+  - startswith: area
+  - startswith: message-digest-key
+- lineage:
+  - startswith: router ospf
+  - startswith: max-metric router-lsa
+# L2VPN Items
+- lineage:
+  - equals: l2vpn
+  - startswith: router-id
+- lineage:
+  - equals: l2vpn
+  - startswith: bridge group
+  - startswith: interface
+  - re_search: ^storm-control (multi|broad)cast
+# Other Items
+- lineage:
+  - re_search: logging \d+.\d+.\d+.\d+ vrf MGMT
+- lineage:
+  - equals: line default
+  - startswith: access-class ingress
+- lineage:
+  - equals: line default
+  - startswith: transport input
+- lineage:
+  - startswith: hostname
+- lineage:
+  - startswith: logging source-interface
+- lineage:
+  - startswith: interface
+  - startswith: ipv4 address
+- lineage:
+  - startswith: snmp-server community
+- lineage:
+  - startswith: snmp-server location
+- lineage:
+  - equals: line console
+  - startswith: exec-timeout
+- lineage:
+  - re_search: telnet vrf \w+ ipv4 server max-servers
+- lineage:
+  - equals: mpls ldp
+  - startswith: session protection duration
+- lineage:
+  - equals: mpls ldp
+  - startswith: igp sync delay
+- lineage:
+  - startswith: interface
+  - startswith:
+    - mtu
+#    - description
+- lineage:
+  - startswith: banner
+- lineage:
+  - startswith: aaa group server tacacs+
+  - startswith: server-private
+  - startswith: key
+
+negation_default_when: []
+
+negation_negate_with: []
