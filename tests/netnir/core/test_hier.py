@@ -1,5 +1,5 @@
 def test_hier_host():
-    from netnir.helpers.hier import HierHost
+    from netnir.core.hier import HierHost
     from nornir import InitNornir
 
     nr = InitNornir("./tests/data/nornir.yaml")

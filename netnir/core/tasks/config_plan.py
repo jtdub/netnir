@@ -1,8 +1,9 @@
 from netnir import nr
-from netnir.core import CompileTemplate
-from netnir.helpers import output_writer
-from netnir.helpers.common_args import fetch_host, verbose, output
+from netnir.core import CompileTemplate, Networking
+from netnir.helpers import output_writer, hier_host
+from netnir.helpers.common_args import fetch_host, verbose
 from netnir.helpers.nornir_config import verbose_logging
+from netnir.constants import OUTPUT_DIR
 from nornir.plugins.functions.text import print_result
 
 
@@ -35,7 +36,25 @@ class ConfigPlan:
         """
         fetch_host(parser, required=True)
         verbose(parser)
-        output(parser)
+        parser.add_argument(
+            "--compile",
+            nargs="?",
+            const=True,
+            help="compile configuration from template",
+            required=False,
+        )
+        parser.add_argument(
+            "--include-tags",
+            action="append",
+            help="hier_config include tags",
+            required=False,
+        )
+        parser.add_argument(
+            "--exclude-tags",
+            action="append",
+            help="hier_config exclude tags",
+            required=False,
+        )
 
     def run(self, template_file="main.conf.j2"):
         """
@@ -45,20 +64,41 @@ class ConfigPlan:
 
         :return: result string
         """
+        print(self.args)
         if self.args.verbose:
             self.nr = verbose_logging(
                 nr=self.nr, state=self.args.verbose, level="DEBUG"
             )
 
-        template = CompileTemplate(
+        compiled_template = CompileTemplate(
             nr=self.nr, host=self.args.host, template=template_file
         )
+        output_writer(
+            nornir_results=compiled_template.render(), output_file="compiled.conf"
+        )
+        print_result(compiled_template.render())
 
-        if self.args.output:
-            output_writer(
-                nornir_results=template.render(), output_file=self.args.output
-            )
+        if self.args.compile:
+            return compiled_template.render()
 
-        print_result(template.render())
+        networking = Networking(nr=self.nr)
+        running_config = networking.fetch(commands="show running")
+        output_writer(nornir_results=running_config, output_file="running.conf")
+        print_result(running_config)
 
-        return template.render()
+        running_config = "/".join([OUTPUT_DIR, self.args.host, "running.conf"])
+        compiled_config = "/".join([OUTPUT_DIR, self.args.host, "compiled.conf"])
+
+        result = self.nr.run(
+            task=hier_host,
+            nr=self.nr,
+            host=self.args.host,
+            include_tags=self.args.incude_tags,
+            exclude_tags=self.args.exclude_tags,
+            running_config=running_config,
+            compiled_config=compiled_config,
+            load_file=True,
+        )
+
+        print_result(result)
+        return result
