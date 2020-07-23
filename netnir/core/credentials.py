@@ -4,6 +4,24 @@ from netnir.constants import SERVICE_NAME
 
 
 class Credentials:
+    """
+    a class to do credentials administration.
+
+    :param username: type str (required)
+    :param password: type str (optional)
+    :param confirm_password: type str (optional)
+    :param service_name: type str (required)
+
+    .. code:: python
+       from netnir.core import Credentials
+
+       creds = Credentials(service_name="testService", username="testUser")
+       ## fetch or create credentials
+       creds.fetch()
+       ## delete credentials from the keyring
+       creds.delete()
+    """
+
     def __init__(
         self,
         username=None,
@@ -19,6 +37,10 @@ class Credentials:
         self.status = None
 
     def create(self):
+        """
+        create credentials
+        :return: dict
+        """
         if self.password is None:
             self.password = getpass(f"{self.message} password: ")
             self.confirm_password = getpass(f"{self.message} confirm passowrd: ")
@@ -36,6 +58,11 @@ class Credentials:
         return self._schema()
 
     def fetch(self):
+        """
+        fetch or create credentials
+
+        :return: dict
+        """
         self.password = self._fetch()
 
         if self.password is None:
@@ -48,6 +75,11 @@ class Credentials:
         return self._schema()
 
     def delete(self):
+        """
+        delete credentials
+
+        :return: dict
+        """
         if self.confirm_password is None:
             self.confirm_password = getpass(f"{self.message} password: ")
 
@@ -66,11 +98,21 @@ class Credentials:
         return creds
 
     def _fetch(self):
+        """
+        private function to fetch credentials
+
+        :return: keyring object
+        """
         return keyring.get_password(
             service_name=self.service_name, username=self.username
         )
 
     def _schema(self):
+        """
+        private function defining the returned output schema
+
+        :return: dict
+        """
         return {
             "username": self.username,
             "password": self.password,

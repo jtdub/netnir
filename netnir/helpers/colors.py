@@ -1,4 +1,16 @@
 class TextColor:
+    """
+    display test on console as a color.
+
+    .. code:: python
+       from netnir.helpers import TextColor
+
+       message = "this is a blue message"
+       TextColor.blue(message)
+
+    :return: color encoded string
+    """
+
     def blue(message):
         return f"\033[34m{message}\033[0m"
 

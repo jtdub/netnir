@@ -7,17 +7,37 @@ from nornir.plugins.functions.text import print_result
 
 
 class ConfigPlan:
+    """
+    config plan cli plugin to render configuration plans, either by
+    compiling from template or using hier_config to create a remediation
+    plan
+
+    :param args: type obj
+    """
+
     def __init__(self, args):
         self.args = args
         self.nr = nr
 
     @staticmethod
     def parser(parser):
+        """
+        cli options parser
+
+        :param parser: type obj
+        """
         fetch_host(parser, required=True)
         verbose(parser)
         output(parser)
 
     def run(self, template_file="main.conf.j2"):
+        """
+        cli execution
+
+        :param template_file: type str
+
+        :return: result string
+        """
         if self.args.verbose:
             verbose_logging(nr=self.nr, state=self.args.verbose, level="DEBUG")
 

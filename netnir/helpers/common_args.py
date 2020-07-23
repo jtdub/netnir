@@ -1,10 +1,16 @@
 def fetch_host(parser, required=False):
+    """
+    common argument to display the --host flag.
+    """
     parser.add_argument(
         "--host", help="specify a specific host", default=str(), required=required,
     )
 
 
 def filter_hosts(parser, required=False):
+    """
+    common argument to display the --filter flag.
+    """
     parser.add_argument(
         "--filter",
         "-f",
@@ -16,6 +22,9 @@ def filter_hosts(parser, required=False):
 
 
 def filter_group(parser, required=False):
+    """
+    common argument to display the --group flag.
+    """
     parser.add_argument(
         "--group",
         "-g",
@@ -26,6 +35,9 @@ def filter_group(parser, required=False):
 
 
 def num_workers(parser, required=False):
+    """
+    common argument to display the --workers flag.
+    """
     parser.add_argument(
         "--workers",
         "-w",
@@ -36,6 +48,9 @@ def num_workers(parser, required=False):
 
 
 def make_changes(parser, required=False):
+    """
+    common argument to display the --X flag.
+    """
     parser.add_argument(
         "-X",
         help="disables nornir dry-run",
@@ -47,6 +62,9 @@ def make_changes(parser, required=False):
 
 
 def verbose(parser, required=False):
+    """
+    common argument to display the --verbose flag.
+    """
     parser.add_argument(
         "--verbose",
         "-v",
@@ -59,6 +77,9 @@ def verbose(parser, required=False):
 
 
 def output(parser, required=False):
+    """
+    common argument to display the --output flag.
+    """
     parser.add_argument(
         "--output", "-o", help="write output to file", required=required,
     )

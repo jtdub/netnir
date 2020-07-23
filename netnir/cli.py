@@ -9,6 +9,10 @@ import sys
 
 class Cli:
     def __init__(self):
+        """
+        A class object used to setup the netnir cli, consume the available commands from plugins,
+        display the available commands, and execute the available commands based on user input.
+        """
         self.plugins = NETNIR_CONFIG["plugins"]
         self.loaded_plugins = dict()
         self.parser = MyParser(prog=f"netnir")
@@ -39,6 +43,9 @@ class Cli:
             sys.exit(f"netnir version {__version__}")
 
     def setup(self):
+        """
+        Initial CLI setup to fetch the user credentials.
+        """
         self.username = NETNIR_USER
 
         if self.username is None:
@@ -50,6 +57,9 @@ class Cli:
         return self.creds.fetch()
 
     def dispatch(self):
+        """
+        Consume and display the available commands from plugins.
+        """
         command = self.args.command
 
         if command is None:

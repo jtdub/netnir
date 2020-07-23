@@ -18,12 +18,21 @@ import sys
 
 
 class Ssh:
+    """
+    cli command to execute show and config commands via SSH
+
+    :param args: type obj
+    """
+
     def __init__(self, args):
         self.args = args
         self.nr = nr
 
     @staticmethod
     def parser(parser):
+        """
+        cli command parser
+        """
         fetch_host(parser)
         filter_group(parser)
         filter_hosts(parser)
@@ -52,6 +61,9 @@ class Ssh:
         )
 
     def run(self):
+        """
+        cli command execution
+        """
         device_filter = filter_type(
             host=self.args.host, filter=self.args.filter, group=self.args.group
         )

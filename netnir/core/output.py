@@ -4,6 +4,24 @@ import os
 
 
 class Output:
+    """
+    a class for writing, reading, and deleting output data to/from a file
+
+    :param host: type str
+    :param output_file: type str
+
+    .. code:: python
+       from netnir.core import Output
+
+       o = Output(host='router.dc1', output_file='data.conf')
+       ## write data to file
+       o.write(output_data="some data")
+       ## read data from file
+       o.read()
+       ## delete file
+       o.delete()
+    """
+
     def __init__(self, host, output_file):
         self.nr = InitNornir(NORNIR_CONFIG)
         self.hostname = self.nr.inventory.hosts[host].name
@@ -17,18 +35,34 @@ class Output:
             os.mkdir(self.output_dir)
 
     def write(self, output_data):
+        """
+        write data to file
+
+        :param output_data: type str
+        :return: str
+        """
         with open(self.output_file, "w") as f:
             f.write(output_data)
 
         return f"contents written to {self.output_file}"
 
     def read(self):
+        """
+        read data from file
+
+        :return: read data
+        """
         with open(self.output_file) as f:
             data = f.read()
 
         return data
 
     def delete(self):
+        """
+        delete file
+
+        :return: str
+        """
         if os.path.isfile(self.output_file):
             os.remove(self.output_file)
 

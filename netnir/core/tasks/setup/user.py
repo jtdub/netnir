@@ -5,6 +5,10 @@ import os
 
 
 class User:
+    """
+    cli user administration to create/fetch/delete a user
+    """
+
     def __init__(self, args):
         self.args = args
 

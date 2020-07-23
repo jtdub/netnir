@@ -1,4 +1,13 @@
 def load_plugins(plugins, subparsers, parser):
+    """
+    fetch and load the plugins to display their commands in the cli.
+
+    :param plugins: type dict
+    :param subparsers: type obj
+    :param parser: type obj
+
+    :return: arguments namespace
+    """
     loaded_plugins = dict()
 
     for task_key, task in plugins.items():

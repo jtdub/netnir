@@ -4,16 +4,28 @@ from netnir.helpers import render_filter
 
 
 class Inventory:
+    """
+    cli based inventory search
+
+    :param args: type obj
+    """
+
     def __init__(self, args):
         self.args = args
 
     @staticmethod
     def parser(parser):
+        """
+        cli command parser
+        """
         fetch_host(parser)
         filter_hosts(parser)
         filter_group(parser)
 
     def run(self):
+        """
+        cli execution
+        """
         self.inventory = nr
 
         if self.args.host:

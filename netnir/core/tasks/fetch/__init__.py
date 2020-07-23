@@ -3,6 +3,10 @@ from netnir.helpers.scaffold.subcommand import SubCommandParser
 
 
 class Fetch(SubCommandParser):
+    """
+    fetch subcommand parser
+    """
+
     title = "fetch commands"
     tasks = {
         "config": {

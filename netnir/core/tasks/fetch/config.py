@@ -6,6 +6,10 @@ from nornir.plugins.functions.text import print_result
 
 
 class FetchConfig:
+    """
+    cli command to fetch remote device configs via nornir's netmiko_show_command plugin
+    """
+
     def __init__(self, args):
         self.args = args
         self.nr = nr

@@ -6,12 +6,20 @@ import yaml
 
 
 class NornirInventory(Inventory):
+    """
+    default inventory module to dynamically create inventory objects from host_vars and group_vars
+    and load the inventory objects into nornir's inventory system.
+    """
+
     def __init__(self, **kwargs):
         super().__init__(
             hosts=self.nhosts(), groups=self.ngroups(), defaults=self.ndefaults()
         )
 
     def nhosts(self):
+        """
+        load devices from host_vars and load them into the nornir inventory schema
+        """
         data = dict()
         hosts = os.listdir(os.path.expanduser(HOSTVARS))
 
@@ -43,6 +51,9 @@ class NornirInventory(Inventory):
         return data
 
     def ngroups(self):
+        """
+        load groups from group_vars and load them into the nornir inventory schema
+        """
         data = dict()
         groups = os.listdir(os.path.expanduser(GROUPVARS))
         if "all" in groups:
@@ -58,6 +69,9 @@ class NornirInventory(Inventory):
         return data
 
     def ndefaults(self):
+        """
+        load the defaults from group_vars/all and load them into the nornir inventory schema
+        """
         if os.path.isfile(os.path.expanduser(GROUPVARS) + "/all"):
             default_vars = yaml.load(
                 open(os.path.expanduser(GROUPVARS) + "/all"), Loader=yaml.SafeLoader,
