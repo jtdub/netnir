@@ -1,6 +1,7 @@
 def test_cli():
     from netnir.cli import Cli
     from netnir.core import Credentials
+    from netnir.helpers.defaults import default_config
     import os
 
     creds = Credentials(
@@ -11,16 +12,7 @@ def test_cli():
     )
     creds.create()
 
-    plugins = {
-        "setup": {
-            "class": "netnir.core.tasks.setup.Setup",
-            "description": "network device authentication setup",
-        },
-        "inventory": {
-            "class": "netnir.core.tasks.inventory.Inventory",
-            "description": "inventory",
-        },
-    }
+    plugins = default_config["plugins"]
     cli = Cli()
     assert cli.args.version is False
 
