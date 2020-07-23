@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
+from netnir import __version__
 import setuptools
 
 
 setuptools.setup(
     name="netnir",
-    version="0.0.1",
+    version=__version__,
     packages=setuptools.find_packages(),
     install_requires=[
         "pytest-runner",
@@ -13,6 +14,7 @@ setuptools.setup(
         "netmiko==2.4.2",
         "hier_config==v1.6.1",
         "keyring>=21.2.1",
+        "keyrings.alt>=3.4.0",
     ],
     tests_require=[
         "pytest",
