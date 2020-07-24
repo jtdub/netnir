@@ -1,4 +1,4 @@
-from netnir.constants import OUTPUT_DIR, NORNIR_CONFIG
+from netnir.constants import OUTPUT_DIR
 from nornir import InitNornir
 import os
 
@@ -30,8 +30,7 @@ class Output:
         """
         initialize the output class
         """
-        self.nr = InitNornir(NORNIR_CONFIG)
-        self.hostname = self.nr.inventory.hosts[host].name
+        self.hostname = host
         self.output_dir = os.path.expanduser("/".join([OUTPUT_DIR, self.hostname]))
         self.output_file = os.path.expanduser("/".join([self.output_dir, output_file]))
 
