@@ -1,6 +1,7 @@
 from netnir import nr
 from netnir.core import CompileTemplate, Networking
-from netnir.helpers import output_writer, hier_host
+from netnir.helpers import output_writer
+from netnir.plugins.hier import hier_host
 from netnir.helpers.common_args import fetch_host, verbose
 from netnir.helpers.nornir_config import verbose_logging
 from netnir.constants import OUTPUT_DIR
