@@ -11,6 +11,10 @@ install:
 script:
 - "python setup.py test"
 
+after_success:
+- "pip install sphinx recommonmark"
+- "cd docs; make html; cd -"
+
 deploy:
 - provider: pypi
   user: "jtdub"
