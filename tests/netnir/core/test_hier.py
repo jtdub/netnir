@@ -3,7 +3,7 @@ def test_hier_host():
     from nornir import InitNornir
 
     nr = InitNornir("./tests/data/nornir.yaml")
-    host = HierHost(nr=nr, host='router.dc1')
+    host = HierHost(nr=nr, host="router.dc1")
     running_config = """hostname router.dc1
 !
 interface Loopback0
