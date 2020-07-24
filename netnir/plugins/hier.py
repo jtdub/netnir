@@ -55,10 +55,6 @@ def hier_host(
             )
 
     host.load_remediation()
-    host.filter_remediation(include_tags=include_tags, exclude_tags=exclude_tags)
-    remediation = str()
-
-    for item in host.remediation_config.all_children():
-        remediation += f"{item.text}\n"
+    remediation = host.filter_remediation(include_tags=include_tags, exclude_tags=exclude_tags)
 
     return Result(host=task.host, result=remediation)
