@@ -69,12 +69,8 @@ def hier_host(
     host.load_remediation()
 
     output = Output(host=task.host.name, output_file="remediation.conf")
-
-    return Result(
-        host=task.host,
-        result=output.write(
-            host.filter_remediation(
-                include_tags=include_tags, exclude_tags=exclude_tags
-            )
-        ),
+    output.write(
+        host.filter_remediation(include_tags=include_tags, exclude_tags=exclude_tags)
     )
+
+    return Result(host=task.host, result=output.read())
