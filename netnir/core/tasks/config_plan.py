@@ -71,6 +71,8 @@ class ConfigPlan:
                 nr=self.nr, state=self.args.verbose, level="DEBUG"
             )
 
+        self.nr = self.nr.filter(name=self.args.host)
+
         compiled_template = CompileTemplate(
             nr=self.nr, host=self.args.host, template=template_file
         )
