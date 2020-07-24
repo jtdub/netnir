@@ -100,5 +100,6 @@ class ConfigPlan:
             load_file=True,
         )
 
+        output_writer(nornir_results=result, output_file="remediation.conf")
         print_result(result)
         return result
