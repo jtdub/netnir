@@ -68,7 +68,7 @@ def hier_host(
 
     host.load_remediation()
 
-    output = Output(host=task.host, output_file="remediaiton.conf")
+    output = Output(host=task.host.name, output_file="remediation.conf")
 
     return Result(
         host=task.host.name,
