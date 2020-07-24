@@ -88,4 +88,3 @@ def filter_type(host: str = None, filter: str = None, group: str = None):
         return {"type": "group", "data": group}
 
     return {"type": None, "data": None}
-
