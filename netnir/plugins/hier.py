@@ -72,7 +72,7 @@ def hier_host(
 
 
     return Result(
-        host=task.host,
+        host=task.host.name,
         result=output.write(
             host.filter_remediation(
                 include_tags=include_tags, exclude_tags=exclude_tags
