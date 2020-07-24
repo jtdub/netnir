@@ -59,6 +59,6 @@ def hier_host(
     remediation = str()
 
     for item in host.remediation_config.all_children():
-        remediation += item.text
+        remediation += f"{item.text}\n"
 
     return Result(host=task.host, result=remediation)
