@@ -94,23 +94,9 @@ class ConfigPlan:
 
         running_config = "/".join([OUTPUT_DIR, self.args.host, "running.conf"])
         compiled_config = "/".join([OUTPUT_DIR, self.args.host, "compiled.conf"])
-        operating_system = self.nr.inventory.hosts[self.args.host].data["os"]
-        hier_options_file = "/".join([HIER_DIR, operating_system, "options.yml"])
-        hier_tags_file = "/".join([HIER_DIR, operating_system, "tags.yml"])
-
-        if os.path.isfile(hier_options_file):
-            hier_options = yaml.load(open(hier_options_file), Loader=yaml.SafeLoader)
-        else:
-            message = TextColor.red(f"{hier_options_file} does not exit")
-            sys.exit(logging.warning(message))
-
-        if not os.path.isfile(hier_tags_file):
-            hier_tags_file = None
 
         result = self.nr.run(
             task=hier_host,
-            hier_options=hier_options,
-            hier_tags_file=hier_tags_file,
             include_tags=self.args.include_tags,
             exclude_tags=self.args.exclude_tags,
             running_config=running_config,
@@ -118,6 +104,5 @@ class ConfigPlan:
             load_file=True,
         )
 
-        output_writer(nornir_results=result, output_file="remediation.conf")
         print_result(result)
         return result
