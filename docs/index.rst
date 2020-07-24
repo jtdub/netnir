@@ -1,5 +1,5 @@
 .. netnir documentation master file, created by
-   sphinx-quickstart on Fri Jul 24 07:59:39 2020.
+   sphinx-quickstart on Fri Jul 24 08:15:33 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
