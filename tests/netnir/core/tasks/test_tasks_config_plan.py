@@ -21,6 +21,6 @@ def test_tasks_config_plan():
     assert cp.args.host == "router.dc1"
     assert isinstance(cp.parser, object)
     assert (
-        cp.run(template_file="template.j2").get("router.dc1")[0].result
+        cp.run(template_file="template.j2").get("router.dc1").result
         == "hostname router.dc1\nos iosxr\nbb_asn 64512\ndc_asn 64513"
     )

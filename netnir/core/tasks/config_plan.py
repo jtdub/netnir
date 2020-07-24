@@ -39,7 +39,7 @@ class ConfigPlan:
 
         :param parser: type obj
         """
-        fetch_host(parser, required=True)
+        fetch_host(parser)
         verbose(parser)
         parser.add_argument(
             "--compile",
@@ -74,18 +74,32 @@ class ConfigPlan:
                 nr=self.nr, state=self.args.verbose, level="DEBUG"
             )
 
-        self.nr = self.nr.filter(name=self.args.host)
+        if self.args.host:
+            self.nr = self.nr.filter(name=self.args.host)
 
-        compiled_template = CompileTemplate(
-            nr=self.nr, host=self.args.host, template=template_file
-        )
-        output_writer(
-            nornir_results=compiled_template.render(), output_file="compiled.conf"
-        )
-        print_result(compiled_template.render())
+            compiled_template = CompileTemplate(
+                nr=self.nr, host=self.args.host, template=template_file
+            )
+            output_writer(
+                nornir_results=compiled_template.render(), output_file="compiled.conf"
+            )
+            print_result(compiled_template.render())
+        else:
+            for host in self.nr.inventory.hosts:
+                compiled_template = CompileTemplate(
+                    nr=self.nr, host=host, template=template_file
+                )
+                output_writer(
+                    nornir_results=compiled_template.render(),
+                    output_file="compiled.conf",
+                )
+                print_result(compiled_template.render())
 
         if self.args.compile:
-            return compiled_template.render()
+            if self.args.host:
+                return compiled_template.render()
+            message = TextColor.green("templates compiled for all hosts")
+            return logging.info(message)
 
         networking = Networking(nr=self.nr)
         running_config = networking.fetch(commands="show running")
