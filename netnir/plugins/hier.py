@@ -1,21 +1,28 @@
+from nornir.core.task import Task, Result
+from hier_config import Host
+import logging
+import os
+
 """hier_config nornir plugin
 """
 
 
 def hier_host(
-    nr: object,
-    host: str = None,
+    task: Task,
+    hier_options: dict = {},
+    hier_tags_file: str = None,
     include_tags: list = None,
     exclude_tags: list = None,
     running_config: str = None,
     compiled_config: str = None,
     load_file: bool = False,
-):
+) -> Result:
     """
-    hier_config helper for nornir
+    hier_config task for nornir
 
-    :param nr: type obj
-    :param host: type str
+    :param task: type object
+    :param hier_options: type dict
+    :param hier_tags_file: type str
     :param incude_tags: type list
     :param exclude_tags: type list
     :param running_config: type str
@@ -24,16 +31,30 @@ def hier_host(
 
     :returns: hier remediation object
     """
-    from netnir.core.hier import HierHost
 
-    hier = HierHost(nr=nr, host=host)
-    hier.load_config_from(
+    host = Host(
+        hostname=task.host.name, os=task.host.data["os"], hconfig_options=hier_options
+    )
+
+    host.load_config_from(
         config_type="running", name=running_config, load_file=load_file
     )
-    hier.load_config_from(
+    host.load_config_from(
         config_type="compiled", name=compiled_config, load_file=load_file
     )
-    hier.load_remediation()
-    hier.filter_remediation(include_tags=include_tags, exclude_tags=exclude_tags)
 
-    return hier.remediation_config()
+    if hier_tags_file:
+        if os.path.isfile(hier_tags_file):
+            host.load_tags(hier_tags_file)
+        else:
+            return Result(
+                host=task.host,
+                result=f"{hier_tags_file} does not exist",
+                failed=True,
+                severity_level=logging.WARN,
+            )
+
+    host.load_remediation()
+    host.filter_remediation(include_tags=include_tags, exclude_tags=exclude_tags)
+
+    return Result(host=task.host, result=host.remediation_config())

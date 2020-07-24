@@ -1,11 +1,15 @@
 from netnir import nr
 from netnir.core import CompileTemplate, Networking
-from netnir.helpers import output_writer
+from netnir.helpers import output_writer, TextColor
 from netnir.plugins.hier import hier_host
 from netnir.helpers.common_args import fetch_host, verbose
 from netnir.helpers.nornir_config import verbose_logging
-from netnir.constants import OUTPUT_DIR
+from netnir.constants import OUTPUT_DIR, HIER_DIR
 from nornir.plugins.functions.text import print_result
+import os
+import sys
+import logging
+import yaml
 
 
 """config plan cli commands
@@ -90,11 +94,23 @@ class ConfigPlan:
 
         running_config = "/".join([OUTPUT_DIR, self.args.host, "running.conf"])
         compiled_config = "/".join([OUTPUT_DIR, self.args.host, "compiled.conf"])
+        operating_system = self.nr.inventory.hosts[self.args.host].data["os"]
+        hier_options_file = "/".join([HIER_DIR, operating_system, "options.yml"])
+        hier_tags_file = "/".join([HIER_DIR, operating_system, "tags.yml"])
+
+        if os.path.isfile(hier_options_file):
+            hier_options = yaml.load(open(hier_options_file), Loader=yaml.SafeLoader)
+        else:
+            message = TextColor.red(f"{hier_options_file} does not exit")
+            sys.exit(logging.warning(message))
+
+        if not os.path.isfile(hier_tags_file):
+            hier_tags_file = None
 
         result = self.nr.run(
             task=hier_host,
-            nr=self.nr,
-            host=self.args.host,
+            hier_options=hier_options,
+            hier_tags_file=hier_tags_file,
             include_tags=self.args.include_tags,
             exclude_tags=self.args.exclude_tags,
             running_config=running_config,
