@@ -65,7 +65,6 @@ class ConfigPlan:
 
         :return: result string
         """
-        print(self.args)
         if self.args.verbose:
             self.nr = verbose_logging(
                 nr=self.nr, state=self.args.verbose, level="DEBUG"
@@ -96,7 +95,7 @@ class ConfigPlan:
             task=hier_host,
             nr=self.nr,
             host=self.args.host,
-            include_tags=self.args.incude_tags,
+            include_tags=self.args.include_tags,
             exclude_tags=self.args.exclude_tags,
             running_config=running_config,
             compiled_config=compiled_config,
