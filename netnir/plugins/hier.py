@@ -17,6 +17,7 @@ def hier_host(
     exclude_tags: list = None,
     running_config: str = None,
     compiled_config: str = None,
+    config_path: str = None,
     load_file: bool = False,
 ) -> Result:
     """
@@ -27,6 +28,7 @@ def hier_host(
     :param exclude_tags: type list
     :param running_config: type str
     :param compiled_config: type str
+    :param config_path: type str
     :param load_file: type bool
 
     :returns: hier remediation object
@@ -35,6 +37,8 @@ def hier_host(
     operating_system = task.host.data["os"]
     hier_options_file = "/".join([HIER_DIR, operating_system, "options.yml"])
     hier_tags_file = "/".join([HIER_DIR, operating_system, "tags.yml"])
+    running_config = "/".join([config_path, task.host.name, running_config])
+    compiled_config = "/".join([config_path, task.host.name, compiled_config])
 
     if os.path.isfile(hier_options_file):
         hier_options = yaml.load(open(hier_options_file), Loader=yaml.SafeLoader)

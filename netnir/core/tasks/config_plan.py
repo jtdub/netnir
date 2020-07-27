@@ -106,15 +106,13 @@ class ConfigPlan:
         output_writer(nornir_results=running_config, output_file="running.conf")
         print_result(running_config)
 
-        running_config = "/".join([OUTPUT_DIR, self.args.host, "running.conf"])
-        compiled_config = "/".join([OUTPUT_DIR, self.args.host, "compiled.conf"])
-
         result = self.nr.run(
             task=hier_host,
             include_tags=self.args.include_tags,
             exclude_tags=self.args.exclude_tags,
-            running_config=running_config,
-            compiled_config=compiled_config,
+            running_config="running.conf",
+            compiled_config="compiled.conf",
+            config_path=OUTPUT_DIR,
             load_file=True,
         )
 
