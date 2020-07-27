@@ -50,8 +50,9 @@ class NornirInventory(Inventory):
                             os.path.expanduser(TEMPLATES),
                             host_vars["provider"],
                             host_vars["os"],
-                        ]
+                        ],
                     ),
+                    "mgmt_protocol": host_vars.get("mgmt_protocol", "ssh"),
                 },
             }
 

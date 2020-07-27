@@ -15,7 +15,7 @@ class CompileTemplate:
     :return: compled template result
     """
 
-    def __init__(self, nr, host, template):
+    def __init__(self, nr: object, host: str = None, template: str = None):
         """initialize the compiletemplate class
         """
         self.nr = nr

@@ -26,7 +26,7 @@ class Output:
        o.delete()
     """
 
-    def __init__(self, host, output_file):
+    def __init__(self, host: str = None, output_file: str = None):
         """
         initialize the output class
         """

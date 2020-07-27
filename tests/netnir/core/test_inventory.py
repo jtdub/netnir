@@ -17,6 +17,7 @@ def test_inventory():
             "pop_code": 1,
             "name": "router.dc1",
             "template_path": "./tests/data/templates/provider1/iosxr",
+            "mgmt_protocol": "ssh",
         },
         "connection_options": {},
     }
@@ -34,6 +35,7 @@ def test_inventory():
             "pop_code": 2,
             "name": "router.dc2",
             "template_path": "./tests/data/templates/provider2/ios",
+            "mgmt_protocol": "ssh",
         },
         "connection_options": {},
     }
@@ -41,3 +43,4 @@ def test_inventory():
     assert isinstance(inv.hosts, dict) is True
     assert router1 == inv.hosts["router.dc1"].dict()
     assert router2 == inv.hosts["router.dc2"].dict()
+    assert inv.hosts["router.dc1"].port == 22

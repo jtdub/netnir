@@ -15,8 +15,8 @@ def test_networking():
 
     assert networking.nr.inventory.defaults.username == "testUser"
     assert networking.nr.inventory.defaults.password == "testPass"
-    assert networking.nr.inventory.defaults.port == 22
     assert networking.nr.inventory.hosts["router.dc1"].name == "router.dc1"
+    assert networking.mgmt_protocol == "ssh"
     assert len(networking.nr.inventory.hosts) == 2
 
     host = nornir.filter(name="router.dc1")

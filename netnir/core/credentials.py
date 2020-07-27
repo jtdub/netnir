@@ -28,10 +28,10 @@ class Credentials:
 
     def __init__(
         self,
-        username=None,
-        password=None,
-        confirm_password=None,
-        service_name=SERVICE_NAME,
+        username: str = None,
+        password: str = None,
+        confirm_password: str = None,
+        service_name: str = SERVICE_NAME,
     ):
         """
         initialize the credentials class

@@ -14,8 +14,7 @@ class Networking:
     via SSH.
 
     :param nr: type obj (required)
-    :param creds: type obj (optional)
-    :param port: type int (optional)
+    :param mgmt_protocol: type str (optional)
     :param num_workers: type int (optional)
     :param service_name: type str (optional)
 
@@ -29,16 +28,22 @@ class Networking:
        networking.config(commands=['ip route 10.0.0.0 255.0.0.0 null0'])
     """
 
-    def __init__(self, nr, port=22, num_workers=None, service_name=SERVICE_NAME):
+    def __init__(
+        self,
+        nr: object,
+        mgmt_protocol: str = "ssh",
+        num_workers: int = None,
+        service_name: str = SERVICE_NAME,
+    ):
         """
         initialize the networking class
         """
         self.nr = nr
+        self.mgmt_protocol = mgmt_protocol
         self.creds = Credentials(service_name=service_name, username=NETNIR_USER)
         self.creds.fetch()
         self.nr.inventory.defaults.username = self.creds.username
         self.nr.inventory.defaults.password = self.creds.password
-        self.nr.inventory.defaults.port = port
         self.nr.config.core.num_workers = (
             num_workers if num_workers else self.nr.config.core.num_workers
         )
