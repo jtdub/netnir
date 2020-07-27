@@ -1,4 +1,12 @@
+from nornir import InitNornir
+from nornir.core.configuration import ConflictingConfigurationWarning
+from netnir.helpers.defaults import default_config, nornir_defaults
 from netnir.helpers.colors import TextColor
+import sys
+import yaml
+import os
+import logging
+import warnings
 
 
 """initialize netnir helpers
@@ -88,3 +96,41 @@ def filter_type(host: str = None, filter: str = None, group: str = None):
         return {"type": "group", "data": group}
 
     return {"type": None, "data": None}
+
+
+def netnir_config(config_file="netnir.yaml"):
+    if os.environ.get("NETNIR_CONFIG", None):
+        return yaml.load(
+            open(os.environ.get("NETNIR_CONFIG")), Loader=yaml.SafeLoader
+        )
+    elif os.path.isfile(config_file):
+        return yaml.load(open(config_file), Loader=yaml.SafeLoader)
+    else:
+        warnings.filterwarnings("ignore", category=ConflictingConfigurationWarning)
+        message = TextColor.red(message="netnir config doesn't exist. creating defaults.")
+        logging.warning(message)
+        netnir_config = yaml.dump(default_config)
+        nornir_config = yaml.dump(nornir_defaults)
+
+        for k, v in default_config["directories"].items():
+            if not os.path.isdir(v):
+                message = TextColor.green(message=f"creating directory {v}")
+                logging.warning(message)
+                os.makedirs(v)
+
+        message = TextColor.green(message=f"creating {config_file} config")
+        logging.warning(message)
+
+        with open(config_file, "w") as f:
+            f.write(netnir_config)
+
+        message = TextColor.green(message="creating ./conf/nornir.yaml config")
+        logging.warning(message)
+
+        with open("./conf/nornir.yaml", "w") as f:
+            f.write(nornir_config)
+
+        message = TextColor.green(message=f"loading config_file config")
+        logging.warning(message)
+
+    return yaml.load(open(config_file), Loader=yaml.SafeLoader)
