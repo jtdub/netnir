@@ -100,14 +100,14 @@ def filter_type(host: str = None, filter: str = None, group: str = None):
 
 def netnir_config(config_file="netnir.yaml"):
     if os.environ.get("NETNIR_CONFIG", None):
-        return yaml.load(
-            open(os.environ.get("NETNIR_CONFIG")), Loader=yaml.SafeLoader
-        )
+        return yaml.load(open(os.environ.get("NETNIR_CONFIG")), Loader=yaml.SafeLoader)
     elif os.path.isfile(config_file):
         return yaml.load(open(config_file), Loader=yaml.SafeLoader)
     else:
         warnings.filterwarnings("ignore", category=ConflictingConfigurationWarning)
-        message = TextColor.red(message="netnir config doesn't exist. creating defaults.")
+        message = TextColor.red(
+            message="netnir config doesn't exist. creating defaults."
+        )
         logging.warning(message)
         netnir_config = yaml.dump(default_config)
         nornir_config = yaml.dump(nornir_defaults)
