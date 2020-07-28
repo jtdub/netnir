@@ -1,14 +1,14 @@
-from netnir import nr
+from netnir import NR
 from netnir.core import Networking
 from netnir.helpers import output_writer, filter_type, inventory_filter
-from netnir.helpers.common_args import (
-    fetch_host,
+from netnir.helpers.common.args import (
+    filter_host,
     filter_hosts,
     filter_group,
     verbose,
     output,
 )
-from netnir.helpers.nornir_config import verbose_logging
+from netnir.helpers.nornir.config import verbose_logging
 from nornir.plugins.functions.text import print_result
 import sys
 
@@ -28,14 +28,14 @@ class Ssh:
         initialize the ssh class
         """
         self.args = args
-        self.nr = nr
+        self.nr = NR
 
     @staticmethod
     def parser(parser):
         """
         cli command parser
         """
-        fetch_host(parser)
+        filter_host(parser)
         filter_group(parser)
         filter_hosts(parser)
         output(parser)

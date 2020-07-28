@@ -1,4 +1,4 @@
-from netnir.constants import HOSTVARS, GROUPVARS, TEMPLATES, DOMAIN
+from netnir import HOSTVARS, GROUPVARS, TEMPLATES, DOMAIN
 from netnir.helpers import device_mapper
 from nornir.core.deserializer.inventory import Inventory
 import os

@@ -1,10 +1,10 @@
-from netnir import nr
+from netnir import NR
 from netnir.core import CompileTemplate, Networking
 from netnir.helpers import output_writer, TextColor
 from netnir.plugins.hier import hier_host
-from netnir.helpers.common_args import fetch_host, verbose
-from netnir.helpers.nornir_config import verbose_logging
-from netnir.constants import OUTPUT_DIR
+from netnir.helpers.common.args import filter_host, verbose
+from netnir.helpers.nornir.config import verbose_logging
+from netnir import OUTPUT_DIR
 from nornir.plugins.functions.text import print_result
 import logging
 
@@ -27,7 +27,7 @@ class ConfigPlan:
         initialize the config plan class
         """
         self.args = args
-        self.nr = nr
+        self.nr = NR
 
     @staticmethod
     def parser(parser):
@@ -36,7 +36,7 @@ class ConfigPlan:
 
         :param parser: type obj
         """
-        fetch_host(parser)
+        filter_host(parser)
         verbose(parser)
         parser.add_argument(
             "--compile",

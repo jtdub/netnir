@@ -2,11 +2,12 @@
 
 
 import setuptools
+from netnir import __version__
 
 
 setuptools.setup(
     name="netnir",
-    version="0.0.1",
+    version=__version__,
     packages=setuptools.find_packages(),
     install_requires=[
         "pytest-runner",
@@ -23,5 +24,14 @@ setuptools.setup(
         "pytest-flake8",
     ],
     python_requires=">=3.6",
-    scripts = ["bin/netnir"],
+    scripts=["bin/netnir"],
+    author="James Williams",
+    author_email="james.williams@rackspace.com",
+    description="a modular cli utility built around nornir.",
+    url="https://github.com/netdevops/netnir",
+    classifiers=[
+        "Python :: 3",
+        "Python :: 3.6",
+        "Python :: 3.8",
+    ],
 )

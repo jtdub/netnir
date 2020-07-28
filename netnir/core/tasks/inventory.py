@@ -1,5 +1,5 @@
-from netnir import nr
-from netnir.helpers.common_args import fetch_host, filter_hosts, filter_group
+from netnir import NR
+from netnir.helpers.common.args import filter_host, filter_hosts, filter_group
 from netnir.helpers import render_filter
 
 
@@ -25,7 +25,7 @@ class Inventory:
         """
         cli command parser
         """
-        fetch_host(parser)
+        filter_host(parser)
         filter_hosts(parser)
         filter_group(parser)
 
@@ -33,18 +33,18 @@ class Inventory:
         """
         cli execution
         """
-        self.inventory = nr
+        self.nr = NR
 
         if self.args.host:
-            hosts = nr.filter(name=self.args.host)
+            hosts = self.nr.filter(name=self.args.host)
             return {"hosts": hosts.inventory.hosts}
         elif self.args.filter:
-            hosts = nr.filter(**render_filter(self.args.filter))
+            hosts = self.nr.filter(**render_filter(self.args.filter))
             return {
                 "hosts": hosts.inventory.hosts,
                 "pattern": render_filter(self.args.filter),
             }
         elif self.args.group:
-            hosts = nr.inventory.children_of_group(self.args.group)
+            hosts = self.nr.inventory.children_of_group(self.args.group)
             return {"hosts": hosts, "group": self.args.group}
-        return {"hosts": nr.inventory.hosts, "groups": nr.inventory.groups}
+        return {"hosts": self.nr.inventory.hosts, "groups": self.nr.inventory.groups}

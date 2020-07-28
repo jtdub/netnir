@@ -1,8 +1,8 @@
-from netnir.helpers.common_args import fetch_host, filter_group, filter_hosts, verbose
+from netnir.helpers.common.args import filter_host, filter_group, filter_hosts, verbose
 from netnir.helpers import filter_type, inventory_filter, output_writer
-from netnir.helpers.nornir_config import verbose_logging
+from netnir.helpers.nornir.config import verbose_logging
 from netnir.core import Networking
-from netnir import nr
+from netnir import NR
 from nornir.plugins.functions.text import print_result
 
 """fetch remove device configs
@@ -18,7 +18,7 @@ class FetchConfig:
         """initialize the class
         """
         self.args = args
-        self.nr = nr
+        self.nr = NR
 
     @staticmethod
     def parser(parser):
@@ -26,7 +26,7 @@ class FetchConfig:
 
         :param parser: type obj
         """
-        fetch_host(parser)
+        filter_host(parser)
         filter_group(parser)
         filter_hosts(parser)
         verbose(parser)

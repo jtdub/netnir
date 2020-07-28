@@ -96,7 +96,7 @@ def filter_type(host: str = None, filter: str = None, group: str = None):
     return {"type": None, "data": None}
 
 
-def netnir_config(config_file="netnir.yaml"):
+def netnir_config(config_file: str = "netnir.yaml"):
     if os.environ.get("NETNIR_CONFIG", None):
         return yaml.load(open(os.environ.get("NETNIR_CONFIG")), Loader=yaml.SafeLoader)
     elif os.path.isfile(config_file):
