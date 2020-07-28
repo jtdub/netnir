@@ -1,10 +1,8 @@
-from nornir.core.configuration import ConflictingConfigurationWarning
 from netnir.helpers.defaults import default_config, nornir_defaults
 from netnir.helpers.colors import TextColor
 import yaml
 import os
 import logging
-import warnings
 
 
 """initialize netnir helpers
@@ -102,7 +100,6 @@ def netnir_config(config_file: str = "netnir.yaml"):
     elif os.path.isfile(config_file):
         return yaml.load(open(config_file), Loader=yaml.SafeLoader)
     else:
-        warnings.filterwarnings("ignore", category=ConflictingConfigurationWarning)
         message = TextColor.red(
             message="netnir config doesn't exist. creating defaults."
         )

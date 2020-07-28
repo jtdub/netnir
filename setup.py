@@ -6,8 +6,8 @@ from netnir import __version__
 
 
 setuptools.setup(
-    name="netnir",
     version=__version__,
+    name="netnir",
     packages=setuptools.find_packages(),
     install_requires=[
         "pytest-runner",

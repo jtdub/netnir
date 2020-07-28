@@ -1,7 +1,6 @@
-from nornir import InitNornir
 from netnir.helpers import netnir_config
+from nornir import InitNornir
 import os
-
 
 NETNIR_CONFIG = netnir_config()
 NETNIR_DIRS = NETNIR_CONFIG["directories"]
