@@ -1,6 +1,6 @@
 import keyring
 from getpass import getpass
-from netnir import SERVICE_NAME
+from netnir.constants import SERVICE_NAME
 
 
 """credentials create/fetch/delete class

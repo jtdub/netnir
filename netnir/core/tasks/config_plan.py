@@ -1,10 +1,10 @@
-from netnir import NR
+from netnir.constants import NR
 from netnir.core import CompileTemplate, Networking
 from netnir.helpers import output_writer, TextColor
 from netnir.plugins.hier import hier_host
 from netnir.helpers.common.args import filter_host, verbose
 from netnir.helpers.nornir.config import verbose_logging
-from netnir import OUTPUT_DIR
+from netnir.constants import OUTPUT_DIR
 from nornir.plugins.functions.text import print_result
 import logging
 

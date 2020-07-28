@@ -1,4 +1,4 @@
-from netnir import NR
+from netnir.constants import NR
 from netnir.helpers.common.args import filter_host, filter_hosts, filter_group
 from netnir.helpers import render_filter
 

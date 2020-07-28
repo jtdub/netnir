@@ -2,7 +2,7 @@ from netnir.helpers.common.args import filter_host, filter_group, filter_hosts, 
 from netnir.helpers import filter_type, inventory_filter, output_writer
 from netnir.helpers.nornir.config import verbose_logging
 from netnir.core import Networking
-from netnir import NR
+from netnir.constants import NR
 from nornir.plugins.functions.text import print_result
 
 """fetch remove device configs

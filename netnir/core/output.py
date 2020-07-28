@@ -1,4 +1,4 @@
-from netnir import OUTPUT_DIR
+from netnir.constants import OUTPUT_DIR
 import os
 
 

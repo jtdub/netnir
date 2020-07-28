@@ -1,4 +1,5 @@
-from netnir import NETNIR_CONFIG, __version__, SERVICE_NAME, NETNIR_USER
+from netnir import NETNIR_CONFIG, __version__
+from netnir.constants import SERVICE_NAME, NETNIR_USER
 from netnir.core import Credentials
 from pprint import pprint
 import argparse
