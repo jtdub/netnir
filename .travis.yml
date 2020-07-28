@@ -16,7 +16,7 @@ after_success:
 - "cd docs; make html; cd -"
 
 deploy:
-  - provider: pages
+- provider: pages
   github-token: $GITHUBTOKEN
   skip-cleanup: true
   keep-history: true
