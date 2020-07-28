@@ -2,7 +2,7 @@
 """
 
 
-def fetch_host(parser, required=False):
+def filter_host(parser, required=False):
     """
     common argument to display the --host flag.
     """

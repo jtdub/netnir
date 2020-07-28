@@ -2,7 +2,7 @@
 """
 
 
-def dry_run(nr, state: bool):
+def dry_run(nr: object, state: bool):
     """change nornir dry-run state
     :param nr: type obj
     :param state: type bool
@@ -13,7 +13,7 @@ def dry_run(nr, state: bool):
     return nr
 
 
-def verbose_logging(nr, state: bool, level: str):
+def verbose_logging(nr: object, state: bool, level: str):
     """change nornir verbose logging state
     :param nr: type obj
     :param state: type bool
