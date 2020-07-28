@@ -1,8 +1,6 @@
-from nornir import InitNornir
 from nornir.core.configuration import ConflictingConfigurationWarning
 from netnir.helpers.defaults import default_config, nornir_defaults
 from netnir.helpers.colors import TextColor
-import sys
 import yaml
 import os
 import logging
@@ -130,7 +128,7 @@ def netnir_config(config_file="netnir.yaml"):
         with open("./conf/nornir.yaml", "w") as f:
             f.write(nornir_config)
 
-        message = TextColor.green(message=f"loading config_file config")
+        message = TextColor.green(message="loading config_file config")
         logging.warning(message)
 
     return yaml.load(open(config_file), Loader=yaml.SafeLoader)

@@ -6,15 +6,10 @@ from netnir.helpers.common_args import (
     filter_hosts,
     filter_group,
     verbose,
-    make_changes,
-    num_workers,
     output,
 )
 from netnir.helpers.nornir_config import verbose_logging
-from netnir.helpers import render_filter
 from nornir.plugins.functions.text import print_result
-from nornir.core.filter import F
-import os
 import sys
 
 """ssh cli commands
@@ -45,8 +40,6 @@ class Ssh:
         filter_hosts(parser)
         output(parser)
         verbose(parser)
-        # make_changes(parser)
-        # num_workers(parser)
         parser.add_argument(
             "--commands",
             "-c",

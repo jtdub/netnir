@@ -4,7 +4,6 @@ from nornir.core.task import Task, Result
 from hier_config import Host
 import logging
 import os
-import sys
 import yaml
 
 """hier_config nornir plugin

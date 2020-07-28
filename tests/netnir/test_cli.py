@@ -2,7 +2,6 @@ def test_cli():
     from netnir.cli import Cli
     from netnir.core import Credentials
     from netnir.helpers.defaults import default_config
-    import os
 
     creds = Credentials(
         service_name="testService",

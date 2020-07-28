@@ -23,7 +23,7 @@ class Cli:
         """
         self.plugins = NETNIR_CONFIG["plugins"]
         self.loaded_plugins = dict()
-        self.parser = MyParser(prog=f"netnir")
+        self.parser = MyParser(prog="netnir")
         self.parser.add_argument(
             "--version", default=False, action="store_true", help="display version"
         )

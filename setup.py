@@ -21,6 +21,7 @@ setuptools.setup(
         "pytest-cov",
         "pytest-pep8",
         "pytest-black",
+        "pytest-flakes",
     ],
     python_requires=">=3.6",
     scripts = ["bin/netnir"],

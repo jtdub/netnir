@@ -4,12 +4,9 @@ from netnir.helpers import output_writer, TextColor
 from netnir.plugins.hier import hier_host
 from netnir.helpers.common_args import fetch_host, verbose
 from netnir.helpers.nornir_config import verbose_logging
-from netnir.constants import OUTPUT_DIR, HIER_DIR
+from netnir.constants import OUTPUT_DIR
 from nornir.plugins.functions.text import print_result
-import os
-import sys
 import logging
-import yaml
 
 
 """config plan cli commands

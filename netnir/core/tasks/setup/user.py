@@ -1,7 +1,6 @@
 from netnir.core import Credentials
 from netnir.constants import SERVICE_NAME, NETNIR_USER
 from pprint import pprint
-import os
 
 """setup user cli commands
 """

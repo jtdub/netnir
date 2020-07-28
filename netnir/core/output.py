@@ -1,5 +1,4 @@
 from netnir.constants import OUTPUT_DIR
-from nornir import InitNornir
 import os
 
 
