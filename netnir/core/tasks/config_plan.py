@@ -1,5 +1,6 @@
 from netnir.constants import NR
-from netnir.core import CompileTemplate, Networking
+from netnir.core.template import CompileTemplate
+from netnir.core.networking import Networking
 from netnir.helpers import output_writer, TextColor
 from netnir.plugins.hier import hier_host
 from netnir.helpers.common.args import filter_host, verbose

@@ -1,5 +1,6 @@
 def test_networking():
-    from netnir.core import Networking, Credentials
+    from netnir.core.networking import Networking
+    from netnir.core.credentials import Credentials
     from nornir import InitNornir
 
     creds = Credentials(

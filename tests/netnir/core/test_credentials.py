@@ -1,5 +1,5 @@
 def test_credentials():
-    from netnir.core import Credentials
+    from netnir.core.credentials import Credentials
 
     creds = Credentials(
         username="testUser",
@@ -20,6 +20,7 @@ def test_credentials():
     assert create == {
         "username": creds.username,
         "password": creds.password,
+        "service": "testService",
         "status": "created",
     }
 
@@ -28,6 +29,7 @@ def test_credentials():
     assert fetch == {
         "username": creds.username,
         "password": creds.password,
+        "service": "testService",
         "status": "fetched",
     }
 
@@ -40,5 +42,6 @@ def test_credentials():
     assert delete == {
         "username": creds.username,
         "password": creds.password,
+        "service": "testService",
         "status": "deleted",
     }

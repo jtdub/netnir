@@ -1,4 +1,4 @@
-from netnir.core import Credentials
+from netnir.core.credentials import Credentials
 from netnir.constants import SERVICE_NAME, NETNIR_USER
 from nornir.plugins.tasks.networking import netmiko_send_command, netmiko_send_config
 

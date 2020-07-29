@@ -1,7 +1,7 @@
 from netnir.helpers.common.args import filter_host, filter_group, filter_hosts, verbose
 from netnir.helpers import filter_type, inventory_filter, output_writer
 from netnir.helpers.nornir.config import verbose_logging
-from netnir.core import Networking
+from netnir.core.networking import Networking
 from netnir.constants import NR
 from nornir.plugins.functions.text import print_result
 

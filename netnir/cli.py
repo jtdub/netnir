@@ -1,9 +1,8 @@
 from netnir import __version__
 from netnir.constants import SERVICE_NAME, NETNIR_USER, NETNIR_CONFIG
-from netnir.core import Credentials
+from netnir.core.credentials import Credentials
 from pprint import pprint
 import argparse
-import os
 import sys
 
 
@@ -54,15 +53,9 @@ class Cli:
         """
         Initial CLI setup to fetch the user credentials.
         """
-        self.username = NETNIR_USER
+        creds = Credentials(service_name=SERVICE_NAME, username=NETNIR_USER)
 
-        if self.username is None:
-            os.environ["NETNIR_USER"] = input("netnir username: ")
-            self.username = os.environ.get("NETNIR_USER", None)
-
-        self.creds = Credentials(service_name=SERVICE_NAME, username=self.username)
-
-        return self.creds.fetch()
+        return creds.fetch()
 
     def dispatch(self):
         """

@@ -1,5 +1,5 @@
 def test_inventory():
-    from netnir.core import NornirInventory
+    from netnir.core.inventory import NornirInventory
 
     inv = NornirInventory()
     router1 = {

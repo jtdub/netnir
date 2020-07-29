@@ -1,5 +1,5 @@
 def test_output():
-    from netnir.core import Output
+    from netnir.core.output import Output
     from os.path import isfile
 
     host = "router.dc1"

@@ -1,5 +1,5 @@
 from netnir.constants import NR
-from netnir.core import Networking
+from netnir.core.networking import Networking
 from netnir.helpers import output_writer, filter_type, inventory_filter
 from netnir.helpers.common.args import (
     filter_host,

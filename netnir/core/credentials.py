@@ -1,6 +1,7 @@
 import keyring
+import os
 from getpass import getpass
-from netnir.constants import SERVICE_NAME
+from netnir.constants import SERVICE_NAME, NETNIR_USER
 
 
 """credentials create/fetch/delete class
@@ -28,7 +29,7 @@ class Credentials:
 
     def __init__(
         self,
-        username: str = None,
+        username: str = NETNIR_USER,
         password: str = None,
         confirm_password: str = None,
         service_name: str = SERVICE_NAME,
@@ -42,6 +43,10 @@ class Credentials:
         self.service_name = service_name
         self.message = "netnir network authentication"
         self.status = None
+
+        if self.username is None:
+            self.username = input("netnir username: ")
+            os.environ["NETNIR_USER"] = self.username
 
     def create(self):
         """
@@ -70,6 +75,7 @@ class Credentials:
 
         :return: dict
         """
+
         self.password = self._fetch()
 
         if self.password is None:
@@ -121,6 +127,7 @@ class Credentials:
         :return: dict
         """
         return {
+            "service": self.service_name,
             "username": self.username,
             "password": self.password,
             "status": self.status,
