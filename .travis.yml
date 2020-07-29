@@ -12,8 +12,11 @@ script:
 - "python setup.py test"
 
 after_success:
-- "pip install sphinx recommonmark"
-- "cd docs; make html; cd -"
+- "pip install sphinx recommonmark sphinx_rtd_theme recommonmark"
+- "cd docs"
+- "make clean; make dirhtml"
+- 'rsync -avz --exclude sphinx-env "${PWD}/_build/dirhtml/" "../../docs"'
+- "cd -"
 
 deploy:
 - provider: pages
