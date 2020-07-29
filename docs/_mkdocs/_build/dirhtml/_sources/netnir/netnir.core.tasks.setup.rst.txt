@@ -1,0 +1,22 @@
+netnir.core.tasks.setup package
+===============================
+
+Submodules
+----------
+
+netnir.core.tasks.setup.user module
+-----------------------------------
+
+.. automodule:: netnir.core.tasks.setup.user
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: netnir.core.tasks.setup
+   :members:
+   :undoc-members:
+   :show-inheritance:

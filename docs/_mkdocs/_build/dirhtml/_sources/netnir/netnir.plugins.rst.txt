@@ -1,0 +1,22 @@
+netnir.plugins package
+======================
+
+Submodules
+----------
+
+netnir.plugins.hier module
+--------------------------
+
+.. automodule:: netnir.plugins.hier
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: netnir.plugins
+   :members:
+   :undoc-members:
+   :show-inheritance:
