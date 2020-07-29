@@ -30,8 +30,15 @@ setuptools.setup(
     description="a modular cli utility built around nornir.",
     url="https://github.com/netdevops/netnir",
     classifiers=[
-        "Python :: 3",
-        "Python :: 3.6",
-        "Python :: 3.8",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Information Technology",
+        "Intended Audience :: System Administrators",
+        "Intended Audience :: Telecommunications Industry",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: System :: Networking",
     ],
 )
