@@ -1,7 +1,7 @@
 .. _netnir:
 
 ==================
-Code Documentation
+code documentation
 ==================
 
 .. toctree::
