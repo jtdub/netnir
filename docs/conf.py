@@ -13,7 +13,7 @@
 import os
 import sys
 from netnir import __version__
-sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('..'))
 
 
 # -- Project information -----------------------------------------------------
@@ -32,7 +32,12 @@ release = __version__
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-  'recommonmark'
+  'recommonmark',
+  'sphinx.ext.autodoc',
+  'sphinx.ext.doctest',
+  'sphinx.ext.coverage',
+  'sphinx.ext.viewcode',
+  'sphinx.ext.githubpages',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

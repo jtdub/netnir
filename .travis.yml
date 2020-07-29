@@ -14,8 +14,9 @@ script:
 after_success:
 - "pip install sphinx recommonmark sphinx_rtd_theme recommonmark"
 - "cd docs"
+- "sphinx-apidoc -f -o netnir ../netnir"
 - "make clean; make dirhtml"
-- 'rsync -avz --exclude sphinx-env "${PWD}/_build/dirhtml/" "../../docs"'
+- 'rsync -avz --exclude sphinx-env "${PWD}/_build/dirhtml/" "../"'
 - "cd -"
 
 deploy:

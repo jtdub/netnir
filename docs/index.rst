@@ -10,6 +10,8 @@ Welcome to netnir's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   netnir.rst
+
 
 
 Indices and tables
