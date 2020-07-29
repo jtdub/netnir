@@ -10,6 +10,7 @@ Welcome to netnir's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   tutorial.rst
    netnir.rst
 
 
