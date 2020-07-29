@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'netnir'
+project = f"netnir {__version__}"
 copyright = '2020, James Williams'
 author = 'James Williams'
 
