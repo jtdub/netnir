@@ -46,14 +46,14 @@ def num_workers(parser, required=False):
         "--workers",
         "-w",
         help="number of workers to utilize",
-        default=int(),
+        default=20,
         required=required,
     )
 
 
 def make_changes(parser, required=False):
     """
-    common argument to display the --X flag.
+    common argument to display the -X flag.
     """
     parser.add_argument(
         "-X",
@@ -73,8 +73,8 @@ def verbose(parser, required=False):
         "--verbose",
         "-v",
         help="verbose logging",
-        default=False,
-        const=True,
+        default=20,
+        const=10,
         nargs="?",
         required=required,
     )

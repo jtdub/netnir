@@ -1,7 +1,9 @@
-import keyring
-import os
-from getpass import getpass
 from netnir.constants import SERVICE_NAME, NETNIR_USER
+from netnir.helpers.colors import TextColor
+from getpass import getpass
+import keyring
+import logging
+import os
 
 
 """credentials create/fetch/delete class
@@ -12,10 +14,10 @@ class Credentials:
     """
     a class to do credentials administration.
 
-    :param username: type str (required)
-    :param password: type str (optional)
-    :param confirm_password: type str (optional)
-    :param service_name: type str (required)
+    :params username: type str (required)
+    :params password: type str (optional)
+    :params confirm_password: type str (optional)
+    :params service_name: type str (required)
 
     .. code:: python
        from netnir.core import Credentials
@@ -43,15 +45,16 @@ class Credentials:
         self.service_name = service_name
         self.message = "netnir network authentication"
         self.status = None
+        self.username_file = os.path.expanduser("~/.netniruser")
 
         if self.username is None:
-            self.username = input("netnir username: ")
-            os.environ["NETNIR_USER"] = self.username
+            self._username()
 
     def create(self):
         """
         create credentials
-        :return: dict
+
+        :returns: dict
         """
         if self.password is None:
             self.password = getpass(f"{self.message} password: ")
@@ -73,7 +76,7 @@ class Credentials:
         """
         fetch or create credentials
 
-        :return: dict
+        :returns: dict
         """
 
         self.password = self._fetch()
@@ -91,7 +94,7 @@ class Credentials:
         """
         delete credentials
 
-        :return: dict
+        :returns: dict
         """
         if self.confirm_password is None:
             self.confirm_password = getpass(f"{self.message} password: ")
@@ -106,15 +109,42 @@ class Credentials:
 
             self.status = "deleted"
 
+            if os.path.isfile(self.username_file):
+                os.remove(self.username_file)
+                message = TextColor.green(
+                    f"username file {self.username_file} has been deleted"
+                )
+                logging.warning(message)
+
             return self._schema()
 
         return creds
+
+    def _username(self):
+        """internal method to read or create the username file
+
+        :returns: username string
+        """
+        if os.path.isfile(self.username_file):
+            with open(self.username_file, "r") as user:
+                self.username = user.read()
+                message = TextColor.green(f"username read from {self.username_file}")
+                logging.warning(message)
+        else:
+            self.username = input("netnir username: ")
+
+            with open(self.username_file, "w") as user:
+                user.write(self.username)
+                message = TextColor.green(f"username written to {self.username_file}")
+                logging.warning(message)
+
+        return self.username
 
     def _fetch(self):
         """
         private function to fetch credentials
 
-        :return: keyring object
+        :returns: keyring object
         """
         return keyring.get_password(
             service_name=self.service_name, username=self.username
@@ -124,7 +154,7 @@ class Credentials:
         """
         private function defining the returned output schema
 
-        :return: dict
+        :returns: dict
         """
         return {
             "service": self.service_name,

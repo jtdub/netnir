@@ -1,6 +1,10 @@
-from netnir.helpers.common.args import filter_host, filter_group, filter_hosts, verbose
+from netnir.helpers.common.args import (
+    filter_host,
+    filter_group,
+    filter_hosts,
+    num_workers,
+)
 from netnir.helpers import filter_type, inventory_filter, output_writer
-from netnir.helpers.nornir.config import verbose_logging
 from netnir.core.networking import Networking
 from netnir.constants import NR
 from nornir.plugins.functions.text import print_result
@@ -29,7 +33,7 @@ class FetchConfig:
         filter_host(parser)
         filter_group(parser)
         filter_hosts(parser)
-        verbose(parser)
+        num_workers(parser)
 
     def run(self):
         """execute the cli task
@@ -37,16 +41,13 @@ class FetchConfig:
         :return: nornir results
         """
 
-        if self.args.verbose:
-            verbose_logging(nr=self.nr, state=self.args.verbose, level="DEBUG")
-
         device_filter = filter_type(
             host=self.args.host, filter=self.args.filter, group=self.args.group
         )
         self.nr = inventory_filter(
             nr=self.nr, device_filter=device_filter["data"], type=device_filter["type"]
         )
-        networking = Networking(nr=self.nr)
+        networking = Networking(nr=self.nr, num_workers=self.args.workers)
         results = networking.fetch(commands="show running")
         output_writer(nornir_results=results, output_file="running.conf")
 
