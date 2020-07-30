@@ -1,6 +1,6 @@
 def test_cli():
     from netnir.cli import Cli
-    from netnir.core import Credentials
+    from netnir.core.credentials import Credentials
     from netnir.helpers.defaults import default_config
 
     creds = Credentials(

@@ -1,5 +1,5 @@
 from netnir.constants import HIER_DIR
-from netnir.core import Output
+from netnir.core.output import Output
 from nornir.core.task import Task, Result
 from hier_config import Host
 import logging

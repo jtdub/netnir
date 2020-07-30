@@ -11,6 +11,7 @@ DOMAIN = NETNIR_CONFIG.get("domain", None)
 OUTPUT_DIR = NETNIR_DIRS.get("output", None)
 SERVICE_NAME = os.environ.get("NETNIR_SERVICE_NAME", "netnir")
 NETNIR_USER = os.environ.get("NETNIR_USER", None)
+NETNIR_PASS = os.environ.get("NETNIR_PASS", None)
 NORNIR_CONFIG = NETNIR_CONFIG["nornir"]["config"]
 HIER_DIR = NETNIR_DIRS.get("hier", None)
 NR = InitNornir(config_file=os.path.expanduser(NORNIR_CONFIG))

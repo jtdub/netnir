@@ -1,4 +1,4 @@
-from netnir.core import Credentials
+from netnir.core.credentials import Credentials
 from netnir.constants import SERVICE_NAME, NETNIR_USER
 from nornir.plugins.tasks.networking import netmiko_send_command, netmiko_send_config
 
@@ -12,10 +12,10 @@ class Networking:
     a networking class that utilizes nornir's netmiko plugin to interact with devices
     via SSH.
 
-    :param nr: type obj (required)
-    :param mgmt_protocol: type str (optional)
-    :param num_workers: type int (optional)
-    :param service_name: type str (optional)
+    :params nr: type obj (required)
+    :params mgmt_protocol: type str (optional)
+    :params num_workers: type int (optional)
+    :params service_name: type str (optional)
 
     .. code:: python
        from netnir.core import Networking

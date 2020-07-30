@@ -1,4 +1,4 @@
-from netnir.core import Credentials
+from netnir.core.credentials import Credentials
 from netnir.constants import SERVICE_NAME, NETNIR_USER
 from pprint import pprint
 

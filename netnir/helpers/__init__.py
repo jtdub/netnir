@@ -51,7 +51,7 @@ def output_writer(nornir_results, output_file):
     :param nornir_results: type obj
     :param output_file: type str
     """
-    from netnir.core import Output
+    from netnir.core.output import Output
 
     for host, data in nornir_results.items():
         o = Output(host=host, output_file=output_file)

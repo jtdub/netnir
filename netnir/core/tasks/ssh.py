@@ -1,14 +1,13 @@
 from netnir.constants import NR
-from netnir.core import Networking
+from netnir.core.networking import Networking
 from netnir.helpers import output_writer, filter_type, inventory_filter
 from netnir.helpers.common.args import (
     filter_host,
     filter_hosts,
     filter_group,
-    verbose,
     output,
+    num_workers,
 )
-from netnir.helpers.nornir.config import verbose_logging
 from nornir.plugins.functions.text import print_result
 import sys
 
@@ -20,7 +19,7 @@ class Ssh:
     """
     cli command to execute show and config commands via SSH
 
-    :param args: type obj
+    :params args: type obj
     """
 
     def __init__(self, args):
@@ -39,7 +38,8 @@ class Ssh:
         filter_group(parser)
         filter_hosts(parser)
         output(parser)
-        verbose(parser)
+        num_workers(parser)
+
         parser.add_argument(
             "--commands",
             "-c",
@@ -47,11 +47,6 @@ class Ssh:
             action="append",
             required=False,
         )
-        # parser.add_argument(
-        #    "--commands-file",
-        #    help="specify a commands file from output directory",
-        #    required=False,
-        # )
         parser.add_argument(
             "--config",
             help="execute commands in config mode",
@@ -65,18 +60,13 @@ class Ssh:
         cli command execution
         """
 
-        if self.args.verbose:
-            self.nr = verbose_logging(
-                nr=self.nr, state=self.args.verbose, level="DEBUG"
-            )
-
         device_filter = filter_type(
             host=self.args.host, filter=self.args.filter, group=self.args.group
         )
         hosts = inventory_filter(
             self.nr, device_filter=device_filter["data"], type=device_filter["type"]
         )
-        networking = Networking(nr=hosts)
+        networking = Networking(nr=hosts, num_workers=self.args.workers,)
 
         if self.args.config:
             results = networking.config(self.args.commands)

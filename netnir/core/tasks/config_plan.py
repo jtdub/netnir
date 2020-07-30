@@ -1,9 +1,9 @@
 from netnir.constants import NR
-from netnir.core import CompileTemplate, Networking
+from netnir.core.template import CompileTemplate
+from netnir.core.networking import Networking
 from netnir.helpers import output_writer, TextColor
 from netnir.plugins.hier import hier_host
-from netnir.helpers.common.args import filter_host, verbose
-from netnir.helpers.nornir.config import verbose_logging
+from netnir.helpers.common.args import filter_host
 from netnir.constants import OUTPUT_DIR
 from nornir.plugins.functions.text import print_result
 import logging
@@ -19,7 +19,7 @@ class ConfigPlan:
     compiling from template or using hier_config to create a remediation
     plan
 
-    :param args: type obj
+    :params args: type obj
     """
 
     def __init__(self, args):
@@ -34,10 +34,9 @@ class ConfigPlan:
         """
         cli options parser
 
-        :param parser: type obj
+        :params parser: type obj
         """
         filter_host(parser)
-        verbose(parser)
         parser.add_argument(
             "--compile",
             nargs="?",
@@ -62,15 +61,10 @@ class ConfigPlan:
         """
         cli execution
 
-        :param template_file: type str
+        :params template_file: type str
 
-        :return: result string
+        :returns: result string
         """
-        if self.args.verbose:
-            self.nr = verbose_logging(
-                nr=self.nr, state=self.args.verbose, level="DEBUG"
-            )
-
         if self.args.host:
             self.nr = self.nr.filter(name=self.args.host)
 

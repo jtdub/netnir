@@ -1,5 +1,5 @@
 def test_template():
-    from netnir.core import CompileTemplate
+    from netnir.core.template import CompileTemplate
     from nornir import InitNornir
 
     nr = InitNornir("./tests/data/nornir.yaml")
