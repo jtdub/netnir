@@ -1,6 +1,8 @@
 from netnir.constants import NR
 from netnir.helpers.common.args import filter_host, filter_hosts, filter_group
-from netnir.helpers import render_filter
+from netnir.helpers import filter_type, inventory_filter
+from netnir.plugins.facts import inventory_facts
+from nornir.plugins.functions.text import print_result
 
 
 """inventory cli commands
@@ -19,6 +21,7 @@ class Inventory:
         initialize the inventory class
         """
         self.args = args
+        self.nr = NR
 
     @staticmethod
     def parser(parser):
@@ -33,18 +36,15 @@ class Inventory:
         """
         cli execution
         """
-        self.nr = NR
+        devices_filter = filter_type(
+            host=self.args.host, filter=self.args.filter, group=self.args.group
+        )
+        self.nr = inventory_filter(
+            nr=self.nr,
+            device_filter=devices_filter["data"],
+            type=devices_filter["type"],
+        )
+        results = self.nr.run(task=inventory_facts)
+        print_result(results)
 
-        if self.args.host:
-            hosts = self.nr.filter(name=self.args.host)
-            return {"hosts": hosts.inventory.hosts}
-        elif self.args.filter:
-            hosts = self.nr.filter(**render_filter(self.args.filter))
-            return {
-                "hosts": hosts.inventory.hosts,
-                "pattern": render_filter(self.args.filter),
-            }
-        elif self.args.group:
-            hosts = self.nr.inventory.children_of_group(self.args.group)
-            return {"hosts": hosts, "group": self.args.group}
-        return {"hosts": self.nr.inventory.hosts, "groups": self.nr.inventory.groups}
+        return results

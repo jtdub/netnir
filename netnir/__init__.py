@@ -3,4 +3,4 @@ initialize netnir by looking for the netnir config. If the netnir config doesn't
 netnir will create the default config and folders.
 """
 
-__version__ = "0.0.6"
+__version__ = "0.0.7"
