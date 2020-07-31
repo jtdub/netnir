@@ -1,19 +1,9 @@
-from netnir.constants import (
-    HOSTVARS,
-    GROUPVARS,
-    TEMPLATES,
-    DOMAIN,
-    NETNIR_USER,
-    NETNIR_PASS,
-)
-from netnir.helpers import device_mapper
 from nornir.core.deserializer.inventory import Inventory
 import os
 import yaml
 
 
-"""dynamic inventory builder class
-"""
+"""dynamic inventory builder class"""
 
 
 class NornirInventory(Inventory):
@@ -31,7 +21,13 @@ class NornirInventory(Inventory):
         )
 
     def nhosts(self):
+        from netnir.helpers import device_mapper
         from netnir.core.credentials import Credentials
+        from netnir.constants import (
+            HOSTVARS,
+            TEMPLATES,
+            DOMAIN,
+        )
 
         """
         load devices from host_vars and load them into the nornir inventory schema
@@ -48,8 +44,8 @@ class NornirInventory(Inventory):
             )
             data[host] = {
                 "hostname": f"{host}.{domain}" if domain else host,
-                "username": os.environ.get(NETNIR_USER, creds["username"]),
-                "password": os.environ.get(NETNIR_PASS, creds["password"]),
+                "username": creds["username"],
+                "password": creds["password"],
                 "port": host_vars.get("port", 22),
                 "platform": device_mapper(host_vars["os"]),
                 "groups": host_vars.get("groups", list()),
@@ -68,8 +64,8 @@ class NornirInventory(Inventory):
                 "connection_options": {
                     "netconf": {
                         "hostname": f"{host}.{domain}" if domain else host,
-                        "username": os.environ.get(NETNIR_USER, creds["username"]),
-                        "password": os.environ.get(NETNIR_PASS, creds["password"]),
+                        "username": creds["username"],
+                        "password": creds["password"],
                         "platform": host_vars.get("os"),
                         "port": host_vars.get("port", 830),
                         "extras": {"hostkey_verify": False},
@@ -83,6 +79,8 @@ class NornirInventory(Inventory):
         """
         load groups from group_vars and load them into the nornir inventory schema
         """
+        from netnir.constants import GROUPVARS
+
         data = dict()
         groups = os.listdir(os.path.expanduser(GROUPVARS))
         if "all" in groups:
@@ -101,6 +99,8 @@ class NornirInventory(Inventory):
         """
         load the defaults from group_vars/all and load them into the nornir inventory schema
         """
+        from netnir.constants import GROUPVARS
+
         if os.path.isfile(os.path.expanduser(GROUPVARS) + "/all"):
             default_vars = yaml.load(
                 open(os.path.expanduser(GROUPVARS) + "/all"), Loader=yaml.SafeLoader,
