@@ -44,8 +44,8 @@ class NornirInventory(Inventory):
             )
             data[host] = {
                 "hostname": f"{host}.{domain}" if domain else host,
-                "username": creds["username"],
-                "password": creds["password"],
+                "username": host_vars.get("username", creds["username"]),
+                "password": host_vars.get("password", creds["password"]),
                 "port": host_vars.get("port", 22),
                 "platform": device_mapper(host_vars["os"]),
                 "groups": host_vars.get("groups", list()),
@@ -64,8 +64,8 @@ class NornirInventory(Inventory):
                 "connection_options": {
                     "netconf": {
                         "hostname": f"{host}.{domain}" if domain else host,
-                        "username": creds["username"],
-                        "password": creds["password"],
+                        "username": host_vars.get("username", creds["username"]),
+                        "password": host_vars.get("password", creds["password"]),
                         "platform": host_vars.get("os"),
                         "port": host_vars.get("port", 830),
                         "extras": {"hostkey_verify": False},
