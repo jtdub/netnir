@@ -20,6 +20,7 @@ def device_mapper(os_type: str):
     device_types = {
         "ios": "cisco_ios",
         "iosxr": "cisco_xr",
+        "iosxe": "cisco_xe",
         "nxos": "cisco_nxos",
         "eos": "arista_eos",
     }
