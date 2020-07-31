@@ -6,7 +6,6 @@ from netnir.constants import (
     NETNIR_USER,
     NETNIR_PASS,
 )
-from netnir.core.credentials import Credentials
 from netnir.helpers import device_mapper
 from nornir.core.deserializer.inventory import Inventory
 import os
@@ -32,6 +31,8 @@ class NornirInventory(Inventory):
         )
 
     def nhosts(self):
+        from netnir.core.credentials import Credentials
+
         """
         load devices from host_vars and load them into the nornir inventory schema
         """

@@ -1,4 +1,3 @@
-from netnir.constants import SERVICE_NAME, NETNIR_USER, NETNIR_PASS
 from netnir.helpers.colors import TextColor
 from getpass import getpass
 import keyring
@@ -31,18 +30,20 @@ class Credentials:
 
     def __init__(
         self,
-        username: str = NETNIR_USER,
-        password: str = NETNIR_PASS,
-        confirm_password: str = NETNIR_PASS,
-        service_name: str = SERVICE_NAME,
+        username: str = None,
+        password: str = None,
+        confirm_password: str = None,
+        service_name: str = None,
     ):
         """
         initialize the credentials class
         """
-        self.username = username
-        self.password = password
-        self.confirm_password = confirm_password
-        self.service_name = service_name
+        from netnir.constants import SERVICE_NAME, NETNIR_USER, NETNIR_PASS
+
+        self.username = NETNIR_USER or username
+        self.password = NETNIR_PASS or password
+        self.confirm_password = NETNIR_PASS or confirm_password
+        self.service_name = SERVICE_NAME or service_name
         self.message = "netnir network authentication"
         self.status = None
         self.username_file = os.path.expanduser("~/.netniruser")
@@ -52,7 +53,7 @@ class Credentials:
 
     def create(self):
         """
-        create credentials
+        create or update credentials
 
         :returns: dict
         """
@@ -79,14 +80,11 @@ class Credentials:
         :returns: dict
         """
 
-        self.password = self._fetch()
-
-        if self.password is None:
+        if self._fetch() is None:
             self.create()
         else:
             self.status = "fetched"
-
-        self.password = self._fetch()
+            self.password = self._fetch()
 
         return self._schema()
 
