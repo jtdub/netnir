@@ -1,4 +1,4 @@
-from netnir.constants import SERVICE_NAME, NETNIR_USER
+from netnir.constants import SERVICE_NAME, NETNIR_USER, NETNIR_PASS
 from netnir.helpers.colors import TextColor
 from getpass import getpass
 import keyring
@@ -32,8 +32,8 @@ class Credentials:
     def __init__(
         self,
         username: str = NETNIR_USER,
-        password: str = None,
-        confirm_password: str = None,
+        password: str = NETNIR_PASS,
+        confirm_password: str = NETNIR_PASS,
         service_name: str = SERVICE_NAME,
     ):
         """
@@ -129,14 +129,14 @@ class Credentials:
             with open(self.username_file, "r") as user:
                 self.username = user.read()
                 message = TextColor.green(f"username read from {self.username_file}")
-                logging.warning(message)
+                logging.info(message)
         else:
             self.username = input("netnir username: ")
 
             with open(self.username_file, "w") as user:
                 user.write(self.username)
                 message = TextColor.green(f"username written to {self.username_file}")
-                logging.warning(message)
+                logging.info(message)
 
         return self.username
 

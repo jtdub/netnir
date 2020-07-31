@@ -1,4 +1,4 @@
-def test_output():
+def test_output(initial_setup):
     from netnir.core.output import Output
     from os.path import isfile
 

@@ -1,5 +1,3 @@
-from netnir.core.credentials import Credentials
-from netnir.constants import SERVICE_NAME, NETNIR_USER
 from nornir.plugins.tasks.networking import netmiko_send_command, netmiko_send_config
 
 
@@ -15,7 +13,6 @@ class Networking:
     :params nr: type obj (required)
     :params mgmt_protocol: type str (optional)
     :params num_workers: type int (optional)
-    :params service_name: type str (optional)
 
     .. code:: python
        from netnir.core import Networking
@@ -28,21 +25,13 @@ class Networking:
     """
 
     def __init__(
-        self,
-        nr: object,
-        mgmt_protocol: str = "ssh",
-        num_workers: int = None,
-        service_name: str = SERVICE_NAME,
+        self, nr: object, mgmt_protocol: str = "ssh", num_workers: int = None,
     ):
         """
         initialize the networking class
         """
         self.nr = nr
         self.mgmt_protocol = mgmt_protocol
-        self.creds = Credentials(service_name=service_name, username=NETNIR_USER)
-        self.creds.fetch()
-        self.nr.inventory.defaults.username = self.creds.username
-        self.nr.inventory.defaults.password = self.creds.password
         self.nr.config.core.num_workers = (
             num_workers if num_workers else self.nr.config.core.num_workers
         )

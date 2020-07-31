@@ -1,4 +1,4 @@
-def test_text_color():
+def test_text_color(initial_setup):
     from netnir.helpers import TextColor
 
     message = "testing 1 2 3"

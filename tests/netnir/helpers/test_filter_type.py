@@ -1,4 +1,4 @@
-def test_filter_type():
+def test_filter_type(initial_setup):
     from netnir.helpers import filter_type
 
     assert filter_type(host="router.dc1") == {"type": "host", "data": "router.dc1"}
