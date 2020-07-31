@@ -1,7 +1,5 @@
 from nornir.core.task import Task, Result
 
-"""netconf nornir plugin"""
-
 
 def netconf_get(task: Task) -> Result:
     """nornir netconf get task

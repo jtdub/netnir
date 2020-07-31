@@ -28,7 +28,7 @@ class CommandScaffold:
 
     def run(self):
         """things to do"""
-        pass
+        return "things to do"
 
     def _inventory(self):
         """filter inventory

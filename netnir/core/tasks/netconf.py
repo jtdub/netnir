@@ -1,10 +1,8 @@
 from netnir.helpers.scaffold.command import CommandScaffold
 
-"""netconf commands"""
-
 
 class NetConf(CommandScaffold):
-    """netconf commands class"""
+    """netconf commands"""
 
     def run(self):
         """execute netconf commands
