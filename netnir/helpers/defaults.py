@@ -27,6 +27,10 @@ default_config = {
             "class": "netnir.core.tasks.ssh.Ssh",
             "description": "command and config execution over SSH",
         },
+        "netconf": {
+            "class": "netnir.core.tasks.netconf.NetConf",
+            "description": "command and config execution over NETCONF",
+        },
         "fetch": {
             "class": "netnir.core.tasks.fetch.Fetch",
             "description": "fetch commands",

@@ -1,4 +1,4 @@
-def test_nornir_config(initial_setup):
+def test_netnir_config(initial_setup):
     from netnir.helpers import netnir_config
 
     test_config = {
@@ -27,6 +27,10 @@ def test_nornir_config(initial_setup):
             "ssh": {
                 "class": "netnir.core.tasks.ssh.Ssh",
                 "description": "command and config execution over SSH",
+            },
+            "netconf": {
+                "class": "netnir.core.tasks.netconf.NetConf",
+                "description": "command and config execution over NETCONF",
             },
             "fetch": {
                 "class": "netnir.core.tasks.fetch.Fetch",
