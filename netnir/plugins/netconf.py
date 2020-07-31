@@ -9,6 +9,6 @@ def netconf_get(task: Task) -> Result:
     manager = task.host.get_connection(
         connection="netconf", configuration=task.nornir.config
     )
-    result = manager.get()
+    result = manager.get_config("running")
 
     return Result(result=result, host=task.host)
