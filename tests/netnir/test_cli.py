@@ -1,15 +1,6 @@
-def test_cli():
+def test_cli(initial_setup):
     from netnir.cli import Cli
-    from netnir.core.credentials import Credentials
     from netnir.helpers.defaults import default_config
-
-    creds = Credentials(
-        service_name="testService",
-        username="testUser",
-        password="testPass",
-        confirm_password="testPass",
-    )
-    creds.create()
 
     plugins = default_config["plugins"]
     cli = Cli()
@@ -18,6 +9,3 @@ def test_cli():
     cli.args.version = True
     assert cli.args.version is True
     assert cli.plugins == plugins
-    assert cli.setup() == creds.fetch()
-
-    creds.delete()

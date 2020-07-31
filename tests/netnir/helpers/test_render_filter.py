@@ -1,4 +1,4 @@
-def test_render_filter():
+def test_render_filter(initial_setup):
     from netnir.helpers import render_filter
 
     items = ["os:iosxr", "group:dc1"]

@@ -1,4 +1,11 @@
-from netnir.constants import HOSTVARS, GROUPVARS, TEMPLATES, DOMAIN
+from netnir.constants import (
+    HOSTVARS,
+    GROUPVARS,
+    TEMPLATES,
+    DOMAIN,
+    NETNIR_USER,
+    NETNIR_PASS,
+)
 from netnir.helpers import device_mapper
 from nornir.core.deserializer.inventory import Inventory
 import os
@@ -24,11 +31,15 @@ class NornirInventory(Inventory):
         )
 
     def nhosts(self):
+        from netnir.core.credentials import Credentials
+
         """
         load devices from host_vars and load them into the nornir inventory schema
         """
         data = dict()
         hosts = os.listdir(os.path.expanduser(HOSTVARS))
+        creds = Credentials()
+        creds = creds.fetch()
 
         for host in hosts:
             domain = DOMAIN
@@ -37,8 +48,8 @@ class NornirInventory(Inventory):
             )
             data[host] = {
                 "hostname": f"{host}.{domain}" if domain else host,
-                "username": None,
-                "password": None,
+                "username": os.environ.get(NETNIR_USER, creds["username"]),
+                "password": os.environ.get(NETNIR_PASS, creds["password"]),
                 "port": host_vars.get("port", 22),
                 "platform": device_mapper(host_vars["os"]),
                 "groups": host_vars.get("groups", list()),
@@ -53,6 +64,16 @@ class NornirInventory(Inventory):
                         ],
                     ),
                     "mgmt_protocol": host_vars.get("mgmt_protocol", "ssh"),
+                },
+                "connection_options": {
+                    "netconf": {
+                        "hostname": f"{host}.{domain}" if domain else host,
+                        "username": os.environ.get(NETNIR_USER, creds["username"]),
+                        "password": os.environ.get(NETNIR_PASS, creds["password"]),
+                        "platform": host_vars.get("os"),
+                        "port": host_vars.get("port", 830),
+                        "extras": {"hostkey_verify": False},
+                    },
                 },
             }
 

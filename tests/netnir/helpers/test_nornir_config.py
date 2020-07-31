@@ -1,4 +1,4 @@
-def test_nornir_config():
+def test_nornir_config(initial_setup):
     from netnir.helpers import netnir_config
 
     test_config = {

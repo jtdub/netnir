@@ -1,4 +1,4 @@
-def test_common_args():
+def test_common_args(initial_setup):
     from netnir.helpers.common import args
     import argparse
 

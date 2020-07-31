@@ -12,6 +12,8 @@ script:
 - "python setup.py test"
 
 after_success:
+- export NETNIR_USER=bogus
+- export NETNIR_PASS=bogus
 - "pip install sphinx recommonmark sphinx_rtd_theme recommonmark"
 - "cd docs/_mkdocs"
 - "sphinx-apidoc -f -o netnir ../../netnir"

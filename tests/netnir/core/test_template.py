@@ -1,4 +1,4 @@
-def test_template():
+def test_template(initial_setup):
     from netnir.core.template import CompileTemplate
     from nornir import InitNornir
 

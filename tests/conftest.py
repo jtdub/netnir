@@ -1,8 +1,8 @@
 import pytest
 
 
-@pytest.fixture(scope="session", autouse=True)
-def initial_setup(request):
+@pytest.fixture
+def initial_setup(autouse=True):
     import os
     import keyring
 

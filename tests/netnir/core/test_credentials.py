@@ -1,16 +1,17 @@
-def test_credentials():
+def test_credentials(initial_setup):
     from netnir.core.credentials import Credentials
+    import os
 
     creds = Credentials(
-        username="testUser",
-        password="testPassword",
-        confirm_password="testPassword",
-        service_name="testService",
+        username=os.environ.get("NETNIR_USER"),
+        password=os.environ.get("NETNIR_PASS"),
+        confirm_password=os.environ.get("NETNIR_PASS"),
+        service_name=os.environ.get("NETNIR_SERVICE_NAME"),
     )
 
     assert creds.username == "testUser"
-    assert creds.password == "testPassword"
-    assert creds.confirm_password == "testPassword"
+    assert creds.password == "testPass"
+    assert creds.confirm_password == "testPass"
     assert creds.service_name == "testService"
     assert creds.message == "netnir network authentication"
     assert creds.status is None

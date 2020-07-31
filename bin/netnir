@@ -5,7 +5,6 @@ from netnir.cli import Cli
 
 try:
     cli = Cli()
-    cli.setup()
     cli.dispatch()
 except KeyboardInterrupt:
     pass

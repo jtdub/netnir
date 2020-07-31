@@ -1,12 +1,13 @@
-def test_inventory():
+def test_inventory(initial_setup):
     from netnir.core.inventory import NornirInventory
+    import os
 
     inv = NornirInventory()
     router1 = {
         "hostname": "router.dc1.example.net",
         "port": 22,
-        "username": None,
-        "password": None,
+        "username": os.environ.get("NETNIR_USER"),
+        "password": os.environ.get("NETNIR_PASS"),
         "platform": "cisco_xr",
         "groups": ["dc1"],
         "data": {
@@ -18,13 +19,22 @@ def test_inventory():
             "template_path": "./tests/data/templates/provider1/iosxr",
             "mgmt_protocol": "ssh",
         },
-        "connection_options": {},
+        "connection_options": {
+            "netconf": {
+                "hostname": "router.dc1.example.net",
+                "username": os.environ.get("NETNIR_USER"),
+                "password": os.environ.get("NETNIR_PASS"),
+                "platform": "iosxr",
+                "port": 830,
+                "extras": {"hostkey_verify": False},
+            },
+        },
     }
     router2 = {
         "hostname": "router.dc2.example.net",
         "port": 22,
-        "username": None,
-        "password": None,
+        "username": os.environ.get("NETNIR_USER"),
+        "password": os.environ.get("NETNIR_PASS"),
         "platform": "cisco_ios",
         "groups": ["dc2"],
         "data": {
@@ -36,7 +46,16 @@ def test_inventory():
             "template_path": "./tests/data/templates/provider2/ios",
             "mgmt_protocol": "ssh",
         },
-        "connection_options": {},
+        "connection_options": {
+            "netconf": {
+                "hostname": "router.dc2.example.net",
+                "username": os.environ.get("NETNIR_USER"),
+                "password": os.environ.get("NETNIR_PASS"),
+                "platform": "ios",
+                "port": 830,
+                "extras": {"hostkey_verify": False},
+            },
+        },
     }
 
     assert isinstance(inv.hosts, dict) is True
