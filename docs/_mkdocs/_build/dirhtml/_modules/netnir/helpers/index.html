@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.helpers &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  <title>netnir.helpers &mdash; netnir 0.0.15 0.0.15 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+            <a href="../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.15
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../">netnir 0.0.14</a>
+          <a href="../../../">netnir 0.0.15</a>
         
       </nav>
 
@@ -159,23 +159,43 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="device_mapper"><a class="viewcode-back" href="../../../netnir/netnir.helpers/#netnir.helpers.device_mapper">[docs]</a><span class="k">def</span> <span class="nf">device_mapper</span><span class="p">(</span><span class="n">os_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="device_mapper"><a class="viewcode-back" href="../../../netnir/netnir.helpers/#netnir.helpers.device_mapper">[docs]</a><span class="k">def</span> <span class="nf">device_mapper</span><span class="p">(</span><span class="n">os_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">proto</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;netmiko&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    map an os type to a netmiko device_type</span>
 
-<span class="sd">    :param os_type: type str</span>
+<span class="sd">    :params os_type: type str</span>
+<span class="sd">    :params proto: type str, default &quot;netmiko&quot;</span>
 
-<span class="sd">    :return: device_type string</span>
+<span class="sd">    :returns: device_type string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">device_types</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;ios&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_ios&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;iosxr&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_xr&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;iosxe&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_xe&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nxos&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_nxos&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;eos&quot;</span><span class="p">:</span> <span class="s2">&quot;arista_eos&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">proto</span> <span class="o">==</span> <span class="s2">&quot;netmiko&quot;</span><span class="p">:</span>
+        <span class="n">device_types</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;ios&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_ios&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;iosxr&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_xr&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;iosxe&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_xe&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;nxos&quot;</span><span class="p">:</span> <span class="s2">&quot;cisco_nxos&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;eos&quot;</span><span class="p">:</span> <span class="s2">&quot;arista_eos&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">device_types</span><span class="p">[</span><span class="n">os_type</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os_type</span>
+    <span class="k">elif</span> <span class="n">proto</span> <span class="o">==</span> <span class="s2">&quot;netconf&quot;</span><span class="p">:</span>
+        <span class="n">device_types</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;csr&quot;</span><span class="p">:</span> <span class="s2">&quot;csr&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;iosxr&quot;</span><span class="p">:</span> <span class="s2">&quot;iosxr&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;iosxe&quot;</span><span class="p">:</span> <span class="s2">&quot;iosxe&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;nxos&quot;</span><span class="p">:</span> <span class="s2">&quot;nexus&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;junos&quot;</span><span class="p">:</span> <span class="s2">&quot;junos&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">device_types</span><span class="p">[</span><span class="n">os_type</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;default&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">os_type</span>
 
-    <span class="k">return</span> <span class="n">device_types</span><span class="p">[</span><span class="n">os_type</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="n">result</span></div>
 
 
 <div class="viewcode-block" id="render_filter"><a class="viewcode-back" href="../../../netnir/netnir.helpers/#netnir.helpers.render_filter">[docs]</a><span class="k">def</span> <span class="nf">render_filter</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>

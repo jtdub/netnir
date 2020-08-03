@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.core.tasks package &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  <title>netnir.core.tasks package &mdash; netnir 0.0.15 0.0.15 documentation</title>
   
 
   
@@ -51,7 +51,7 @@
           
 
           
-            <a href="../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+            <a href="../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.15
           
 
           
@@ -114,7 +114,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../">netnir 0.0.14</a>
+          <a href="../../">netnir 0.0.15</a>
         
       </nav>
 
@@ -195,15 +195,10 @@
 <dl class="py class">
 <dt id="netnir.core.tasks.config_plan.ConfigPlan">
 <em class="property">class </em><code class="sig-prename descclassname">netnir.core.tasks.config_plan.</code><code class="sig-name descname">ConfigPlan</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/config_plan/#ConfigPlan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.config_plan.ConfigPlan" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="../netnir.helpers.scaffold/#netnir.helpers.scaffold.command.CommandScaffold" title="netnir.helpers.scaffold.command.CommandScaffold"><code class="xref py py-class docutils literal notranslate"><span class="pre">netnir.helpers.scaffold.command.CommandScaffold</span></code></a></p>
 <p>config plan cli plugin to render configuration plans, either by
 compiling from template or using hier_config to create a remediation
 plan</p>
-<dl class="field-list simple">
-<dt class="field-odd">Params args</dt>
-<dd class="field-odd"><p>type obj</p>
-</dd>
-</dl>
 <dl class="py method">
 <dt id="netnir.core.tasks.config_plan.ConfigPlan.parser">
 <em class="property">static </em><code class="sig-name descname">parser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parser</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/config_plan/#ConfigPlan.parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.config_plan.ConfigPlan.parser" title="Permalink to this definition">¶</a></dt>
@@ -256,6 +251,17 @@ plan</p>
 <dd><p>Bases: <a class="reference internal" href="../netnir.helpers.scaffold/#netnir.helpers.scaffold.command.CommandScaffold" title="netnir.helpers.scaffold.command.CommandScaffold"><code class="xref py py-class docutils literal notranslate"><span class="pre">netnir.helpers.scaffold.command.CommandScaffold</span></code></a></p>
 <p>netconf commands</p>
 <dl class="py method">
+<dt id="netnir.core.tasks.netconf.NetConf.parser">
+<em class="property">static </em><code class="sig-name descname">parser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parser</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/netconf/#NetConf.parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.netconf.NetConf.parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>command parser function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params parser</dt>
+<dd class="field-odd"><p>type object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="netnir.core.tasks.netconf.NetConf.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/netconf/#NetConf.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.netconf.NetConf.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>execute netconf commands</p>
@@ -274,13 +280,8 @@ plan</p>
 <dl class="py class">
 <dt id="netnir.core.tasks.ssh.Ssh">
 <em class="property">class </em><code class="sig-prename descclassname">netnir.core.tasks.ssh.</code><code class="sig-name descname">Ssh</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/ssh/#Ssh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.ssh.Ssh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="../netnir.helpers.scaffold/#netnir.helpers.scaffold.command.CommandScaffold" title="netnir.helpers.scaffold.command.CommandScaffold"><code class="xref py py-class docutils literal notranslate"><span class="pre">netnir.helpers.scaffold.command.CommandScaffold</span></code></a></p>
 <p>cli command to execute show and config commands via SSH</p>
-<dl class="field-list simple">
-<dt class="field-odd">Params args</dt>
-<dd class="field-odd"><p>type obj</p>
-</dd>
-</dl>
 <dl class="py method">
 <dt id="netnir.core.tasks.ssh.Ssh.parser">
 <em class="property">static </em><code class="sig-name descname">parser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parser</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/ssh/#Ssh.parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.ssh.Ssh.parser" title="Permalink to this definition">¶</a></dt>

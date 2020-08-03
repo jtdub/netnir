@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.core.tasks.config_plan &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  <title>netnir.core.tasks.config_plan &mdash; netnir 0.0.15 0.0.15 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+            <a href="../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.15
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../../">netnir 0.0.14</a>
+          <a href="../../../../../">netnir 0.0.15</a>
         
       </nav>
 
@@ -148,12 +148,11 @@
            <div itemprop="articleBody">
             
   <h1>Source code for netnir.core.tasks.config_plan</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">netnir.constants</span> <span class="kn">import</span> <span class="n">NR</span>
+<span></span><span class="kn">from</span> <span class="nn">netnir.helpers.scaffold.command</span> <span class="kn">import</span> <span class="n">CommandScaffold</span>
 <span class="kn">from</span> <span class="nn">netnir.core.template</span> <span class="kn">import</span> <span class="n">CompileTemplate</span>
 <span class="kn">from</span> <span class="nn">netnir.core.networking</span> <span class="kn">import</span> <span class="n">Networking</span>
 <span class="kn">from</span> <span class="nn">netnir.helpers</span> <span class="kn">import</span> <span class="n">output_writer</span><span class="p">,</span> <span class="n">TextColor</span>
 <span class="kn">from</span> <span class="nn">netnir.plugins.hier</span> <span class="kn">import</span> <span class="n">hier_host</span>
-<span class="kn">from</span> <span class="nn">netnir.helpers.common.args</span> <span class="kn">import</span> <span class="n">filter_host</span>
 <span class="kn">from</span> <span class="nn">netnir.constants</span> <span class="kn">import</span> <span class="n">OUTPUT_DIR</span>
 <span class="kn">from</span> <span class="nn">nornir.plugins.functions.text</span> <span class="kn">import</span> <span class="n">print_result</span>
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -163,21 +162,12 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 
-<div class="viewcode-block" id="ConfigPlan"><a class="viewcode-back" href="../../../../../netnir/netnir.core.tasks/#netnir.core.tasks.config_plan.ConfigPlan">[docs]</a><span class="k">class</span> <span class="nc">ConfigPlan</span><span class="p">:</span>
+<div class="viewcode-block" id="ConfigPlan"><a class="viewcode-back" href="../../../../../netnir/netnir.core.tasks/#netnir.core.tasks.config_plan.ConfigPlan">[docs]</a><span class="k">class</span> <span class="nc">ConfigPlan</span><span class="p">(</span><span class="n">CommandScaffold</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    config plan cli plugin to render configuration plans, either by</span>
 <span class="sd">    compiling from template or using hier_config to create a remediation</span>
 <span class="sd">    plan</span>
-
-<span class="sd">    :params args: type obj</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        initialize the config plan class</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nr</span> <span class="o">=</span> <span class="n">NR</span>
 
 <div class="viewcode-block" id="ConfigPlan.parser"><a class="viewcode-back" href="../../../../../netnir/netnir.core.tasks/#netnir.core.tasks.config_plan.ConfigPlan.parser">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">parser</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
@@ -186,7 +176,7 @@
 
 <span class="sd">        :params parser: type obj</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">filter_host</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">CommandScaffold</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s2">&quot;--compile&quot;</span><span class="p">,</span>
             <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span>
@@ -215,26 +205,16 @@
 
 <span class="sd">        :returns: result string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">host</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">host</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inventory</span><span class="p">()</span>
 
+        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">hosts</span><span class="p">:</span>
             <span class="n">compiled_template</span> <span class="o">=</span> <span class="n">CompileTemplate</span><span class="p">(</span>
-                <span class="n">nr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template_file</span>
+                <span class="n">nr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template_file</span>
             <span class="p">)</span>
             <span class="n">output_writer</span><span class="p">(</span>
-                <span class="n">nornir_results</span><span class="o">=</span><span class="n">compiled_template</span><span class="o">.</span><span class="n">render</span><span class="p">(),</span> <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;compiled.conf&quot;</span>
+                <span class="n">nornir_results</span><span class="o">=</span><span class="n">compiled_template</span><span class="o">.</span><span class="n">render</span><span class="p">(),</span> <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;compiled.conf&quot;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">print_result</span><span class="p">(</span><span class="n">compiled_template</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">hosts</span><span class="p">:</span>
-                <span class="n">compiled_template</span> <span class="o">=</span> <span class="n">CompileTemplate</span><span class="p">(</span>
-                    <span class="n">nr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template_file</span>
-                <span class="p">)</span>
-                <span class="n">output_writer</span><span class="p">(</span>
-                    <span class="n">nornir_results</span><span class="o">=</span><span class="n">compiled_template</span><span class="o">.</span><span class="n">render</span><span class="p">(),</span>
-                    <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;compiled.conf&quot;</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="n">print_result</span><span class="p">(</span><span class="n">compiled_template</span><span class="o">.</span><span class="n">render</span><span class="p">())</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">compile</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">host</span><span class="p">:</span>

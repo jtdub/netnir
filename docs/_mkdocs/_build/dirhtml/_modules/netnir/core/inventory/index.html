@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.core.inventory &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  <title>netnir.core.inventory &mdash; netnir 0.0.15 0.0.15 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.15
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../">netnir 0.0.14</a>
+          <a href="../../../../">netnir 0.0.15</a>
         
       </nav>
 
@@ -216,7 +216,9 @@
                         <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">domain</span> <span class="k">else</span> <span class="n">host</span><span class="p">,</span>
                         <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="n">creds</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]),</span>
                         <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="n">creds</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]),</span>
-                        <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;os&quot;</span><span class="p">),</span>
+                        <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="n">device_mapper</span><span class="p">(</span>
+                            <span class="n">os_type</span><span class="o">=</span><span class="n">host_vars</span><span class="p">[</span><span class="s2">&quot;os&quot;</span><span class="p">],</span> <span class="n">proto</span><span class="o">=</span><span class="s2">&quot;netconf&quot;</span>
+                        <span class="p">),</span>
                         <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">,</span> <span class="mi">830</span><span class="p">),</span>
                         <span class="s2">&quot;extras&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;hostkey_verify&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
                     <span class="p">},</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.core.tasks.netconf &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  <title>netnir.core.tasks.netconf &mdash; netnir 0.0.15 0.0.15 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+            <a href="../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.15
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../../">netnir 0.0.14</a>
+          <a href="../../../../../">netnir 0.0.15</a>
         
       </nav>
 
@@ -149,21 +149,53 @@
             
   <h1>Source code for netnir.core.tasks.netconf</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">netnir.helpers.scaffold.command</span> <span class="kn">import</span> <span class="n">CommandScaffold</span>
+<span class="kn">from</span> <span class="nn">netnir.helpers.common.args</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">netconf_config</span><span class="p">,</span>
+    <span class="n">netconf_filter</span><span class="p">,</span>
+    <span class="n">netconf_source</span><span class="p">,</span>
+    <span class="n">netconf_target</span><span class="p">,</span>
+    <span class="n">config</span><span class="p">,</span>
+<span class="p">)</span>
 
 
 <div class="viewcode-block" id="NetConf"><a class="viewcode-back" href="../../../../../netnir/netnir.core.tasks/#netnir.core.tasks.netconf.NetConf">[docs]</a><span class="k">class</span> <span class="nc">NetConf</span><span class="p">(</span><span class="n">CommandScaffold</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;netconf commands&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="NetConf.parser"><a class="viewcode-back" href="../../../../../netnir/netnir.core.tasks/#netnir.core.tasks.netconf.NetConf.parser">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parser</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
+        <span class="n">CommandScaffold</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">netconf_config</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">netconf_filter</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">netconf_source</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">netconf_target</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">config</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NetConf.run"><a class="viewcode-back" href="../../../../../netnir/netnir.core.tasks/#netnir.core.tasks.netconf.NetConf.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;execute netconf commands</span>
 
 <span class="sd">        :returns: nornir Result object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">netnir.plugins.netconf</span> <span class="kn">import</span> <span class="n">netconf_get</span>
+        <span class="kn">from</span> <span class="nn">netnir.plugins.netconf</span> <span class="kn">import</span> <span class="n">netconf_get_config</span><span class="p">,</span> <span class="n">netconf_edit_config</span>
         <span class="kn">from</span> <span class="nn">nornir.plugins.functions.text</span> <span class="kn">import</span> <span class="n">print_result</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">nr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inventory</span><span class="p">()</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">netconf_get</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NETCONF GET CONFIG AND STATE&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="n">task</span><span class="o">=</span><span class="n">netconf_edit_config</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NETCONF EDIT CONFIG&quot;</span><span class="p">,</span>
+                <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+                <span class="n">nc_config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">nc_config</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="n">task</span><span class="o">=</span><span class="n">netconf_get_config</span><span class="p">,</span>
+                <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">source</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NETCONF GET FILTERED CONFIG&quot;</span><span class="p">,</span>
+                <span class="n">nc_filter_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">nc_filter</span><span class="p">,</span>
+                <span class="n">nc_filter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">nc_config</span><span class="p">,</span>
+            <span class="p">)</span>
+
         <span class="n">print_result</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">results</span></div></div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.plugins.netconf &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  <title>netnir.plugins.netconf &mdash; netnir 0.0.15 0.0.15 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.15
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../">netnir 0.0.14</a>
+          <a href="../../../../">netnir 0.0.15</a>
         
       </nav>
 
@@ -151,17 +151,64 @@
 <span></span><span class="kn">from</span> <span class="nn">nornir.core.task</span> <span class="kn">import</span> <span class="n">Task</span><span class="p">,</span> <span class="n">Result</span>
 
 
-<div class="viewcode-block" id="netconf_get"><a class="viewcode-back" href="../../../../netnir/netnir.plugins/#netnir.plugins.netconf.netconf_get">[docs]</a><span class="k">def</span> <span class="nf">netconf_get</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;nornir netconf get task</span>
+<div class="viewcode-block" id="netconf_get_config"><a class="viewcode-back" href="../../../../netnir/netnir.plugins/#netnir.plugins.netconf.netconf_get_config">[docs]</a><span class="k">def</span> <span class="nf">netconf_get_config</span><span class="p">(</span>
+    <span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">,</span>
+    <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;candidate&quot;</span><span class="p">,</span>
+    <span class="n">nc_filter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">nc_filter_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;nornir netconf get config task</span>
 
 <span class="sd">    :params task: type object</span>
+<span class="sd">    :params source: type str - configuration source</span>
+<span class="sd">    :params nc_filter: type str - netconf filter</span>
+<span class="sd">    :params nc_filter_type: type str</span>
+<span class="sd">    :returns: nornir result object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">manager</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">get_connection</span><span class="p">(</span>
         <span class="n">connection</span><span class="o">=</span><span class="s2">&quot;netconf&quot;</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">nornir</span><span class="o">.</span><span class="n">config</span>
     <span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_config</span><span class="p">(</span><span class="s2">&quot;running&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">nc_filter</span> <span class="ow">and</span> <span class="n">nc_filter_type</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_config</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="p">(</span><span class="n">nc_filter_type</span><span class="p">,</span> <span class="n">nc_filter</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_config</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="netconf_edit_config"><a class="viewcode-back" href="../../../../netnir/netnir.plugins/#netnir.plugins.netconf.netconf_edit_config">[docs]</a><span class="k">def</span> <span class="nf">netconf_edit_config</span><span class="p">(</span>
+    <span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;candidate&quot;</span><span class="p">,</span> <span class="n">nc_config</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;nornir netconf edit config task</span>
+
+<span class="sd">    :params task: type object</span>
+<span class="sd">    :params target: type str - configuration target</span>
+<span class="sd">    :params nc_config: type str - yang config model</span>
+<span class="sd">    :returns: nornir result object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">manager</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">get_connection</span><span class="p">(</span>
+        <span class="n">connection</span><span class="o">=</span><span class="s2">&quot;netconf&quot;</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">nornir</span><span class="o">.</span><span class="n">config</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="n">manager</span><span class="o">.</span><span class="n">lock</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">):</span>
+        <span class="n">config_response</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">edit_config</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">nc_config</span><span class="p">)</span>
+        <span class="n">config_validate</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">target</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">config_response</span><span class="o">.</span><span class="n">ok</span> <span class="ow">and</span> <span class="n">config_validate</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;config_response&quot;</span><span class="p">:</span> <span class="n">config_response</span><span class="o">.</span><span class="n">ok</span><span class="p">,</span>
+                <span class="s2">&quot;config_validate&quot;</span><span class="p">:</span> <span class="n">config_validate</span><span class="o">.</span><span class="n">ok</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">failed</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">manager</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;config_response&quot;</span><span class="p">:</span> <span class="n">config_response</span><span class="o">.</span><span class="n">error</span><span class="p">,</span>
+                <span class="s2">&quot;config_validate&quot;</span><span class="p">:</span> <span class="n">config_validate</span><span class="o">.</span><span class="n">error</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">failed</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">manager</span><span class="o">.</span><span class="n">discard_changes</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">failed</span><span class="o">=</span><span class="n">failed</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
