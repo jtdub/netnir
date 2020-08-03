@@ -15,6 +15,7 @@ class Networking:
     :params num_workers: type int (optional)
 
     .. code:: python
+
        from netnir.core import Networking
        from nornir import InitNornir
 

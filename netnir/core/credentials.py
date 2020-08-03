@@ -19,6 +19,7 @@ class Credentials:
     :params service_name: type str (required)
 
     .. code:: python
+
        from netnir.core import Credentials
 
        creds = Credentials(service_name="testService", username="testUser")

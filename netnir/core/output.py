@@ -14,6 +14,7 @@ class Output:
     :param output_file: type str
 
     .. code:: python
+
        from netnir.core import Output
 
        o = Output(host='router.dc1', output_file='data.conf')
