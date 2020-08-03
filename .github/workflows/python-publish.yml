@@ -1,7 +1,7 @@
 # This workflows will upload a Python Package using Twine when a release is created
 # For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
 
-name: Upload Python Package
+name: Publish Netnir Package
 
 on:
   release:
@@ -29,3 +29,29 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
         twine upload dist/*
+
+  documentation:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setuppython@v2
+      with:
+        python-version: '3.x'
+    - name: Create documentation
+      run:
+        - git checkout -b auto-documentation
+        - export NETNIR_USER=bogus
+        - export NETNIR_PASS=bogus
+        - pip install sphinx recommonmark sphinx_rtd_theme recommonmark
+        - cd docs/_mkdocs
+        - sphinx-apidoc -f -o netnir ../../netnir
+        - make clean
+        - make dirhtml
+        - rsync -avz --exclude sphinx-env ./_build/dirhtml/ ..
+        - cd -
+        - git add .
+        - git commit -m 'update documentation'
+        - git push origin auto-documentation
