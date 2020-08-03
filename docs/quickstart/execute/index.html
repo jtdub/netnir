@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>executing netnir commands &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="custom netnir commands" href="../commands/" />
+    <link rel="prev" title="configuring netnir" href="../configure/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorial/">netnir at a glance</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../install/">installing netnir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configure/">configuring netnir</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">executing netnir commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../commands/">custom netnir commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../netnir/">code documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">netnir 0.0.14</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../tutorial/">netnir at a glance</a> &raquo;</li>
+        
+      <li>executing netnir commands</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/quickstart/execute.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="executing-netnir-commands">
+<span id="execute"></span><h1>executing netnir commands<a class="headerlink" href="#executing-netnir-commands" title="Permalink to this headline">¶</a></h1>
+<p>Using the built in netnir plugins is easy. For example, if you want to fetch the production config from a device, use the <em>fetch config</em> command.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ netnir fetch config
+netmiko_send_command************************************************************
+* sbx-iosxr-mgmt ** changed : False ********************************************
+vvvv netmiko_send_command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO
+
+Wed Jul <span class="m">29</span> <span class="m">23</span>:31:56.177 UTC
+Building configuration...
+!! IOS XR Configuration <span class="nv">version</span> <span class="o">=</span> <span class="m">6</span>.5.3
+!! Last configuration change at Wed Jul <span class="m">29</span> <span class="m">23</span>:29:39 <span class="m">2020</span> by admin
+!
+hostname iosxr1
+domain name abc.inc
+username admin
+ group root-lr
+ group cisco-support
+ secret <span class="m">5</span> <span class="nv">$1$oN8e$ft916PCBogrqPKt59kepW0</span>
+!
+tpa
+ vrf default
+  address-family ipv4
+   default-route mgmt
+  !
+ !
+!
+line console
+ exec-timeout <span class="m">0</span> <span class="m">0</span>
+ absolute-timeout <span class="m">0</span>
+ session-timeout <span class="m">0</span>
+!
+line default
+ exec-timeout <span class="m">0</span> <span class="m">0</span>
+ absolute-timeout <span class="m">0</span>
+ session-timeout <span class="m">0</span>
+ transport input ssh
+!
+call-home
+ service active
+ contact smart-licensing
+ profile CiscoTAC-1
+  active
+  destination transport-method http
+ !
+!
+interface Loopback100
+ description ***MERGE LOOPBACK <span class="m">100</span>****
+ ipv4 address <span class="m">1</span>.1.1.100 <span class="m">255</span>.255.255.255
+!
+interface Loopback200
+ description ***MERGE LOOPBACK <span class="m">200</span>****
+ ipv4 address <span class="m">1</span>.1.1.200 <span class="m">255</span>.255.255.255
+!
+interface MgmtEth0/RP0/CPU0/0
+ ipv4 address <span class="m">10</span>.10.20.175 <span class="m">255</span>.255.255.0
+!
+interface GigabitEthernet0/0/0/1
+ shutdown
+!
+interface GigabitEthernet0/0/0/2
+ shutdown
+!
+interface GigabitEthernet0/0/0/3
+ shutdown
+!
+interface GigabitEthernet0/0/0/4
+ shutdown
+!
+interface GigabitEthernet0/0/0/5
+ shutdown
+!
+interface GigabitEthernet0/0/0/6
+ shutdown
+!
+router static
+ address-family ipv4 unicast
+  <span class="m">0</span>.0.0.0/0 <span class="m">10</span>.10.20.254
+ !
+!
+mpls ldp
+ address-family ipv4
+ !
+ interface GigabitEthernet0/0/0/0
+  address-family ipv4
+  !
+ !
+!
+xml agent tty
+ iteration off
+!
+netconf agent tty
+!
+netconf-yang agent
+ ssh
+!
+ssh server v2
+ssh server vrf default
+ssh server netconf vrf default
+end
+
+^^^^ END netmiko_send_command ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</pre></div>
+</div>
+</div></blockquote>
+<p>If you want to interact or make changes with a device via SSH, use the <em>ssh</em> command.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ netnir ssh -c <span class="s1">&#39;show platform&#39;</span> -c <span class="s1">&#39;show route&#39;</span>
+netmiko_send_command************************************************************
+* sbx-iosxr-mgmt ** changed : False ********************************************
+vvvv netmiko_send_command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO
+
+Wed Jul <span class="m">29</span> <span class="m">23</span>:39:09.731 UTC
+Node              Type                       State             Config state
+--------------------------------------------------------------------------------
+<span class="m">0</span>/0/CPU0          R-IOSXRV9000-LC-C          IOS XR RUN        NSHUT
+<span class="m">0</span>/RP0/CPU0        R-IOSXRV9000-RP-C<span class="o">(</span>Active<span class="o">)</span>  IOS XR RUN        NSHUT
+^^^^ END netmiko_send_command ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+netmiko_send_command************************************************************
+* sbx-iosxr-mgmt ** changed : False ********************************************
+vvvv netmiko_send_command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO
+CPU0:iosxr1#
+
+RP/0/RP0/CPU0:iosxr1#show route
+
+Wed Jul <span class="m">29</span> <span class="m">23</span>:39:10.855 UTC
+
+^^^^ END netmiko_send_command ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<span class="o">[{</span><span class="s1">&#39;sbx-iosxr-mgmt&#39;</span>: MultiResult: <span class="o">[</span>Result: <span class="s2">&quot;netmiko_send_command&quot;</span><span class="o">]}</span>,
+ <span class="o">{</span><span class="s1">&#39;sbx-iosxr-mgmt&#39;</span>: MultiResult: <span class="o">[</span>Result: <span class="s2">&quot;netmiko_send_command&quot;</span><span class="o">]}]</span>
+
+$ netnir ssh -c <span class="s1">&#39;route-policy NETNIR-TEST&#39;</span> -c <span class="s1">&#39;end&#39;</span> --config
+<span class="o">{</span><span class="s1">&#39;sbx-iosxr-mgmt&#39;</span>: MultiResult: <span class="o">[</span>Result: <span class="s2">&quot;netmiko_send_config&quot;</span><span class="o">]}</span>
+$ netnir ssh -c <span class="s1">&#39;show rpl route-policy NETNIR-TEST&#39;</span>
+netmiko_send_command************************************************************
+* sbx-iosxr-mgmt ** changed : False ********************************************
+vvvv netmiko_send_command ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO
+
+Wed Jul <span class="m">29</span> <span class="m">23</span>:43:37.092 UTC
+route-policy NETNIR-TEST
+end-set
+
+^^^^ END netmiko_send_command ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<span class="o">[{</span><span class="s1">&#39;sbx-iosxr-mgmt&#39;</span>: MultiResult: <span class="o">[</span>Result: <span class="s2">&quot;netmiko_send_command&quot;</span><span class="o">]}]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../commands/" class="btn btn-neutral float-right" title="custom netnir commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../configure/" class="btn btn-neutral float-left" title="configuring netnir" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, James Williams
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
