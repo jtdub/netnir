@@ -11,9 +11,9 @@ default_config = {
     "domain": "example.net",
     "nornir": {"config": "./conf/nornir.yaml"},
     "plugins": {
-        "setup": {
-            "class": "netnir.core.tasks.setup.Setup",
-            "description": "netnir setup commands",
+        "user": {
+            "class": "netnir.core.tasks.user.User",
+            "description": "netnir user commands",
         },
         "inventory": {
             "class": "netnir.core.tasks.inventory.Inventory",

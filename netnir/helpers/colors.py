@@ -7,6 +7,7 @@ class TextColor:
     display test on console as a color.
 
     .. code:: python
+
        from netnir.helpers import TextColor
 
        message = "this is a blue message"

@@ -12,9 +12,9 @@ def test_netnir_config(initial_setup):
         "domain": "example.net",
         "nornir": {"config": "./tests/data/nornir.yaml"},
         "plugins": {
-            "setup": {
-                "class": "netnir.core.tasks.setup.Setup",
-                "description": "netnir setup commands",
+            "user": {
+                "class": "netnir.core.tasks.user.User",
+                "description": "netnir user commands",
             },
             "inventory": {
                 "class": "netnir.core.tasks.inventory.Inventory",
