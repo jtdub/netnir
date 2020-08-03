@@ -9,23 +9,43 @@ import logging
 """
 
 
-def device_mapper(os_type: str):
+def device_mapper(os_type: str, proto: str = "netmiko"):
     """
     map an os type to a netmiko device_type
 
-    :param os_type: type str
+    :params os_type: type str
+    :params proto: type str, default "netmiko"
 
-    :return: device_type string
+    :returns: device_type string
     """
-    device_types = {
-        "ios": "cisco_ios",
-        "iosxr": "cisco_xr",
-        "iosxe": "cisco_xe",
-        "nxos": "cisco_nxos",
-        "eos": "arista_eos",
-    }
+    if proto == "netmiko":
+        device_types = {
+            "ios": "cisco_ios",
+            "iosxr": "cisco_xr",
+            "iosxe": "cisco_xe",
+            "nxos": "cisco_nxos",
+            "eos": "arista_eos",
+        }
+        try:
+            result = device_types[os_type]
+        except KeyError:
+            return os_type
+    elif proto == "netconf":
+        device_types = {
+            "csr": "csr",
+            "iosxr": "iosxr",
+            "iosxe": "iosxe",
+            "nxos": "nexus",
+            "junos": "junos",
+        }
+        try:
+            result = device_types[os_type]
+        except KeyError:
+            return "default"
+    else:
+        result = os_type
 
-    return device_types[os_type]
+    return result
 
 
 def render_filter(pattern: list):

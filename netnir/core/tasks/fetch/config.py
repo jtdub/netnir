@@ -1,28 +1,16 @@
-from netnir.helpers.common.args import (
-    filter_host,
-    filter_group,
-    filter_hosts,
-    num_workers,
-)
-from netnir.helpers import filter_type, inventory_filter, output_writer
+from netnir.helpers.scaffold.command import CommandScaffold
+from netnir.helpers.common.args import num_workers
+from netnir.helpers import output_writer
 from netnir.core.networking import Networking
-from netnir.constants import NR
 from nornir.plugins.functions.text import print_result
 
-"""fetch remove device configs
-"""
+"""fetch remove device configs"""
 
 
-class FetchConfig:
+class FetchConfig(CommandScaffold):
     """
     cli command to fetch remote device configs via nornir's netmiko_show_command plugin
     """
-
-    def __init__(self, args):
-        """initialize the class
-        """
-        self.args = args
-        self.nr = NR
 
     @staticmethod
     def parser(parser):
@@ -30,9 +18,7 @@ class FetchConfig:
 
         :param parser: type obj
         """
-        filter_host(parser)
-        filter_group(parser)
-        filter_hosts(parser)
+        CommandScaffold.parser(parser)
         num_workers(parser)
 
     def run(self):
@@ -41,12 +27,7 @@ class FetchConfig:
         :return: nornir results
         """
 
-        device_filter = filter_type(
-            host=self.args.host, filter=self.args.filter, group=self.args.group
-        )
-        self.nr = inventory_filter(
-            nr=self.nr, device_filter=device_filter["data"], type=device_filter["type"]
-        )
+        self.nr = self._inventory()
         networking = Networking(nr=self.nr, num_workers=self.args.workers)
         results = networking.fetch(commands="show running")
         output_writer(nornir_results=results, output_file="running.conf")

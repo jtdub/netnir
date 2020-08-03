@@ -51,7 +51,7 @@ def test_inventory(initial_setup):
                 "hostname": "router.dc2.example.net",
                 "username": os.environ.get("NETNIR_USER"),
                 "password": os.environ.get("NETNIR_PASS"),
-                "platform": "ios",
+                "platform": "default",
                 "port": 830,
                 "extras": {"hostkey_verify": False},
             },

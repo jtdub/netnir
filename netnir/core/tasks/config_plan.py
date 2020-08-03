@@ -1,9 +1,8 @@
-from netnir.constants import NR
+from netnir.helpers.scaffold.command import CommandScaffold
 from netnir.core.template import CompileTemplate
 from netnir.core.networking import Networking
 from netnir.helpers import output_writer, TextColor
 from netnir.plugins.hier import hier_host
-from netnir.helpers.common.args import filter_host
 from netnir.constants import OUTPUT_DIR
 from nornir.plugins.functions.text import print_result
 import logging
@@ -13,21 +12,12 @@ import logging
 """
 
 
-class ConfigPlan:
+class ConfigPlan(CommandScaffold):
     """
     config plan cli plugin to render configuration plans, either by
     compiling from template or using hier_config to create a remediation
     plan
-
-    :params args: type obj
     """
-
-    def __init__(self, args):
-        """
-        initialize the config plan class
-        """
-        self.args = args
-        self.nr = NR
 
     @staticmethod
     def parser(parser):
@@ -36,7 +26,7 @@ class ConfigPlan:
 
         :params parser: type obj
         """
-        filter_host(parser)
+        CommandScaffold.parser(parser)
         parser.add_argument(
             "--compile",
             nargs="?",
@@ -65,26 +55,16 @@ class ConfigPlan:
 
         :returns: result string
         """
-        if self.args.host:
-            self.nr = self.nr.filter(name=self.args.host)
+        self.nr = self._inventory()
 
+        for host in self.nr.inventory.hosts:
             compiled_template = CompileTemplate(
-                nr=self.nr, host=self.args.host, template=template_file
+                nr=self.nr, host=host, template=template_file
             )
             output_writer(
-                nornir_results=compiled_template.render(), output_file="compiled.conf"
+                nornir_results=compiled_template.render(), output_file="compiled.conf",
             )
             print_result(compiled_template.render())
-        else:
-            for host in self.nr.inventory.hosts:
-                compiled_template = CompileTemplate(
-                    nr=self.nr, host=host, template=template_file
-                )
-                output_writer(
-                    nornir_results=compiled_template.render(),
-                    output_file="compiled.conf",
-                )
-                print_result(compiled_template.render())
 
         if self.args.compile:
             if self.args.host:

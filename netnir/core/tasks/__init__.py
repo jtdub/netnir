@@ -1,2 +1,1 @@
-"""built-in tasks initialization
-"""
+"""built-in tasks initialization"""

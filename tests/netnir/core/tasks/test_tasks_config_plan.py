@@ -4,6 +4,8 @@ def test_tasks_config_plan():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--host")
+    parser.add_argument("--filter")
+    parser.add_argument("--group")
     parser.add_argument("--verbose", const=True, nargs="?")
     parser.add_argument("--output")
     parser.add_argument("--compile", const=True, nargs="?")

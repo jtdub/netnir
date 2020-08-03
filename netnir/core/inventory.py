@@ -66,7 +66,9 @@ class NornirInventory(Inventory):
                         "hostname": f"{host}.{domain}" if domain else host,
                         "username": host_vars.get("username", creds["username"]),
                         "password": host_vars.get("password", creds["password"]),
-                        "platform": host_vars.get("os"),
+                        "platform": device_mapper(
+                            os_type=host_vars["os"], proto="netconf"
+                        ),
                         "port": host_vars.get("port", 830),
                         "extras": {"hostkey_verify": False},
                     },
