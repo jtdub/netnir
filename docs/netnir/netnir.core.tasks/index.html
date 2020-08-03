@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>netnir.core.tasks package &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="netnir.core.tasks.fetch package" href="../netnir.core.tasks.fetch/" />
+    <link rel="prev" title="netnir.core package" href="../netnir.core/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/">netnir at a glance</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../">code documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../modules/">netnir</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../netnir/">netnir package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../netnir/#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../netnir/#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../netnir/#module-netnir.cli">netnir.cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../netnir/#module-netnir.constants">netnir.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../netnir/#module-netnir">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">netnir 0.0.14</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../">code documentation</a> &raquo;</li>
+        
+          <li><a href="../modules/">netnir</a> &raquo;</li>
+        
+          <li><a href="../netnir/">netnir package</a> &raquo;</li>
+        
+          <li><a href="../netnir.core/">netnir.core package</a> &raquo;</li>
+        
+      <li>netnir.core.tasks package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/netnir/netnir.core.tasks.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="netnir-core-tasks-package">
+<h1>netnir.core.tasks package<a class="headerlink" href="#netnir-core-tasks-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../netnir.core.tasks.fetch/">netnir.core.tasks.fetch package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.core.tasks.fetch/#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.core.tasks.fetch/#module-netnir.core.tasks.fetch.config">netnir.core.tasks.fetch.config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.core.tasks.fetch/#module-netnir.core.tasks.fetch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-netnir.core.tasks.config_plan">
+<span id="netnir-core-tasks-config-plan-module"></span><h2>netnir.core.tasks.config_plan module<a class="headerlink" href="#module-netnir.core.tasks.config_plan" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="netnir.core.tasks.config_plan.ConfigPlan">
+<em class="property">class </em><code class="sig-prename descclassname">netnir.core.tasks.config_plan.</code><code class="sig-name descname">ConfigPlan</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/config_plan/#ConfigPlan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.config_plan.ConfigPlan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>config plan cli plugin to render configuration plans, either by
+compiling from template or using hier_config to create a remediation
+plan</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params args</dt>
+<dd class="field-odd"><p>type obj</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="netnir.core.tasks.config_plan.ConfigPlan.parser">
+<em class="property">static </em><code class="sig-name descname">parser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parser</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/config_plan/#ConfigPlan.parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.config_plan.ConfigPlan.parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>cli options parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params parser</dt>
+<dd class="field-odd"><p>type obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netnir.core.tasks.config_plan.ConfigPlan.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template_file</span><span class="o">=</span><span class="default_value">'main.conf.j2'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/config_plan/#ConfigPlan.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.config_plan.ConfigPlan.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>cli execution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params template_file</dt>
+<dd class="field-odd"><p>type str</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>result string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-netnir.core.tasks.inventory">
+<span id="netnir-core-tasks-inventory-module"></span><h2>netnir.core.tasks.inventory module<a class="headerlink" href="#module-netnir.core.tasks.inventory" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="netnir.core.tasks.inventory.Inventory">
+<em class="property">class </em><code class="sig-prename descclassname">netnir.core.tasks.inventory.</code><code class="sig-name descname">Inventory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/inventory/#Inventory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.inventory.Inventory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../netnir.helpers.scaffold/#netnir.helpers.scaffold.command.CommandScaffold" title="netnir.helpers.scaffold.command.CommandScaffold"><code class="xref py py-class docutils literal notranslate"><span class="pre">netnir.helpers.scaffold.command.CommandScaffold</span></code></a></p>
+<p>cli based inventory search</p>
+<dl class="py method">
+<dt id="netnir.core.tasks.inventory.Inventory.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/inventory/#Inventory.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.inventory.Inventory.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>things to do</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-netnir.core.tasks.netconf">
+<span id="netnir-core-tasks-netconf-module"></span><h2>netnir.core.tasks.netconf module<a class="headerlink" href="#module-netnir.core.tasks.netconf" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="netnir.core.tasks.netconf.NetConf">
+<em class="property">class </em><code class="sig-prename descclassname">netnir.core.tasks.netconf.</code><code class="sig-name descname">NetConf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/netconf/#NetConf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.netconf.NetConf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../netnir.helpers.scaffold/#netnir.helpers.scaffold.command.CommandScaffold" title="netnir.helpers.scaffold.command.CommandScaffold"><code class="xref py py-class docutils literal notranslate"><span class="pre">netnir.helpers.scaffold.command.CommandScaffold</span></code></a></p>
+<p>netconf commands</p>
+<dl class="py method">
+<dt id="netnir.core.tasks.netconf.NetConf.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/netconf/#NetConf.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.netconf.NetConf.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute netconf commands</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>nornir Result object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-netnir.core.tasks.ssh">
+<span id="netnir-core-tasks-ssh-module"></span><h2>netnir.core.tasks.ssh module<a class="headerlink" href="#module-netnir.core.tasks.ssh" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="netnir.core.tasks.ssh.Ssh">
+<em class="property">class </em><code class="sig-prename descclassname">netnir.core.tasks.ssh.</code><code class="sig-name descname">Ssh</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/ssh/#Ssh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.ssh.Ssh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>cli command to execute show and config commands via SSH</p>
+<dl class="field-list simple">
+<dt class="field-odd">Params args</dt>
+<dd class="field-odd"><p>type obj</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="netnir.core.tasks.ssh.Ssh.parser">
+<em class="property">static </em><code class="sig-name descname">parser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parser</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/ssh/#Ssh.parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.ssh.Ssh.parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>cli command parser</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netnir.core.tasks.ssh.Ssh.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/ssh/#Ssh.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.ssh.Ssh.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>cli command execution</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-netnir.core.tasks.user">
+<span id="netnir-core-tasks-user-module"></span><h2>netnir.core.tasks.user module<a class="headerlink" href="#module-netnir.core.tasks.user" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="netnir.core.tasks.user.User">
+<em class="property">class </em><code class="sig-prename descclassname">netnir.core.tasks.user.</code><code class="sig-name descname">User</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/user/#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.user.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>cli user administration to create/fetch/delete a user</p>
+<dl class="py method">
+<dt id="netnir.core.tasks.user.User.parser">
+<em class="property">static </em><code class="sig-name descname">parser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parser</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/user/#User.parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.user.User.parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>parse cli arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parser</strong> – type obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netnir.core.tasks.user.User.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/tasks/user/#User.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.tasks.user.User.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute cli task</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>credentials result</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-netnir.core.tasks">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-netnir.core.tasks" title="Permalink to this headline">¶</a></h2>
+<p>built-in tasks initialization</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../netnir.core.tasks.fetch/" class="btn btn-neutral float-right" title="netnir.core.tasks.fetch package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../netnir.core/" class="btn btn-neutral float-left" title="netnir.core package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, James Williams
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

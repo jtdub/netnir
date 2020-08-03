@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>netnir.helpers package &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="netnir.helpers.common package" href="../netnir.helpers.common/" />
+    <link rel="prev" title="netnir.core.tasks.fetch package" href="../netnir.core.tasks.fetch/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/">netnir at a glance</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../">code documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../modules/">netnir</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../netnir/">netnir package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../netnir/#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../netnir/#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../netnir/#module-netnir.cli">netnir.cli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../netnir/#module-netnir.constants">netnir.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../netnir/#module-netnir">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">netnir 0.0.14</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../">code documentation</a> &raquo;</li>
+        
+          <li><a href="../modules/">netnir</a> &raquo;</li>
+        
+          <li><a href="../netnir/">netnir package</a> &raquo;</li>
+        
+      <li>netnir.helpers package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/netnir/netnir.helpers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="netnir-helpers-package">
+<h1>netnir.helpers package<a class="headerlink" href="#netnir-helpers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../netnir.helpers.common/">netnir.helpers.common package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.helpers.common/#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.helpers.common/#module-netnir.helpers.common.args">netnir.helpers.common.args module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.helpers.common/#module-netnir.helpers.common">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../netnir.helpers.scaffold/">netnir.helpers.scaffold package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.helpers.scaffold/#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.helpers.scaffold/#module-netnir.helpers.scaffold.command">netnir.helpers.scaffold.command module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.helpers.scaffold/#module-netnir.helpers.scaffold.subcommand">netnir.helpers.scaffold.subcommand module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../netnir.helpers.scaffold/#module-netnir.helpers.scaffold">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-netnir.helpers.colors">
+<span id="netnir-helpers-colors-module"></span><h2>netnir.helpers.colors module<a class="headerlink" href="#module-netnir.helpers.colors" title="Permalink to this headline">¶</a></h2>
+<p>text color helper</p>
+<dl class="py class">
+<dt id="netnir.helpers.colors.TextColor">
+<em class="property">class </em><code class="sig-prename descclassname">netnir.helpers.colors.</code><code class="sig-name descname">TextColor</code><a class="reference internal" href="../../_modules/netnir/helpers/colors/#TextColor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.colors.TextColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>display test on console as a color.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">netnir.helpers</span> <span class="kn">import</span> <span class="n">TextColor</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;this is a blue message&quot;</span>
+<span class="n">TextColor</span><span class="o">.</span><span class="n">blue</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>color encoded string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="netnir.helpers.colors.TextColor.blue">
+<code class="sig-name descname">blue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/colors/#TextColor.blue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.colors.TextColor.blue" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>blue text</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netnir.helpers.colors.TextColor.cyan">
+<code class="sig-name descname">cyan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/colors/#TextColor.cyan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.colors.TextColor.cyan" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>cyan text</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netnir.helpers.colors.TextColor.green">
+<code class="sig-name descname">green</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/colors/#TextColor.green"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.colors.TextColor.green" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>green text</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netnir.helpers.colors.TextColor.purple">
+<code class="sig-name descname">purple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/colors/#TextColor.purple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.colors.TextColor.purple" title="Permalink to this definition">¶</a></dt>
+<dd><p>red
+:return: red text</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netnir.helpers.colors.TextColor.red">
+<code class="sig-name descname">red</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/colors/#TextColor.red"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.colors.TextColor.red" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>red text</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netnir.helpers.colors.TextColor.yellow">
+<code class="sig-name descname">yellow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/colors/#TextColor.yellow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.colors.TextColor.yellow" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>yellow text</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-netnir.helpers.defaults">
+<span id="netnir-helpers-defaults-module"></span><h2>netnir.helpers.defaults module<a class="headerlink" href="#module-netnir.helpers.defaults" title="Permalink to this headline">¶</a></h2>
+<p>default configuration</p>
+<dl class="py data">
+<dt id="netnir.helpers.defaults.default_config">
+<code class="sig-prename descclassname">netnir.helpers.defaults.</code><code class="sig-name descname">default_config</code><em class="property"> = {'directories': {'groupvars': './group_vars', 'hier': './conf/hier', 'hostvars': './host_vars', 'output': './output', 'templates': './templates'}, 'domain': 'example.net', 'nornir': {'config': './conf/nornir.yaml'}, 'plugins': {'cp': {'class': 'netnir.core.tasks.config_plan.ConfigPlan', 'description': 'config plan commands'}, 'fetch': {'class': 'netnir.core.tasks.fetch.Fetch', 'description': 'fetch commands'}, 'inventory': {'class': 'netnir.core.tasks.inventory.Inventory', 'description': 'inventory search command'}, 'netconf': {'class': 'netnir.core.tasks.netconf.NetConf', 'description': 'command and config execution over NETCONF'}, 'ssh': {'class': 'netnir.core.tasks.ssh.Ssh', 'description': 'command and config execution over SSH'}, 'user': {'class': 'netnir.core.tasks.user.User', 'description': 'netnir user commands'}}}</em><a class="headerlink" href="#netnir.helpers.defaults.default_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>default nornir config</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-netnir.helpers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-netnir.helpers" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="netnir.helpers.device_mapper">
+<code class="sig-prename descclassname">netnir.helpers.</code><code class="sig-name descname">device_mapper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">os_type</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/#device_mapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.device_mapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>map an os type to a netmiko device_type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>os_type</strong> – type str</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>device_type string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="netnir.helpers.filter_type">
+<code class="sig-prename descclassname">netnir.helpers.</code><code class="sig-name descname">filter_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">host</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filter</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">group</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/#filter_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.filter_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>define how nornir inventory filter should execute</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="netnir.helpers.inventory_filter">
+<code class="sig-prename descclassname">netnir.helpers.</code><code class="sig-name descname">inventory_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nr</span></em>, <em class="sig-param"><span class="n">device_filter</span></em>, <em class="sig-param"><span class="n">type</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/#inventory_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.inventory_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>nornir inventory filter helper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nr</strong> – typ obj</p></li>
+<li><p><strong>device_filter</strong> – str or dict</p></li>
+<li><p><strong>type</strong> – type str</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>nornir object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="netnir.helpers.netnir_config">
+<code class="sig-prename descclassname">netnir.helpers.</code><code class="sig-name descname">netnir_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config_file</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'netnir.yaml'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/#netnir_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.netnir_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="netnir.helpers.output_writer">
+<code class="sig-prename descclassname">netnir.helpers.</code><code class="sig-name descname">output_writer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nornir_results</span></em>, <em class="sig-param"><span class="n">output_file</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/#output_writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.output_writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>write results to text file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nornir_results</strong> – type obj</p></li>
+<li><p><strong>output_file</strong> – type str</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="netnir.helpers.render_filter">
+<code class="sig-prename descclassname">netnir.helpers.</code><code class="sig-name descname">render_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pattern</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/helpers/#render_filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.helpers.render_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>take the –filter argument list and return a k,v dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pattern</strong> – type list</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pattern dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../netnir.helpers.common/" class="btn btn-neutral float-right" title="netnir.helpers.common package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../netnir.core.tasks.fetch/" class="btn btn-neutral float-left" title="netnir.core.tasks.fetch package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, James Williams
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

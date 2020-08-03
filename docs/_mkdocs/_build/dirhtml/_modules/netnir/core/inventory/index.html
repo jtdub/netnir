@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>netnir.core.inventory &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex/" />
+    <link rel="search" title="Search" href="../../../../search/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/">netnir at a glance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../netnir/">code documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../">netnir 0.0.14</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../">Module code</a> &raquo;</li>
+        
+      <li>netnir.core.inventory</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for netnir.core.inventory</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">nornir.core.deserializer.inventory</span> <span class="kn">import</span> <span class="n">Inventory</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+
+<span class="sd">&quot;&quot;&quot;dynamic inventory builder class&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="NornirInventory"><a class="viewcode-back" href="../../../../netnir/netnir.core/#netnir.core.inventory.NornirInventory">[docs]</a><span class="k">class</span> <span class="nc">NornirInventory</span><span class="p">(</span><span class="n">Inventory</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    default inventory module to dynamically create inventory objects from host_vars and group_vars</span>
+<span class="sd">    and load the inventory objects into nornir&#39;s inventory system.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        initialize the NornirInventory class and load the data into nornir</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">hosts</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nhosts</span><span class="p">(),</span> <span class="n">groups</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ngroups</span><span class="p">(),</span> <span class="n">defaults</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ndefaults</span><span class="p">()</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="NornirInventory.nhosts"><a class="viewcode-back" href="../../../../netnir/netnir.core/#netnir.core.inventory.NornirInventory.nhosts">[docs]</a>    <span class="k">def</span> <span class="nf">nhosts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">netnir.helpers</span> <span class="kn">import</span> <span class="n">device_mapper</span>
+        <span class="kn">from</span> <span class="nn">netnir.core.credentials</span> <span class="kn">import</span> <span class="n">Credentials</span>
+        <span class="kn">from</span> <span class="nn">netnir.constants</span> <span class="kn">import</span> <span class="p">(</span>
+            <span class="n">HOSTVARS</span><span class="p">,</span>
+            <span class="n">TEMPLATES</span><span class="p">,</span>
+            <span class="n">DOMAIN</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        load devices from host_vars and load them into the nornir inventory schema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">hosts</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">HOSTVARS</span><span class="p">))</span>
+        <span class="n">creds</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">()</span>
+        <span class="n">creds</span> <span class="o">=</span> <span class="n">creds</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="n">DOMAIN</span>
+            <span class="n">host_vars</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">HOSTVARS</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">host</span><span class="p">),</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">host</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">domain</span> <span class="k">else</span> <span class="n">host</span><span class="p">,</span>
+                <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="n">creds</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="n">creds</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="p">),</span>
+                <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="n">device_mapper</span><span class="p">(</span><span class="n">host_vars</span><span class="p">[</span><span class="s2">&quot;os&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">()),</span>
+                <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="o">**</span><span class="n">host_vars</span><span class="p">,</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+                    <span class="s2">&quot;template_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="p">[</span>
+                            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">TEMPLATES</span><span class="p">),</span>
+                            <span class="n">host_vars</span><span class="p">[</span><span class="s2">&quot;provider&quot;</span><span class="p">],</span>
+                            <span class="n">host_vars</span><span class="p">[</span><span class="s2">&quot;os&quot;</span><span class="p">],</span>
+                        <span class="p">],</span>
+                    <span class="p">),</span>
+                    <span class="s2">&quot;mgmt_protocol&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mgmt_protocol&quot;</span><span class="p">,</span> <span class="s2">&quot;ssh&quot;</span><span class="p">),</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;connection_options&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;netconf&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">domain</span> <span class="k">else</span> <span class="n">host</span><span class="p">,</span>
+                        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="n">creds</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">]),</span>
+                        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="n">creds</span><span class="p">[</span><span class="s2">&quot;password&quot;</span><span class="p">]),</span>
+                        <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;os&quot;</span><span class="p">),</span>
+                        <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">host_vars</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">,</span> <span class="mi">830</span><span class="p">),</span>
+                        <span class="s2">&quot;extras&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;hostkey_verify&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                    <span class="p">},</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="NornirInventory.ngroups"><a class="viewcode-back" href="../../../../netnir/netnir.core/#netnir.core.inventory.NornirInventory.ngroups">[docs]</a>    <span class="k">def</span> <span class="nf">ngroups</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        load groups from group_vars and load them into the nornir inventory schema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">netnir.constants</span> <span class="kn">import</span> <span class="n">GROUPVARS</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">GROUPVARS</span><span class="p">))</span>
+        <span class="k">if</span> <span class="s2">&quot;all&quot;</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+            <span class="n">groups</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+            <span class="n">group_vars</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">GROUPVARS</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">group</span><span class="p">),</span>
+                <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">group_vars</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="NornirInventory.ndefaults"><a class="viewcode-back" href="../../../../netnir/netnir.core/#netnir.core.inventory.NornirInventory.ndefaults">[docs]</a>    <span class="k">def</span> <span class="nf">ndefaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        load the defaults from group_vars/all and load them into the nornir inventory schema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">netnir.constants</span> <span class="kn">import</span> <span class="n">GROUPVARS</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">GROUPVARS</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/all&quot;</span><span class="p">):</span>
+            <span class="n">default_vars</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+                <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">GROUPVARS</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/all&quot;</span><span class="p">),</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">default_vars</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">default_vars</span><span class="p">}</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, James Williams
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

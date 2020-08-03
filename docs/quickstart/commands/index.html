@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>custom netnir commands &mdash; netnir 0.0.14 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex/" />
+    <link rel="search" title="Search" href="../../search/" />
+    <link rel="next" title="code documentation" href="../../netnir/" />
+    <link rel="prev" title="executing netnir commands" href="../execute/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.14
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorial/">netnir at a glance</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../install/">installing netnir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configure/">configuring netnir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../execute/">executing netnir commands</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">custom netnir commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../netnir/">code documentation</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../">netnir 0.0.14</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../tutorial/">netnir at a glance</a> &raquo;</li>
+        
+      <li>custom netnir commands</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/quickstart/commands.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="custom-netnir-commands">
+<span id="commands"></span><h1>custom netnir commands<a class="headerlink" href="#custom-netnir-commands" title="Permalink to this headline">¶</a></h1>
+<p>Creating custom netnir commands is simple. The first thing that you do is create an installable python package with a class
+that follows the following format:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Plugin</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parser</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--some-arg&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">some</span><span class="o">-</span><span class="n">arg</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>An example of this is:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cat setup.py
+<span class="c1">#!/usr/bin/env python3</span>
+
+import setuptools
+
+setuptools.setup<span class="o">(</span>
+    <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;example netnir plugin&quot;</span>,
+    <span class="nv">packages</span><span class="o">=[</span><span class="s1">&#39;netnir_plugin&#39;</span><span class="o">]</span>
+<span class="o">)</span>
+
+$ cat netnir_plugin/__init__.py
+from netnir.helpers.common.args import filter_host
+
+class ExamplePlugin:
+
+    def __init__<span class="o">(</span>self, args<span class="o">)</span>:
+        self.args <span class="o">=</span> args
+
+    @staticmethod
+    def parser<span class="o">(</span>parser<span class="o">)</span>:
+        parser.add_argument<span class="o">(</span><span class="s2">&quot;--print&quot;</span>, <span class="nv">help</span><span class="o">=</span><span class="s2">&quot;print something to the screen&quot;</span><span class="o">)</span>
+        filter_host<span class="o">(</span>parser<span class="o">)</span>
+
+    def run<span class="o">(</span>self<span class="o">)</span>:
+        <span class="k">if</span> self.args.host:
+            <span class="k">return</span> self.args.host
+        <span class="k">elif</span> self.args.print:
+            <span class="k">return</span> self.args.print
+        <span class="k">else</span>:
+            <span class="k">return</span> <span class="s2">&quot;nothing to print&quot;</span>
+
+$ python
+Python <span class="m">3</span>.8.1 <span class="o">(</span>v3.8.1:1b293b6006, Dec <span class="m">18</span> <span class="m">2019</span>, <span class="m">14</span>:08:53<span class="o">)</span>
+<span class="o">[</span>Clang <span class="m">6</span>.0 <span class="o">(</span>clang-600.0.57<span class="o">)]</span> on darwin
+Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
+&gt;&gt;&gt; import netnir_plugin
+</pre></div>
+</div>
+</div></blockquote>
+<p>Once that is done, you can modify the <em>netnir.yaml</em> to add the plugin in the <em>plugins</em> section.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cat netnir.yaml
+&lt;/omitted&gt;
+plugins:
+&lt;/omitted&gt;
+  example:
+    class: netnir_plugin.ExamplePlugin
+    description: example netnir plugin
+</pre></div>
+</div>
+</div></blockquote>
+<p>Then execute netnir.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ netnir -h
+usage: netnir <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--version<span class="o">]</span> <span class="o">{</span>cp,fetch,inventory,setup,ssh,example<span class="o">}</span> ...
+
+optional arguments:
+  -h, --help            show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  --version             display version
+
+netnir commands:
+  <span class="o">{</span>cp,fetch,inventory,setup,ssh,example<span class="o">}</span>
+    cp                  config plan commands
+    fetch               fetch commands
+    inventory           inventory search <span class="nb">command</span>
+    setup               netnir setup commands
+    ssh                 <span class="nb">command</span> and config execution over SSH
+    example             example netnir plugin
+
+$ netnir example -h
+usage: netnir example <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--print PRINT<span class="o">]</span> <span class="o">[</span>--host HOST<span class="o">]</span>
+
+example netnir plugin
+
+optional arguments:
+  -h, --help     show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  --print PRINT  print something to the screen
+  --host HOST    specify a specific host
+
+$ netnir example --host router.dc1
+<span class="s1">&#39;router.dc1&#39;</span>
+$ netnir example --print <span class="s1">&#39;some message&#39;</span>
+<span class="s1">&#39;some message&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../netnir/" class="btn btn-neutral float-right" title="code documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../execute/" class="btn btn-neutral float-left" title="executing netnir commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, James Williams
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
