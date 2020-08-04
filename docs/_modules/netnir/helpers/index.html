@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.helpers &mdash; netnir 0.0.15 0.0.15 documentation</title>
+  <title>netnir.helpers &mdash; netnir 0.0.16 0.0.16 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.15
+            <a href="../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.16
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../">netnir 0.0.15</a>
+          <a href="../../../">netnir 0.0.16</a>
         
       </nav>
 
@@ -300,6 +300,29 @@
         <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">),</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plugins_import"><a class="viewcode-back" href="../../../netnir/netnir.helpers/#netnir.helpers.plugins_import">[docs]</a><span class="k">def</span> <span class="nf">plugins_import</span><span class="p">(</span><span class="n">tasks</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">subparsers</span><span class="p">:</span> <span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;import plugins into python and load them into netnir</span>
+
+<span class="sd">    :param tasks: type dictionary</span>
+<span class="sd">    :param subparsers: argparse subparsers object</span>
+
+<span class="sd">    :returns: loaded_plugins dictionary</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">loaded_plugins</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">task_key</span><span class="p">,</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">plugin</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">cmdparser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+            <span class="n">task_key</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">task</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span> <span class="n">description</span><span class="o">=</span><span class="n">task</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">plugin</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">__import__</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">plugin</span><span class="p">),</span> <span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="n">app</span><span class="p">]),</span> <span class="n">app</span><span class="p">)</span>
+        <span class="n">loaded_plugins</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">task_key</span><span class="p">:</span> <span class="n">plugin</span><span class="p">})</span>
+        <span class="n">plugin</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="n">cmdparser</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">loaded_plugins</span></div>
 </pre></div>
 
            </div>

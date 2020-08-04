@@ -153,6 +153,13 @@ def netnir_config(config_file: str = "netnir.yaml"):
 
 
 def plugins_import(tasks: dict, subparsers: object):
+    """import plugins into python and load them into netnir
+
+    :param tasks: type dictionary
+    :param subparsers: argparse subparsers object
+
+    :returns: loaded_plugins dictionary
+    """
     loaded_plugins = dict()
 
     for task_key, task in tasks.items():
