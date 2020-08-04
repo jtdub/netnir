@@ -34,19 +34,19 @@ class SubCommandParser:
         """
         sub command parser.
         """
-        subparsers = parser.add_subparsers(title=cls.title, dest="command")
+        from netnir.helpers import plugins_import
 
-        for task_key, task in cls.tasks.items():
-            cmdparser = subparsers.add_parser(
-                task_key, help=task["description"], description=task["description"],
-            )
-            task["class"].parser(cmdparser)
+        subparsers = parser.add_subparsers(title=cls.title, dest="command")
+        plugins_import(tasks=cls.tasks, subparsers=subparsers)
 
     def run(self):
         """
         execute the subcommand parser.
         """
         command = self.args.command
-        action_class = self.tasks[command]["class"]
+        action = self.tasks[command]["class"]
+        plugin = action.split(".")[:-1]
+        app = action.split(".")[-1]
+        action_class = getattr(__import__(".".join(plugin), fromlist=[app]), app)
         action = action_class(self.args)
         action.run()

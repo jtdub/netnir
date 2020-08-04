@@ -19,29 +19,15 @@ class Cli:
         A class object used to setup the netnir cli, consume the available commands from plugins,
         display the available commands, and execute the available commands based on user input.
         """
+        from netnir.helpers import plugins_import
+
         self.plugins = NETNIR_CONFIG["plugins"]
-        self.loaded_plugins = dict()
         self.parser = MyParser(prog="netnir")
         self.parser.add_argument(
             "--version", default=False, action="store_true", help="display version"
         )
-
         subparsers = self.parser.add_subparsers(title="netnir commands", dest="command")
-
-        for task_key, task in self.plugins.items():
-            plugin = task["class"].split(".")[:-1]
-            app = task["class"].split(".")[-1]
-            cmdparser = subparsers.add_parser(
-                task_key, help=task["description"], description=task["description"],
-            )
-
-            try:
-                plugin = getattr(__import__(".".join(plugin), fromlist=[app]), app)
-                self.loaded_plugins.update({task_key: plugin})
-            except ModuleNotFoundError:
-                raise
-
-            plugin.parser(cmdparser)
+        self.loaded_plugins = plugins_import(tasks=self.plugins, subparsers=subparsers)
 
         self.args = self.parser.parse_args()
 

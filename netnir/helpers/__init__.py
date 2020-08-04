@@ -150,3 +150,19 @@ def netnir_config(config_file: str = "netnir.yaml"):
         logging.warning(message)
 
     return yaml.load(open(config_file), Loader=yaml.SafeLoader)
+
+
+def plugins_import(tasks: dict, subparsers: object):
+    loaded_plugins = dict()
+
+    for task_key, task in tasks.items():
+        plugin = task["class"].split(".")[:-1]
+        app = task["class"].split(".")[-1]
+        cmdparser = subparsers.add_parser(
+            task_key, help=task["description"], description=task["description"],
+        )
+        plugin = getattr(__import__(".".join(plugin), fromlist=[app]), app)
+        loaded_plugins.update({task_key: plugin})
+        plugin.parser(cmdparser)
+
+    return loaded_plugins
