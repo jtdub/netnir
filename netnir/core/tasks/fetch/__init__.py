@@ -1,4 +1,3 @@
-from netnir.core.tasks.fetch.config import FetchConfig
 from netnir.helpers.scaffold.subcommand import SubCommandParser
 
 
@@ -14,7 +13,7 @@ class Fetch(SubCommandParser):
     title = "fetch commands"
     tasks = {
         "config": {
-            "class": FetchConfig,
+            "class": "netnir.core.tasks.fetch.config.FetchConfig",
             "description": "fetch current config from a network device",
         },
     }
