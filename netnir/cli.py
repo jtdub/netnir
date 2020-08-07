@@ -5,8 +5,7 @@ import argparse
 import sys
 
 
-"""cli class to build and execute cli commands
-"""
+"""cli class to build and execute cli commands"""
 
 
 class Cli:

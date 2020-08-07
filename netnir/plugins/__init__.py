@@ -1,2 +1,1 @@
-"""initialize plugins
-"""
+"""initialize plugins"""
