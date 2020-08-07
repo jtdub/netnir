@@ -5,9 +5,6 @@ import os
 import logging
 
 
-"""initialize netnir helpers"""
-
-
 def device_mapper(os_type: str, proto: str = "netmiko"):
     """
     map an os type to a netmiko device_type

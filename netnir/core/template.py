@@ -1,10 +1,6 @@
 from nornir.plugins.tasks.text import template_file
 
 
-"""compile template class
-"""
-
-
 class CompileTemplate:
     """compile jinja2 template utilizing the nornir template_file plugin
 

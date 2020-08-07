@@ -8,10 +8,6 @@ from nornir.plugins.functions.text import print_result
 import logging
 
 
-"""config plan cli commands
-"""
-
-
 class ConfigPlan(CommandScaffold):
     """
     config plan cli plugin to render configuration plans, either by

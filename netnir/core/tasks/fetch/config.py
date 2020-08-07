@@ -4,8 +4,6 @@ from netnir.helpers import output_writer
 from netnir.plugins.netmiko import netmiko_send_commands
 from nornir.plugins.functions.text import print_result
 
-"""fetch remove device configs"""
-
 
 class FetchConfig(CommandScaffold):
     """

@@ -1,10 +1,6 @@
 from netnir.helpers.scaffold.subcommand import SubCommandParser
 
 
-"""fetch subcommands initialization
-"""
-
-
 class Fetch(SubCommandParser):
     """
     fetch subcommand parser

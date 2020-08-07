@@ -1,7 +1,3 @@
-"""common cli arguments
-"""
-
-
 def filter_host(parser, required: bool = False):
     """
     common argument to display the --host flag.

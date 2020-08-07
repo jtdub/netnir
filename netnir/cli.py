@@ -5,9 +5,6 @@ import argparse
 import sys
 
 
-"""cli class to build and execute cli commands"""
-
-
 class Cli:
     """
     a class object used to setup the netnir cli.

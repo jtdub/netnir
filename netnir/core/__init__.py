@@ -1,1 +1,0 @@
-"""netnir core initialization"""

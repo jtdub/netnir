@@ -8,8 +8,6 @@ from netnir.helpers.common.args import (
 )
 from nornir.plugins.functions.text import print_result
 
-"""ssh cli commands"""
-
 
 class Ssh(CommandScaffold):
     """

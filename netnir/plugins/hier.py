@@ -6,9 +6,6 @@ import logging
 import os
 import yaml
 
-"""hier_config nornir plugin
-"""
-
 
 def hier_host(
     task: Task,

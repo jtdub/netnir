@@ -2,8 +2,6 @@ from nornir.core.task import Task, Result
 from netmiko import ConnectHandler
 from netnir.helpers import device_mapper
 
-"""netmiko (SSH) nornir tasks"""
-
 
 def netmiko_send_commands(task: Task, commands: list()):
     """send show commands to a device via netmiko

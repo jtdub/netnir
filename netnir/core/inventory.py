@@ -3,9 +3,6 @@ import os
 import yaml
 
 
-"""dynamic inventory builder class"""
-
-
 class NornirInventory(Inventory):
     """
     default inventory module to dynamically create inventory objects from host_vars and group_vars
