@@ -1,6 +1,6 @@
 from netnir.helpers.scaffold.command import CommandScaffold
 from netnir.core.template import CompileTemplate
-from netnir.core.networking import Networking
+from netnir.plugins.netmiko import netmiko_send_commands
 from netnir.helpers import output_writer, TextColor
 from netnir.plugins.hier import hier_host
 from netnir.constants import OUTPUT_DIR
@@ -72,10 +72,13 @@ class ConfigPlan(CommandScaffold):
             message = TextColor.green("templates compiled for all hosts")
             return logging.info(message)
 
-        networking = Networking(nr=self.nr)
-        running_config = networking.fetch(commands="show running")
-        output_writer(nornir_results=running_config, output_file="running.conf")
-        print_result(running_config)
+        results = self.nr(
+            task=netmiko_send_commands,
+            commands="show running",
+            name="FETCH RUNNING CONFIG",
+        )
+        output_writer(nornir_results=results, output_file="running.conf")
+        print_result(results)
 
         result = self.nr.run(
             task=hier_host,
@@ -85,6 +88,7 @@ class ConfigPlan(CommandScaffold):
             compiled_config="compiled.conf",
             config_path=OUTPUT_DIR,
             load_file=True,
+            name="RENDER REMEDIATION CONFIG",
         )
 
         print_result(result)

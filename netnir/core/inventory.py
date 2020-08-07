@@ -21,7 +21,6 @@ class NornirInventory(Inventory):
         )
 
     def nhosts(self):
-        from netnir.helpers import device_mapper
         from netnir.core.credentials import Credentials
         from netnir.constants import (
             HOSTVARS,
@@ -47,7 +46,7 @@ class NornirInventory(Inventory):
                 "username": host_vars.get("username", creds["username"]),
                 "password": host_vars.get("password", creds["password"]),
                 "port": host_vars.get("port", 22),
-                "platform": device_mapper(host_vars["os"]),
+                "platform": host_vars["os"],
                 "groups": host_vars.get("groups", list()),
                 "data": {
                     **host_vars,
@@ -60,18 +59,6 @@ class NornirInventory(Inventory):
                         ],
                     ),
                     "mgmt_protocol": host_vars.get("mgmt_protocol", "ssh"),
-                },
-                "connection_options": {
-                    "netconf": {
-                        "hostname": f"{host}.{domain}" if domain else host,
-                        "username": host_vars.get("username", creds["username"]),
-                        "password": host_vars.get("password", creds["password"]),
-                        "platform": device_mapper(
-                            os_type=host_vars["os"], proto="netconf"
-                        ),
-                        "port": host_vars.get("port", 830),
-                        "extras": {"hostkey_verify": False},
-                    },
                 },
             }
 
