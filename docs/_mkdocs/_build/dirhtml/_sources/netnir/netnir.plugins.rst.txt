@@ -28,6 +28,21 @@ netnir.plugins.netconf module
    :undoc-members:
    :show-inheritance:
 
+netnir.plugins.netmiko module
+-----------------------------
+
+.. automodule:: netnir.plugins.netmiko
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+netnir.plugins.template module
+------------------------------
+
+.. automodule:: netnir.plugins.template
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Module contents
 ---------------

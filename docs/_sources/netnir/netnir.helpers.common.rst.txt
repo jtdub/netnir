@@ -12,7 +12,6 @@ netnir.helpers.common.args module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 
