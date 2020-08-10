@@ -5,10 +5,6 @@ import logging
 import os
 
 
-"""credentials create/fetch/delete class
-"""
-
-
 class Credentials:
     """
     a class to do credentials administration.

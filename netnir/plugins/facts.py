@@ -1,10 +1,6 @@
 from nornir.core.task import Task, Result
 
 
-"""nornir facts plugins
-"""
-
-
 def inventory_facts(task: Task) -> Result:
     """gather inventory facts
 

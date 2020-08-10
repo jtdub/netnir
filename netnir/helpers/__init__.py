@@ -5,10 +5,6 @@ import os
 import logging
 
 
-"""initialize netnir helpers
-"""
-
-
 def device_mapper(os_type: str, proto: str = "netmiko"):
     """
     map an os type to a netmiko device_type
@@ -173,3 +169,12 @@ def plugins_import(tasks: dict, subparsers: object):
         plugin.parser(cmdparser)
 
     return loaded_plugins
+
+
+def merge_two_dicts(x, y):
+    try:
+        z = x.copy()
+    except AttributeError:
+        z = dict(x)
+    z.update(y)
+    return z

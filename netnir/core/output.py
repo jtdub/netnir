@@ -2,10 +2,6 @@ from netnir.constants import OUTPUT_DIR
 import os
 
 
-"""ouput read/write/delete class
-"""
-
-
 class Output:
     """
     a class for writing, reading, and deleting output data to/from a file

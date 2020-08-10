@@ -1,13 +1,9 @@
 from netnir.constants import HIER_DIR
-from netnir.core.output import Output
 from nornir.core.task import Task, Result
 from hier_config import Host
 import logging
 import os
 import yaml
-
-"""hier_config nornir plugin
-"""
 
 
 def hier_host(
@@ -70,10 +66,8 @@ def hier_host(
         )
 
     host.load_remediation()
-
-    output = Output(host=task.host.name, output_file="remediation.conf")
-    output.write(
-        host.filter_remediation(include_tags=include_tags, exclude_tags=exclude_tags)
+    results = host.filter_remediation(
+        include_tags=include_tags, exclude_tags=exclude_tags
     )
 
-    return Result(host=task.host, result=output.read())
+    return Result(host=task.host, result=results)

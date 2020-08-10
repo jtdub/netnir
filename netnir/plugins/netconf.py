@@ -1,9 +1,11 @@
 from nornir.core.task import Task, Result
+from netnir.helpers import device_mapper
+from ncclient import manager
 
 
 def netconf_get_config(
     task: Task,
-    source: str = "candidate",
+    source: str = "running",
     nc_filter: str = None,
     nc_filter_type: str = None,
 ) -> Result:
@@ -15,19 +17,31 @@ def netconf_get_config(
     :params nc_filter_type: type str
     :returns: nornir result object
     """
-    manager = task.host.get_connection(
-        connection="netconf", configuration=task.nornir.config
-    )
-    if nc_filter and nc_filter_type:
-        result = manager.get_config(source=source, filter=(nc_filter_type, nc_filter))
-    else:
-        result = manager.get_config(source=source)
+    device_params = {
+        "host": task.host.hostname,
+        "port": task.host.port or 830,
+        "username": task.host.username,
+        "password": task.host.password,
+        "hostkey_verify": False,
+        "device_params": {
+            "name": device_mapper(os_type=task.host.data["os"], proto="netconf")
+        },
+    }
+
+    with manager.connect(**device_params) as conn:
+        if nc_filter and nc_filter_type:
+            with open(nc_filter) as xml:
+                nc_filter = xml.read()
+
+            result = conn.get_config(source=source, filter=(nc_filter_type, nc_filter))
+        else:
+            result = conn.get_config(source=source)
 
     return Result(result=result, host=task.host)
 
 
 def netconf_edit_config(
-    task: Task, target: str = "candidate", nc_config: str = None
+    task: Task, target: str = "running", nc_config: str = None
 ) -> Result:
     """nornir netconf edit config task
 
@@ -36,12 +50,23 @@ def netconf_edit_config(
     :params nc_config: type str - yang config model
     :returns: nornir result object
     """
-    manager = task.host.get_connection(
-        connection="netconf", configuration=task.nornir.config
-    )
-    with manager.lock(target=target):
-        config_response = manager.edit_config(target=target, config=nc_config)
-        config_validate = manager.validate(source=target)
+    device_params = {
+        "host": task.host.hostname,
+        "port": task.host.port or 830,
+        "username": task.host.username,
+        "password": task.host.password,
+        "hostkey_verify": False,
+        "device_params": {
+            "name": device_mapper(os_type=task.host.data["os"], proto="netconf")
+        },
+    }
+
+    with manager.connect(**device_params) as conn:
+        with open(nc_config) as xml:
+            nc_config = xml.read()
+
+        config_response = conn.edit_config(target=target, config=nc_config)
+        config_validate = conn.validate(source=target)
 
         if config_response.ok and config_validate.ok:
             result = {
@@ -49,13 +74,13 @@ def netconf_edit_config(
                 "config_validate": config_validate.ok,
             }
             failed = False
-            manager.commit()
+            conn.commit()
         else:
             result = {
                 "config_response": config_response.error,
                 "config_validate": config_validate.error,
             }
             failed = True
-            manager.discard_changes()
+            conn.discard_changes()
 
     return Result(result=result, host=task.host, failed=failed)

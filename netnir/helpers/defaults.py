@@ -1,5 +1,3 @@
-"""default configuration
-"""
 default_config = {
     "directories": {
         "hostvars": "./host_vars",

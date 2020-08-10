@@ -1,7 +1,3 @@
-"""text color helper
-"""
-
-
 class TextColor:
     """
     display test on console as a color.

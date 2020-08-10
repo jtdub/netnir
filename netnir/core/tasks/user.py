@@ -2,9 +2,6 @@ from netnir.core.credentials import Credentials
 from netnir.constants import SERVICE_NAME, NETNIR_USER
 from pprint import pprint
 
-"""setup user cli commands
-"""
-
 
 class User:
     """

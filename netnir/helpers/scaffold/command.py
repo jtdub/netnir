@@ -1,6 +1,3 @@
-""" netnir command scaffolding """
-
-
 class CommandScaffold:
     """ scaffold class """
 
