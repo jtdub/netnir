@@ -20,6 +20,7 @@ def template_file(
         loader=FileSystemLoader(template_path),
         undefined=StrictUndefined,
         trim_blocks=True,
+        autoescape=True,
     )
     env.filters.update(jinja_filters)
     template = env.get_template(template_file)
