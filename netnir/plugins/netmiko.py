@@ -11,18 +11,23 @@ def netmiko_send_commands(task: Task, commands: list()) -> Result:
 
     :returns: nornir Result object
     """
+    try:
+        secret = task.host.connection_options["netmiko"]["extras"]["secret"]
+    except KeyError:
+        secret = None
+
     device_params = {
         "host": task.host.hostname,
         "device_type": device_mapper(os_type=task.host.platform, proto="netmiko"),
         "port": task.host.port,
         "username": task.host.username,
         "password": task.host.password,
-        "secret": task.host.connection_options["netmiko"]["extras"].get("secret", None),
+        "secret": secret,
+        "ssh_config_file": task.nornir.config.ssh.config_file or None,
     }
+    output = str()
 
     with ConnectHandler(**device_params) as conn:
-        output = str()
-
         for command in commands:
             output += conn.send_command(command)
 
@@ -37,13 +42,19 @@ def netmiko_send_config(task: Task, commands: list()) -> Result:
 
     :returns: nornir Result object
     """
+    try:
+        secret = task.host.connection_options["netmiko"]["extras"]["secret"]
+    except KeyError:
+        secret = None
+
     device_params = {
         "host": task.host.hostname,
         "device_type": device_mapper(os_type=task.host.platform, proto="netmiko"),
         "port": task.host.port,
         "username": task.host.username,
         "password": task.host.password,
-        "secret": task.host.connection_options["netmiko"]["extras"].get("secret", None),
+        "secret": secret,
+        "ssh_config_file": task.nornir.config.ssh.config_file or None,
     }
 
     with ConnectHandler(**device_params) as conn:

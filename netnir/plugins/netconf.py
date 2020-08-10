@@ -3,6 +3,29 @@ from netnir.helpers import device_mapper
 from ncclient import manager
 
 
+def netconf_capabilities(task: Task) -> Result:
+    """nornir get netconf capabilities
+
+    :params task: type object
+    :returns: nornir result object
+    """
+    device_params = {
+        "host": task.host.hostname,
+        "port": task.host.port or 830,
+        "username": task.host.username,
+        "password": task.host.password,
+        "hostkey_verify": False,
+        "device_params": {
+            "name": device_mapper(os_type=task.host.data["os"], proto="netconf")
+        },
+    }
+
+    with manager.connect(**device_params) as conn:
+        results = [capability for capability in conn.server_capabilities]
+
+    return Result(host=task.host, result=results)
+
+
 def netconf_get_config(
     task: Task,
     source: str = "running",

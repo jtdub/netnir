@@ -4,6 +4,7 @@ from netnir.helpers.common.args import (
     netconf_filter,
     netconf_source,
     netconf_target,
+    netconf_capabilities,
     config,
 )
 
@@ -18,6 +19,7 @@ class NetConf(CommandScaffold):
         netconf_filter(parser)
         netconf_source(parser)
         netconf_target(parser)
+        netconf_capabilities(parser)
         config(parser)
 
     def run(self):
@@ -25,12 +27,20 @@ class NetConf(CommandScaffold):
 
         :returns: nornir Result object
         """
-        from netnir.plugins.netconf import netconf_get_config, netconf_edit_config
+        from netnir.plugins.netconf import (
+            netconf_get_config,
+            netconf_edit_config,
+            netconf_capabilities,
+        )
         from nornir.plugins.functions.text import print_result
 
         self.nr = self._inventory()
 
-        if self.args.config:
+        if self.args.capabilities:
+            results = self.nr.run(
+                task=netconf_capabilities, name="NETCONF SERVER CAPABILITIES",
+            )
+        elif self.args.config:
             results = self.nr.run(
                 task=netconf_edit_config,
                 name="NETCONF EDIT CONFIG",
