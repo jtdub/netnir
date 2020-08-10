@@ -157,3 +157,17 @@ def netconf_config(parser, required: bool = False):
         help="yang config file that defines what to fetch from a device or edit on a device",
         required=required,
     )
+
+
+def netconf_capabilities(parser, required: bool = False):
+    """
+    common argument to retrieve the netconf capabilities from a netconf server
+    via netconf with the --capabilities flag.
+    """
+    parser.add_argument(
+        "--capabilities",
+        help="retrieve netconf capabilities from a netconf server",
+        required=required,
+        nargs="?",
+        const=True,
+    )

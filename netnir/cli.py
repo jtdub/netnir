@@ -12,8 +12,9 @@ class Cli:
 
     def __init__(self):
         """
-        A class object used to setup the netnir cli, consume the available commands from plugins,
-        display the available commands, and execute the available commands based on user input.
+        A class object used to setup the netnir cli, consume the available
+        commands from plugins, display the available commands, and execute
+        the available commands based on user input.
         """
         from netnir.helpers import plugins_import
 
