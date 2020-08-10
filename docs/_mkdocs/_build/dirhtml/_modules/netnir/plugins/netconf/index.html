@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.plugins.netconf &mdash; netnir 0.0.17 0.0.17 documentation</title>
+  <title>netnir.plugins.netconf &mdash; netnir 0.0.18 0.0.18 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.17
+            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.18
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../">netnir 0.0.17</a>
+          <a href="../../../../">netnir 0.0.18</a>
         
       </nav>
 
@@ -151,6 +151,29 @@
 <span></span><span class="kn">from</span> <span class="nn">nornir.core.task</span> <span class="kn">import</span> <span class="n">Task</span><span class="p">,</span> <span class="n">Result</span>
 <span class="kn">from</span> <span class="nn">netnir.helpers</span> <span class="kn">import</span> <span class="n">device_mapper</span>
 <span class="kn">from</span> <span class="nn">ncclient</span> <span class="kn">import</span> <span class="n">manager</span>
+
+
+<div class="viewcode-block" id="netconf_capabilities"><a class="viewcode-back" href="../../../../netnir/netnir.plugins/#netnir.plugins.netconf.netconf_capabilities">[docs]</a><span class="k">def</span> <span class="nf">netconf_capabilities</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;nornir get netconf capabilities</span>
+
+<span class="sd">    :params task: type object</span>
+<span class="sd">    :returns: nornir result object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">device_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">hostname</span><span class="p">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">port</span> <span class="ow">or</span> <span class="mi">830</span><span class="p">,</span>
+        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
+        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
+        <span class="s2">&quot;hostkey_verify&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;device_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">device_mapper</span><span class="p">(</span><span class="n">os_type</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;os&quot;</span><span class="p">],</span> <span class="n">proto</span><span class="o">=</span><span class="s2">&quot;netconf&quot;</span><span class="p">)</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">with</span> <span class="n">manager</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">**</span><span class="n">device_params</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">capability</span> <span class="k">for</span> <span class="n">capability</span> <span class="ow">in</span> <span class="n">conn</span><span class="o">.</span><span class="n">server_capabilities</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">results</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="netconf_get_config"><a class="viewcode-back" href="../../../../netnir/netnir.plugins/#netnir.plugins.netconf.netconf_get_config">[docs]</a><span class="k">def</span> <span class="nf">netconf_get_config</span><span class="p">(</span>

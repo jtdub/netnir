@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.core.tasks.netconf &mdash; netnir 0.0.17 0.0.17 documentation</title>
+  <title>netnir.core.tasks.netconf &mdash; netnir 0.0.18 0.0.18 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.17
+            <a href="../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.18
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../../">netnir 0.0.17</a>
+          <a href="../../../../../">netnir 0.0.18</a>
         
       </nav>
 
@@ -154,6 +154,7 @@
     <span class="n">netconf_filter</span><span class="p">,</span>
     <span class="n">netconf_source</span><span class="p">,</span>
     <span class="n">netconf_target</span><span class="p">,</span>
+    <span class="n">netconf_capabilities</span><span class="p">,</span>
     <span class="n">config</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -168,6 +169,7 @@
         <span class="n">netconf_filter</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
         <span class="n">netconf_source</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
         <span class="n">netconf_target</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">netconf_capabilities</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
         <span class="n">config</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NetConf.run"><a class="viewcode-back" href="../../../../../netnir/netnir.core.tasks/#netnir.core.tasks.netconf.NetConf.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -175,12 +177,20 @@
 
 <span class="sd">        :returns: nornir Result object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">netnir.plugins.netconf</span> <span class="kn">import</span> <span class="n">netconf_get_config</span><span class="p">,</span> <span class="n">netconf_edit_config</span>
+        <span class="kn">from</span> <span class="nn">netnir.plugins.netconf</span> <span class="kn">import</span> <span class="p">(</span>
+            <span class="n">netconf_get_config</span><span class="p">,</span>
+            <span class="n">netconf_edit_config</span><span class="p">,</span>
+            <span class="n">netconf_capabilities</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="kn">from</span> <span class="nn">nornir.plugins.functions.text</span> <span class="kn">import</span> <span class="n">print_result</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">nr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inventory</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">capabilities</span><span class="p">:</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="n">task</span><span class="o">=</span><span class="n">netconf_capabilities</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NETCONF SERVER CAPABILITIES&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
             <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="n">task</span><span class="o">=</span><span class="n">netconf_edit_config</span><span class="p">,</span>
                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;NETCONF EDIT CONFIG&quot;</span><span class="p">,</span>
