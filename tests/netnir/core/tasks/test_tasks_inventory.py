@@ -10,8 +10,9 @@ def test_tasks_inventory():
     args = parser.parse_args()
     args.host = "router.dc1"
     inventory = Inventory(args)
-
-    assert inventory.run()["router.dc1"].result == {
+    assert inventory.args.host == "router.dc1"
+    result = inventory.run()
+    assert result.get("router.dc1").result == {
         "facts": {
             "groups": ["dc1"],
             "mgmt_protocol": "ssh",

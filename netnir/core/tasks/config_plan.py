@@ -1,11 +1,10 @@
 from netnir.helpers.scaffold.command import CommandScaffold
-from netnir.core.template import CompileTemplate
+from netnir.plugins.template import template_file
 from netnir.plugins.netmiko import netmiko_send_commands
-from netnir.helpers import output_writer, TextColor
 from netnir.plugins.hier import hier_host
+from netnir.helpers import output_writer
 from netnir.constants import OUTPUT_DIR
 from nornir.plugins.functions.text import print_result
-import logging
 
 
 class ConfigPlan(CommandScaffold):
@@ -43,7 +42,7 @@ class ConfigPlan(CommandScaffold):
             required=False,
         )
 
-    def run(self, template_file="main.conf.j2"):
+    def run(self):
         """
         cli execution
 
@@ -52,23 +51,19 @@ class ConfigPlan(CommandScaffold):
         :returns: result string
         """
         self.nr = self._inventory()
-
-        for host in self.nr.inventory.hosts:
-            compiled_template = CompileTemplate(
-                nr=self.nr, host=host, template=template_file
-            )
-            output_writer(
-                nornir_results=compiled_template.render(), output_file="compiled.conf",
-            )
-            print_result(compiled_template.render())
+        results = self.nr.run(
+            task=template_file,
+            template_file="main.conf.j2",
+            output_file="compiled.conf",
+            name="COMPILE TEMPLATES",
+        )
+        output_writer(nornir_results=results, output_file="compiled.conf")
+        print_result(results)
 
         if self.args.compile:
-            if self.args.host:
-                return compiled_template.render()
-            message = TextColor.green("templates compiled for all hosts")
-            return logging.info(message)
+            return results
 
-        results = self.nr(
+        results = self.nr.run(
             task=netmiko_send_commands,
             commands="show running",
             name="FETCH RUNNING CONFIG",
@@ -76,7 +71,7 @@ class ConfigPlan(CommandScaffold):
         output_writer(nornir_results=results, output_file="running.conf")
         print_result(results)
 
-        result = self.nr.run(
+        results = self.nr.run(
             task=hier_host,
             include_tags=self.args.include_tags,
             exclude_tags=self.args.exclude_tags,
@@ -86,6 +81,7 @@ class ConfigPlan(CommandScaffold):
             load_file=True,
             name="RENDER REMEDIATION CONFIG",
         )
+        output_writer(nornir_results=results, output_file="remediation.conf")
+        print_result(results)
 
-        print_result(result)
-        return result
+        return results

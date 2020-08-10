@@ -44,13 +44,9 @@ class Ssh(CommandScaffold):
                 name="SSH COMMAND EXECUTION",
             )
 
-        if isinstance(results, str):
-            results = [results]
+        if self.args.output:
+            output_writer(nornir_results=results, output_file=self.args.output)
 
-        for task in results:
-            if self.args.output:
-                output_writer(nornir_results=task, output_file=self.args.output)
-
-            print_result(task)
+        print_result(results)
 
         return results

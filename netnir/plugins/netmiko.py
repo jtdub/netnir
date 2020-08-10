@@ -3,7 +3,7 @@ from netmiko import ConnectHandler
 from netnir.helpers import device_mapper
 
 
-def netmiko_send_commands(task: Task, commands: list()):
+def netmiko_send_commands(task: Task, commands: list()) -> Result:
     """send show commands to a device via netmiko
 
     :param task: nornir Task object
@@ -29,7 +29,7 @@ def netmiko_send_commands(task: Task, commands: list()):
     return Result(host=task.host, result=output)
 
 
-def netmiko_send_config(task: Task, commands: list()):
+def netmiko_send_config(task: Task, commands: list()) -> Result:
     """execute configuration changes on a device via netmiko
 
     :param task: nornir Task object
