@@ -20,7 +20,6 @@ netnir.helpers.scaffold.subcommand module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

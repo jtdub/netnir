@@ -52,7 +52,6 @@ netnir.core.tasks.user module
    :undoc-members:
    :show-inheritance:
 
-
 Module contents
 ---------------
 

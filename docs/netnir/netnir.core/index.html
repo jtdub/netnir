@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.core package &mdash; netnir 0.0.16 0.0.16 documentation</title>
+  <title>netnir.core package &mdash; netnir 0.0.17 0.0.17 documentation</title>
   
 
   
@@ -51,7 +51,7 @@
           
 
           
-            <a href="../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.16
+            <a href="../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.17
           
 
           
@@ -114,7 +114,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../">netnir 0.0.16</a>
+          <a href="../../">netnir 0.0.17</a>
         
       </nav>
 
@@ -277,17 +277,17 @@
 and load the inventory objects into nornir’s inventory system.</p>
 <dl class="py attribute">
 <dt id="netnir.core.inventory.NornirInventory.defaults">
-<code class="sig-name descname">defaults</code><a class="headerlink" href="#netnir.core.inventory.NornirInventory.defaults" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">defaults</code><em class="property">: nornir.core.deserializer.inventory.Defaults</em><a class="headerlink" href="#netnir.core.inventory.NornirInventory.defaults" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="netnir.core.inventory.NornirInventory.groups">
-<code class="sig-name descname">groups</code><a class="headerlink" href="#netnir.core.inventory.NornirInventory.groups" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">groups</code><em class="property">: Dict<span class="p">[</span>str<span class="p">, </span>nornir.core.deserializer.inventory.InventoryElement<span class="p">]</span></em><a class="headerlink" href="#netnir.core.inventory.NornirInventory.groups" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="netnir.core.inventory.NornirInventory.hosts">
-<code class="sig-name descname">hosts</code><a class="headerlink" href="#netnir.core.inventory.NornirInventory.hosts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hosts</code><em class="property">: Dict<span class="p">[</span>str<span class="p">, </span>nornir.core.deserializer.inventory.InventoryElement<span class="p">]</span></em><a class="headerlink" href="#netnir.core.inventory.NornirInventory.hosts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -306,65 +306,6 @@ and load the inventory objects into nornir’s inventory system.</p>
 <dt id="netnir.core.inventory.NornirInventory.nhosts">
 <code class="sig-name descname">nhosts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/inventory/#NornirInventory.nhosts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.inventory.NornirInventory.nhosts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-netnir.core.networking">
-<span id="netnir-core-networking-module"></span><h2>netnir.core.networking module<a class="headerlink" href="#module-netnir.core.networking" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="netnir.core.networking.Networking">
-<em class="property">class </em><code class="sig-prename descclassname">netnir.core.networking.</code><code class="sig-name descname">Networking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nr</span><span class="p">:</span> <span class="n">object</span></em>, <em class="sig-param"><span class="n">mgmt_protocol</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'ssh'</span></em>, <em class="sig-param"><span class="n">num_workers</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/networking/#Networking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.networking.Networking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>a networking class that utilizes nornir’s netmiko plugin to interact with devices
-via SSH.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Params nr</dt>
-<dd class="field-odd"><p>type obj (required)</p>
-</dd>
-<dt class="field-even">Params mgmt_protocol</dt>
-<dd class="field-even"><p>type str (optional)</p>
-</dd>
-<dt class="field-odd">Params num_workers</dt>
-<dd class="field-odd"><p>type int (optional)</p>
-</dd>
-</dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">netnir.core</span> <span class="kn">import</span> <span class="n">Networking</span>
-<span class="kn">from</span> <span class="nn">nornir</span> <span class="kn">import</span> <span class="n">InitNornir</span>
-
-<span class="n">nr</span> <span class="o">=</span> <span class="n">InitNornir</span><span class="p">()</span>
-<span class="n">networking</span> <span class="o">=</span> <span class="n">Networking</span><span class="p">(</span><span class="n">nr</span><span class="o">=</span><span class="n">nr</span><span class="p">)</span>
-<span class="n">networking</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">commands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;show version&#39;</span><span class="p">])</span>
-<span class="n">networking</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">commands</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ip route 10.0.0.0 255.0.0.0 null0&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt id="netnir.core.networking.Networking.config">
-<code class="sig-name descname">config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">commands</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/networking/#Networking.config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.networking.Networking.config" title="Permalink to this definition">¶</a></dt>
-<dd><p>execute configuration commands on a remote device and return the results</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>commands</strong> – type list</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>nornir results object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="netnir.core.networking.Networking.fetch">
-<code class="sig-name descname">fetch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">commands</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/networking/#Networking.fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.networking.Networking.fetch" title="Permalink to this definition">¶</a></dt>
-<dd><p>execute show commands on the remote device and return the results</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>commands</strong> – type list</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>nornir results object</p>
-</dd>
-</dl>
-</dd></dl>
 
 </dd></dl>
 
@@ -434,38 +375,8 @@ via SSH.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-netnir.core.template">
-<span id="netnir-core-template-module"></span><h2>netnir.core.template module<a class="headerlink" href="#module-netnir.core.template" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="netnir.core.template.CompileTemplate">
-<em class="property">class </em><code class="sig-prename descclassname">netnir.core.template.</code><code class="sig-name descname">CompileTemplate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nr</span><span class="p">:</span> <span class="n">object</span></em>, <em class="sig-param"><span class="n">host</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">template</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/template/#CompileTemplate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.template.CompileTemplate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>compile jinja2 template utilizing the nornir template_file plugin</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>nr</strong> – type obj</p></li>
-<li><p><strong>host</strong> – type str</p></li>
-<li><p><strong>template</strong> – type str</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>compled template result</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt id="netnir.core.template.CompileTemplate.render">
-<code class="sig-name descname">render</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/netnir/core/template/#CompileTemplate.render"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netnir.core.template.CompileTemplate.render" title="Permalink to this definition">¶</a></dt>
-<dd><p>execute the class and return the results</p>
-<p>return: nornir results</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
 <div class="section" id="module-netnir.core">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-netnir.core" title="Permalink to this headline">¶</a></h2>
-<p>netnir core initialization</p>
 </div>
 </div>
 

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.helpers &mdash; netnir 0.0.16 0.0.16 documentation</title>
+  <title>netnir.helpers &mdash; netnir 0.0.17 0.0.17 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.16
+            <a href="../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.17
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../">netnir 0.0.16</a>
+          <a href="../../../">netnir 0.0.17</a>
         
       </nav>
 
@@ -153,10 +153,6 @@
 <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-
-
-<span class="sd">&quot;&quot;&quot;initialize netnir helpers</span>
-<span class="sd">&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="device_mapper"><a class="viewcode-back" href="../../../netnir/netnir.helpers/#netnir.helpers.device_mapper">[docs]</a><span class="k">def</span> <span class="nf">device_mapper</span><span class="p">(</span><span class="n">os_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">proto</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;netmiko&quot;</span><span class="p">):</span>
@@ -323,6 +319,15 @@
         <span class="n">plugin</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="n">cmdparser</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">loaded_plugins</span></div>
+
+
+<div class="viewcode-block" id="merge_two_dicts"><a class="viewcode-back" href="../../../netnir/netnir.helpers/#netnir.helpers.merge_two_dicts">[docs]</a><span class="k">def</span> <span class="nf">merge_two_dicts</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">z</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">z</span></div>
 </pre></div>
 
            </div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.plugins.hier &mdash; netnir 0.0.16 0.0.16 documentation</title>
+  <title>netnir.plugins.hier &mdash; netnir 0.0.17 0.0.17 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.16
+            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.17
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../">netnir 0.0.16</a>
+          <a href="../../../../">netnir 0.0.17</a>
         
       </nav>
 
@@ -149,15 +149,11 @@
             
   <h1>Source code for netnir.plugins.hier</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">netnir.constants</span> <span class="kn">import</span> <span class="n">HIER_DIR</span>
-<span class="kn">from</span> <span class="nn">netnir.core.output</span> <span class="kn">import</span> <span class="n">Output</span>
 <span class="kn">from</span> <span class="nn">nornir.core.task</span> <span class="kn">import</span> <span class="n">Task</span><span class="p">,</span> <span class="n">Result</span>
 <span class="kn">from</span> <span class="nn">hier_config</span> <span class="kn">import</span> <span class="n">Host</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">yaml</span>
-
-<span class="sd">&quot;&quot;&quot;hier_config nornir plugin</span>
-<span class="sd">&quot;&quot;&quot;</span>
 
 
 <div class="viewcode-block" id="hier_host"><a class="viewcode-back" href="../../../../netnir/netnir.plugins/#netnir.plugins.hier.hier_host">[docs]</a><span class="k">def</span> <span class="nf">hier_host</span><span class="p">(</span>
@@ -220,13 +216,11 @@
         <span class="p">)</span>
 
     <span class="n">host</span><span class="o">.</span><span class="n">load_remediation</span><span class="p">()</span>
-
-    <span class="n">output</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;remediation.conf&quot;</span><span class="p">)</span>
-    <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-        <span class="n">host</span><span class="o">.</span><span class="n">filter_remediation</span><span class="p">(</span><span class="n">include_tags</span><span class="o">=</span><span class="n">include_tags</span><span class="p">,</span> <span class="n">exclude_tags</span><span class="o">=</span><span class="n">exclude_tags</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">filter_remediation</span><span class="p">(</span>
+        <span class="n">include_tags</span><span class="o">=</span><span class="n">include_tags</span><span class="p">,</span> <span class="n">exclude_tags</span><span class="o">=</span><span class="n">exclude_tags</span>
     <span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">read</span><span class="p">())</span></div>
+    <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">results</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

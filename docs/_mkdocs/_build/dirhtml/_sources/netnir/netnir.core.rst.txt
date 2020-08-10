@@ -28,14 +28,6 @@ netnir.core.inventory module
    :undoc-members:
    :show-inheritance:
 
-netnir.core.networking module
------------------------------
-
-.. automodule:: netnir.core.networking
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 netnir.core.output module
 -------------------------
 
@@ -43,15 +35,6 @@ netnir.core.output module
    :members:
    :undoc-members:
    :show-inheritance:
-
-netnir.core.template module
----------------------------
-
-.. automodule:: netnir.core.template
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 
 Module contents
 ---------------
