@@ -36,12 +36,14 @@ class Ssh(CommandScaffold):
                 task=netmiko_send_config,
                 commands=self.args.commands,
                 name="SSH CONFIG EXECUTION",
+                num_workers=self.args.workers,
             )
         else:
             results = self.nr.run(
                 task=netmiko_send_commands,
                 commands=self.args.commands,
                 name="SSH COMMAND EXECUTION",
+                num_workers=self.args.workers,
             )
 
         if self.args.output:

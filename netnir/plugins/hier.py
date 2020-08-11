@@ -1,6 +1,7 @@
 from netnir.constants import HIER_DIR
 from nornir.core.task import Task, Result
 from hier_config import Host
+from typing import Any
 import logging
 import os
 import yaml
@@ -14,6 +15,7 @@ def hier_host(
     compiled_config: str = None,
     config_path: str = None,
     load_file: bool = False,
+    **kwargs: Any,
 ) -> Result:
     """
     hier_config task for nornir

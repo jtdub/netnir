@@ -11,6 +11,7 @@ def test_tasks_config_plan():
     parser.add_argument("--compile", const=True, nargs="?")
     parser.add_argument("--include-tags", action="append")
     parser.add_argument("--exclude-tags", action="append")
+    parser.add_argument("--workers", default=1)
     args = parser.parse_args()
     cp = ConfigPlan(args=args)
     cp.args.compile = True

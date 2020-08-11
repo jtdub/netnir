@@ -17,11 +17,17 @@ class CommandScaffold:
 
         :params parser: type object
         """
-        from netnir.helpers.common.args import filter_host, filter_hosts, filter_group
+        from netnir.helpers.common.args import (
+            filter_host,
+            filter_hosts,
+            filter_group,
+            num_workers,
+        )
 
         filter_host(parser)
         filter_hosts(parser)
         filter_group(parser)
+        num_workers(parser)
 
     def run(self):
         """things to do"""

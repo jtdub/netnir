@@ -11,7 +11,9 @@ class Inventory(CommandScaffold):
         from nornir.plugins.functions.text import print_result
 
         self.nr = self._inventory()
-        results = self.nr.run(task=inventory_facts)
+        results = self.nr.run(
+            task=inventory_facts, name="INVENTORY FACTS", num_workers=self.args.workers
+        )
         print_result(results)
 
         return results

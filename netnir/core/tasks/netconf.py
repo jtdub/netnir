@@ -38,7 +38,9 @@ class NetConf(CommandScaffold):
 
         if self.args.capabilities:
             results = self.nr.run(
-                task=netconf_capabilities, name="NETCONF SERVER CAPABILITIES",
+                task=netconf_capabilities,
+                name="NETCONF SERVER CAPABILITIES",
+                num_workers=self.args.workers,
             )
         elif self.args.config:
             results = self.nr.run(
@@ -46,6 +48,7 @@ class NetConf(CommandScaffold):
                 name="NETCONF EDIT CONFIG",
                 target=self.args.target,
                 nc_config=self.args.nc_config,
+                num_workers=self.args.workers,
             )
         else:
             results = self.nr.run(
@@ -54,6 +57,7 @@ class NetConf(CommandScaffold):
                 name="NETCONF GET FILTERED CONFIG",
                 nc_filter_type=self.args.nc_filter,
                 nc_filter=self.args.nc_config,
+                num_workers=self.args.workers,
             )
 
         print_result(results)
