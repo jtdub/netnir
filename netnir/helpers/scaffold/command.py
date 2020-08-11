@@ -40,13 +40,8 @@ class CommandScaffold:
         return "things to do"
 
     def _verbose(self):
-        import os
-
         self.logging.setLevel(self.args.verbose)
-
-        to_console = True if self.logging.level == 10 else False
-        os.environ["NORNIR_LOGGING_TO_CONSOLE"] = str(to_console)
-        os.environ["NORNIR_LOGGING_LEVEL"] = self.args.verbose
+        to_console = True if self.args.verbose == "DEBUG" else False
 
         return {"level": self.logging.level, "to_console": to_console}
 

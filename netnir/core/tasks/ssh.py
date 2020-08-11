@@ -55,6 +55,6 @@ class Ssh(CommandScaffold):
         if self.args.output:
             output_writer(nornir_results=results, output_file=self.args.output)
 
-        print_result(results)
+        print_result(result=results, severity_level=self._verbose()["level"])
 
         return results

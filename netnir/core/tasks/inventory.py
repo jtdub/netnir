@@ -19,6 +19,7 @@ class Inventory(CommandScaffold):
             severity_level=self._verbose()["level"],
             to_console=self._verbose()["to_console"],
         )
-        print_result(results)
+
+        print_result(result=results, severity_level=self._verbose()["level"])
 
         return results

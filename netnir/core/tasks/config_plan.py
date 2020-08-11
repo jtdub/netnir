@@ -94,6 +94,7 @@ class ConfigPlan(CommandScaffold):
             to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="remediation.conf")
-        print_result(results)
+
+        print_result(result=results, severity_level=self._verbose()["level"])
 
         return results

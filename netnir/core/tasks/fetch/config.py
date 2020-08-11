@@ -35,4 +35,6 @@ class FetchConfig(CommandScaffold):
         )
         output_writer(nornir_results=results, output_file="running.conf")
 
-        return print_result(results)
+        print_result(result=results, severity_level=self._verbose()["level"])
+
+        return results

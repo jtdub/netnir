@@ -34,6 +34,7 @@ class NetConf(CommandScaffold):
         )
         from nornir.plugins.functions.text import print_result
 
+        self._verbose()
         self.nr = self._inventory()
 
         if self.args.capabilities:
@@ -69,6 +70,6 @@ class NetConf(CommandScaffold):
                 to_console=self._verbose()["to_console"],
             )
 
-        print_result(results)
+        print_result(result=results, severity_level=self._verbose()["level"])
 
         return results
