@@ -12,12 +12,6 @@ def hier_host(
     load_file: bool = False,
     **kwargs: Any,
 ) -> Result:
-    from netnir.constants import HIER_DIR
-    from hier_config import Host
-    import logging
-    import os
-    import yaml
-
     """
     hier_config task for nornir
 
@@ -31,6 +25,11 @@ def hier_host(
 
     :returns: hier remediation object
     """
+    from netnir.constants import HIER_DIR
+    from hier_config import Host
+    import logging
+    import os
+    import yaml
 
     operating_system = task.host.data["os"]
     hier_options_file = "/".join([HIER_DIR, operating_system, "options.yml"])
