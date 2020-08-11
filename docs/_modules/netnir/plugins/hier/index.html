@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.plugins.hier &mdash; netnir 0.0.18 0.0.18 documentation</title>
+  <title>netnir.plugins.hier &mdash; netnir 0.0.19 0.0.19 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.18
+            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.19
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../">netnir 0.0.18</a>
+          <a href="../../../../">netnir 0.0.19</a>
         
       </nav>
 
@@ -148,12 +148,8 @@
            <div itemprop="articleBody">
             
   <h1>Source code for netnir.plugins.hier</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">netnir.constants</span> <span class="kn">import</span> <span class="n">HIER_DIR</span>
-<span class="kn">from</span> <span class="nn">nornir.core.task</span> <span class="kn">import</span> <span class="n">Task</span><span class="p">,</span> <span class="n">Result</span>
-<span class="kn">from</span> <span class="nn">hier_config</span> <span class="kn">import</span> <span class="n">Host</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">yaml</span>
+<span></span><span class="kn">from</span> <span class="nn">nornir.core.task</span> <span class="kn">import</span> <span class="n">Task</span><span class="p">,</span> <span class="n">Result</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
 
 <div class="viewcode-block" id="hier_host"><a class="viewcode-back" href="../../../../netnir/netnir.plugins/#netnir.plugins.hier.hier_host">[docs]</a><span class="k">def</span> <span class="nf">hier_host</span><span class="p">(</span>
@@ -164,6 +160,7 @@
     <span class="n">compiled_config</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">load_file</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    hier_config task for nornir</span>
@@ -178,12 +175,18 @@
 
 <span class="sd">    :returns: hier remediation object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">netnir.constants</span> <span class="kn">import</span> <span class="n">HIER_DIR</span>
+    <span class="kn">from</span> <span class="nn">hier_config</span> <span class="kn">import</span> <span class="n">Host</span>
+    <span class="kn">import</span> <span class="nn">logging</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">yaml</span>
 
     <span class="n">operating_system</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;os&quot;</span><span class="p">]</span>
     <span class="n">hier_options_file</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">HIER_DIR</span><span class="p">,</span> <span class="n">operating_system</span><span class="p">,</span> <span class="s2">&quot;options.yml&quot;</span><span class="p">])</span>
     <span class="n">hier_tags_file</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">HIER_DIR</span><span class="p">,</span> <span class="n">operating_system</span><span class="p">,</span> <span class="s2">&quot;tags.yml&quot;</span><span class="p">])</span>
     <span class="n">running_config</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">config_path</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">running_config</span><span class="p">])</span>
     <span class="n">compiled_config</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">config_path</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">compiled_config</span><span class="p">])</span>
+    <span class="n">logging</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;nornir&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">hier_options_file</span><span class="p">):</span>
         <span class="n">hier_options</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">hier_options_file</span><span class="p">),</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.helpers &mdash; netnir 0.0.18 0.0.18 documentation</title>
+  <title>netnir.helpers &mdash; netnir 0.0.19 0.0.19 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.18
+            <a href="../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.19
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../">netnir 0.0.18</a>
+          <a href="../../../">netnir 0.0.19</a>
         
       </nav>
 
@@ -152,7 +152,6 @@
 <span class="kn">from</span> <span class="nn">netnir.helpers.colors</span> <span class="kn">import</span> <span class="n">TextColor</span>
 <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">logging</span>
 
 
 <div class="viewcode-block" id="device_mapper"><a class="viewcode-back" href="../../../netnir/netnir.helpers/#netnir.helpers.device_mapper">[docs]</a><span class="k">def</span> <span class="nf">device_mapper</span><span class="p">(</span><span class="n">os_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">proto</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;netmiko&quot;</span><span class="p">):</span>
@@ -262,6 +261,10 @@
 
 
 <div class="viewcode-block" id="netnir_config"><a class="viewcode-back" href="../../../netnir/netnir.helpers/#netnir.helpers.netnir_config">[docs]</a><span class="k">def</span> <span class="nf">netnir_config</span><span class="p">(</span><span class="n">config_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;netnir.yaml&quot;</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">logging</span>
+
+    <span class="n">logging</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;nornir&quot;</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NETNIR_CONFIG&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NETNIR_CONFIG&quot;</span><span class="p">)),</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.helpers.scaffold.command &mdash; netnir 0.0.18 0.0.18 documentation</title>
+  <title>netnir.helpers.scaffold.command &mdash; netnir 0.0.19 0.0.19 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.18
+            <a href="../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.19
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../../">netnir 0.0.18</a>
+          <a href="../../../../../">netnir 0.0.19</a>
         
       </nav>
 
@@ -159,8 +159,10 @@
 <span class="sd">        :params args: type object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">netnir.constants</span> <span class="kn">import</span> <span class="n">NR</span>
+        <span class="kn">import</span> <span class="nn">logging</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logging</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;nornir&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nr</span> <span class="o">=</span> <span class="n">NR</span>
 
 <div class="viewcode-block" id="CommandScaffold.parser"><a class="viewcode-back" href="../../../../../netnir/netnir.helpers.scaffold/#netnir.helpers.scaffold.command.CommandScaffold.parser">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -169,15 +171,31 @@
 
 <span class="sd">        :params parser: type object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">netnir.helpers.common.args</span> <span class="kn">import</span> <span class="n">filter_host</span><span class="p">,</span> <span class="n">filter_hosts</span><span class="p">,</span> <span class="n">filter_group</span>
+        <span class="kn">from</span> <span class="nn">netnir.helpers.common.args</span> <span class="kn">import</span> <span class="p">(</span>
+            <span class="n">filter_host</span><span class="p">,</span>
+            <span class="n">filter_hosts</span><span class="p">,</span>
+            <span class="n">filter_group</span><span class="p">,</span>
+            <span class="n">num_workers</span><span class="p">,</span>
+            <span class="n">make_changes</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="n">filter_host</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
         <span class="n">filter_hosts</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
-        <span class="n">filter_group</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span></div>
+        <span class="n">filter_group</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">num_workers</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">make_changes</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+        <span class="n">verbose</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CommandScaffold.run"><a class="viewcode-back" href="../../../../../netnir/netnir.helpers.scaffold/#netnir.helpers.scaffold.command.CommandScaffold.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;things to do&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s2">&quot;things to do&quot;</span></div>
+
+    <span class="k">def</span> <span class="nf">_verbose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="n">to_console</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">verbose</span> <span class="o">==</span> <span class="s2">&quot;DEBUG&quot;</span> <span class="k">else</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">level</span><span class="p">,</span> <span class="s2">&quot;to_console&quot;</span><span class="p">:</span> <span class="n">to_console</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;filter inventory</span>
