@@ -44,6 +44,7 @@ class Credentials:
         self.message = "netnir network authentication"
         self.status = None
         self.username_file = os.path.expanduser("~/.netniruser")
+        self.logging = logging.getLogger("nornir")
 
         if self.username is None:
             self._username()
@@ -109,7 +110,7 @@ class Credentials:
                 message = TextColor.green(
                     f"username file {self.username_file} has been deleted"
                 )
-                logging.warning(message)
+                self.logging.warning(message)
 
             return self._schema()
 
@@ -124,14 +125,14 @@ class Credentials:
             with open(self.username_file, "r") as user:
                 self.username = user.read()
                 message = TextColor.green(f"username read from {self.username_file}")
-                logging.info(message)
+                self.logging.info(message)
         else:
             self.username = input("netnir username: ")
 
             with open(self.username_file, "w") as user:
                 user.write(self.username)
                 message = TextColor.green(f"username written to {self.username_file}")
-                logging.info(message)
+                self.logging.info(message)
 
         return self.username
 

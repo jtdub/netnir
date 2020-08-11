@@ -70,8 +70,8 @@ def verbose(parser, required: bool = False):
         "--verbose",
         "-v",
         help="verbose logging",
-        default=20,
-        const=10,
+        default="INFO",
+        const="DEBUG",
         nargs="?",
         required=required,
     )

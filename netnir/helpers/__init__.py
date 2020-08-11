@@ -2,7 +2,6 @@ from netnir.helpers.defaults import default_config, nornir_defaults
 from netnir.helpers.colors import TextColor
 import yaml
 import os
-import logging
 
 
 def device_mapper(os_type: str, proto: str = "netmiko"):
@@ -112,6 +111,10 @@ def filter_type(host: str = None, filter: str = None, group: str = None):
 
 
 def netnir_config(config_file: str = "netnir.yaml"):
+    import logging
+
+    logging = logging.getLogger("nornir")
+
     if os.environ.get("NETNIR_CONFIG", None):
         return yaml.load(open(os.environ.get("NETNIR_CONFIG")), Loader=yaml.SafeLoader)
     elif os.path.isfile(config_file):

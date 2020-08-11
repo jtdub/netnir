@@ -41,6 +41,9 @@ class NetConf(CommandScaffold):
                 task=netconf_capabilities,
                 name="NETCONF SERVER CAPABILITIES",
                 num_workers=self.args.workers,
+                dry_run=self.args.X,
+                severity_level=self._verbose()["level"],
+                to_console=self._verbose()["to_console"],
             )
         elif self.args.config:
             results = self.nr.run(
@@ -49,6 +52,9 @@ class NetConf(CommandScaffold):
                 target=self.args.target,
                 nc_config=self.args.nc_config,
                 num_workers=self.args.workers,
+                dry_run=self.args.X,
+                severity_level=self._verbose()["level"],
+                to_console=self._verbose()["to_console"],
             )
         else:
             results = self.nr.run(
@@ -58,6 +64,9 @@ class NetConf(CommandScaffold):
                 nc_filter_type=self.args.nc_filter,
                 nc_filter=self.args.nc_config,
                 num_workers=self.args.workers,
+                dry_run=self.args.X,
+                severity_level=self._verbose()["level"],
+                to_console=self._verbose()["to_console"],
             )
 
         print_result(results)

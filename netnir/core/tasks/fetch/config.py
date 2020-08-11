@@ -28,6 +28,9 @@ class FetchConfig(CommandScaffold):
             task=netmiko_send_commands,
             commands="show running",
             num_workers=self.args.workers,
+            dry_run=self.args.X,
+            severity_level=self._verbose()["level"],
+            to_console=self._verbose()["to_console"],
             name="FETCH RUNNING CONFIG",
         )
         output_writer(nornir_results=results, output_file="running.conf")

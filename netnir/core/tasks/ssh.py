@@ -37,6 +37,9 @@ class Ssh(CommandScaffold):
                 commands=self.args.commands,
                 name="SSH CONFIG EXECUTION",
                 num_workers=self.args.workers,
+                dry_run=self.args.X,
+                severity_level=self._verbose()["level"],
+                to_console=self._verbose()["to_console"],
             )
         else:
             results = self.nr.run(
@@ -44,6 +47,9 @@ class Ssh(CommandScaffold):
                 commands=self.args.commands,
                 name="SSH COMMAND EXECUTION",
                 num_workers=self.args.workers,
+                dry_run=self.args.X,
+                severity_level=self._verbose()["level"],
+                to_console=self._verbose()["to_console"],
             )
 
         if self.args.output:

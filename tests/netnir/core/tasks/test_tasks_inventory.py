@@ -5,6 +5,8 @@ def test_tasks_inventory():
         filter_hosts,
         filter_host,
         num_workers,
+        make_changes,
+        verbose,
     )
     import argparse
 
@@ -13,6 +15,8 @@ def test_tasks_inventory():
     filter_hosts(parser)
     filter_host(parser)
     num_workers(parser)
+    make_changes(parser)
+    verbose(parser)
     args = parser.parse_args()
     args.host = "router.dc1"
     inventory = Inventory(args)

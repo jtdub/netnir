@@ -57,6 +57,9 @@ class ConfigPlan(CommandScaffold):
             output_file="compiled.conf",
             name="COMPILE TEMPLATES",
             num_workers=self.args.workers,
+            dry_run=self.args.X,
+            severity_level=self._verbose()["level"],
+            to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="compiled.conf")
         print_result(results)
@@ -69,6 +72,9 @@ class ConfigPlan(CommandScaffold):
             commands="show running",
             name="FETCH RUNNING CONFIG",
             num_workers=self.args.workers,
+            dry_run=self.args.X,
+            severity_level=self._verbose()["level"],
+            to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="running.conf")
         print_result(results)
@@ -83,6 +89,9 @@ class ConfigPlan(CommandScaffold):
             load_file=True,
             name="RENDER REMEDIATION CONFIG",
             num_workers=self.args.workers,
+            dry_run=self.args.X,
+            severity_level=self._verbose()["level"],
+            to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="remediation.conf")
         print_result(results)
