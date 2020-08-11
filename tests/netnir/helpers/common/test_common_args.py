@@ -26,8 +26,8 @@ def test_common_args(initial_setup):
     assert isinstance(parsed_args.hosts, list)
     assert parsed_args.group == "dc1"
     assert isinstance(parsed_args.group, str)
-    assert parsed_args.workers == 20
+    assert parsed_args.workers == 1
     assert isinstance(parsed_args.workers, int)
     assert parsed_args.X is True
-    assert parsed_args.verbose == 20
+    assert parsed_args.verbose == "INFO"
     assert parsed_args.output == "example.txt"

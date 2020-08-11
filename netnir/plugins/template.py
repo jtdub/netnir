@@ -1,10 +1,11 @@
 from nornir.core.task import Task, Result
 from netnir.helpers import merge_two_dicts
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
+from typing import Any
 
 
 def template_file(
-    task: Task, template_file: str, jinja_filters: dict = {}, **kwargs: dict,
+    task: Task, template_file: str, jinja_filters: dict = {}, **kwargs: Any,
 ) -> Result:
     """compile a jinja2 template and write it to a file.
 

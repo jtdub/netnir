@@ -1,9 +1,5 @@
-from netnir.constants import HIER_DIR
 from nornir.core.task import Task, Result
-from hier_config import Host
-import logging
-import os
-import yaml
+from typing import Any
 
 
 def hier_host(
@@ -14,6 +10,7 @@ def hier_host(
     compiled_config: str = None,
     config_path: str = None,
     load_file: bool = False,
+    **kwargs: Any,
 ) -> Result:
     """
     hier_config task for nornir
@@ -28,12 +25,18 @@ def hier_host(
 
     :returns: hier remediation object
     """
+    from netnir.constants import HIER_DIR
+    from hier_config import Host
+    import logging
+    import os
+    import yaml
 
     operating_system = task.host.data["os"]
     hier_options_file = "/".join([HIER_DIR, operating_system, "options.yml"])
     hier_tags_file = "/".join([HIER_DIR, operating_system, "tags.yml"])
     running_config = "/".join([config_path, task.host.name, running_config])
     compiled_config = "/".join([config_path, task.host.name, compiled_config])
+    logging = logging.getLogger("nornir")
 
     if os.path.isfile(hier_options_file):
         hier_options = yaml.load(open(hier_options_file), Loader=yaml.SafeLoader)

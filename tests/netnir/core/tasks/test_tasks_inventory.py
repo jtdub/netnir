@@ -1,12 +1,22 @@
 def test_tasks_inventory():
     from netnir.core.tasks.inventory import Inventory
-    from netnir.helpers.common.args import filter_group, filter_hosts, filter_host
+    from netnir.helpers.common.args import (
+        filter_group,
+        filter_hosts,
+        filter_host,
+        num_workers,
+        make_changes,
+        verbose,
+    )
     import argparse
 
     parser = argparse.ArgumentParser()
     filter_group(parser)
     filter_hosts(parser)
     filter_host(parser)
+    num_workers(parser)
+    make_changes(parser)
+    verbose(parser)
     args = parser.parse_args()
     args.host = "router.dc1"
     inventory = Inventory(args)

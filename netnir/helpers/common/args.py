@@ -42,7 +42,8 @@ def num_workers(parser, required: bool = False):
         "--workers",
         "-w",
         help="number of workers to utilize",
-        default=20,
+        default=1,
+        type=int,
         required=required,
     )
 
@@ -69,8 +70,8 @@ def verbose(parser, required: bool = False):
         "--verbose",
         "-v",
         help="verbose logging",
-        default=20,
-        const=10,
+        default="INFO",
+        const="DEBUG",
         nargs="?",
         required=required,
     )
@@ -120,6 +121,7 @@ def netconf_source(parser, required: bool = False):
         help="the source config config for netconf to get",
         choices=["candidate", "running"],
         required=required,
+        default="running",
     )
 
 
@@ -132,6 +134,7 @@ def netconf_target(parser, required: bool = False):
         help="the target config for netconf to edit",
         choices=["candidate", "running", "startup"],
         required=required,
+        default="running",
     )
 
 

@@ -36,17 +36,25 @@ class Ssh(CommandScaffold):
                 task=netmiko_send_config,
                 commands=self.args.commands,
                 name="SSH CONFIG EXECUTION",
+                num_workers=self.args.workers,
+                dry_run=self.args.X,
+                severity_level=self._verbose()["level"],
+                to_console=self._verbose()["to_console"],
             )
         else:
             results = self.nr.run(
                 task=netmiko_send_commands,
                 commands=self.args.commands,
                 name="SSH COMMAND EXECUTION",
+                num_workers=self.args.workers,
+                dry_run=self.args.X,
+                severity_level=self._verbose()["level"],
+                to_console=self._verbose()["to_console"],
             )
 
         if self.args.output:
             output_writer(nornir_results=results, output_file=self.args.output)
 
-        print_result(results)
+        print_result(result=results, severity_level=self._verbose()["level"])
 
         return results

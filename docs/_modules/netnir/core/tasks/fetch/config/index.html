@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.core.tasks.fetch.config &mdash; netnir 0.0.18 0.0.18 documentation</title>
+  <title>netnir.core.tasks.fetch.config &mdash; netnir 0.0.19 0.0.19 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.18
+            <a href="../../../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.19
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../../../">netnir 0.0.18</a>
+          <a href="../../../../../../">netnir 0.0.19</a>
         
       </nav>
 
@@ -151,7 +151,6 @@
             
   <h1>Source code for netnir.core.tasks.fetch.config</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">netnir.helpers.scaffold.command</span> <span class="kn">import</span> <span class="n">CommandScaffold</span>
-<span class="kn">from</span> <span class="nn">netnir.helpers.common.args</span> <span class="kn">import</span> <span class="n">num_workers</span>
 <span class="kn">from</span> <span class="nn">netnir.helpers</span> <span class="kn">import</span> <span class="n">output_writer</span>
 <span class="kn">from</span> <span class="nn">netnir.plugins.netmiko</span> <span class="kn">import</span> <span class="n">netmiko_send_commands</span>
 <span class="kn">from</span> <span class="nn">nornir.plugins.functions.text</span> <span class="kn">import</span> <span class="n">print_result</span>
@@ -168,8 +167,7 @@
 
 <span class="sd">        :param parser: type obj</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">CommandScaffold</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
-        <span class="n">num_workers</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span></div>
+        <span class="n">CommandScaffold</span><span class="o">.</span><span class="n">parser</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="FetchConfig.run"><a class="viewcode-back" href="../../../../../../netnir/netnir.core.tasks.fetch/#netnir.core.tasks.fetch.config.FetchConfig.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;execute the cli task</span>
@@ -178,10 +176,20 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">nr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inventory</span><span class="p">()</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">netmiko_send_commands</span><span class="p">,</span> <span class="n">commands</span><span class="o">=</span><span class="s2">&quot;show running&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="n">task</span><span class="o">=</span><span class="n">netmiko_send_commands</span><span class="p">,</span>
+            <span class="n">commands</span><span class="o">=</span><span class="s2">&quot;show running&quot;</span><span class="p">,</span>
+            <span class="n">num_workers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">workers</span><span class="p">,</span>
+            <span class="n">dry_run</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">X</span><span class="p">,</span>
+            <span class="n">severity_level</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">()[</span><span class="s2">&quot;level&quot;</span><span class="p">],</span>
+            <span class="n">to_console</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">()[</span><span class="s2">&quot;to_console&quot;</span><span class="p">],</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;FETCH RUNNING CONFIG&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="n">output_writer</span><span class="p">(</span><span class="n">nornir_results</span><span class="o">=</span><span class="n">results</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="s2">&quot;running.conf&quot;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">print_result</span><span class="p">(</span><span class="n">results</span><span class="p">)</span></div></div>
+        <span class="n">print_result</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">results</span><span class="p">,</span> <span class="n">severity_level</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">()[</span><span class="s2">&quot;level&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">results</span></div></div>
 </pre></div>
 
            </div>

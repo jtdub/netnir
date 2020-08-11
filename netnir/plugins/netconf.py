@@ -1,9 +1,10 @@
 from nornir.core.task import Task, Result
 from netnir.helpers import device_mapper
 from ncclient import manager
+from typing import Any
 
 
-def netconf_capabilities(task: Task) -> Result:
+def netconf_capabilities(task: Task, **kwargs: Any) -> Result:
     """nornir get netconf capabilities
 
     :params task: type object
@@ -31,6 +32,7 @@ def netconf_get_config(
     source: str = "running",
     nc_filter: str = None,
     nc_filter_type: str = None,
+    **kwargs: Any
 ) -> Result:
     """nornir netconf get config task
 

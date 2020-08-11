@@ -56,6 +56,10 @@ class ConfigPlan(CommandScaffold):
             template_file="main.conf.j2",
             output_file="compiled.conf",
             name="COMPILE TEMPLATES",
+            num_workers=self.args.workers,
+            dry_run=self.args.X,
+            severity_level=self._verbose()["level"],
+            to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="compiled.conf")
         print_result(results)
@@ -67,6 +71,10 @@ class ConfigPlan(CommandScaffold):
             task=netmiko_send_commands,
             commands="show running",
             name="FETCH RUNNING CONFIG",
+            num_workers=self.args.workers,
+            dry_run=self.args.X,
+            severity_level=self._verbose()["level"],
+            to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="running.conf")
         print_result(results)
@@ -80,8 +88,13 @@ class ConfigPlan(CommandScaffold):
             config_path=OUTPUT_DIR,
             load_file=True,
             name="RENDER REMEDIATION CONFIG",
+            num_workers=self.args.workers,
+            dry_run=self.args.X,
+            severity_level=self._verbose()["level"],
+            to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="remediation.conf")
-        print_result(results)
+
+        print_result(result=results, severity_level=self._verbose()["level"])
 
         return results
