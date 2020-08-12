@@ -7,11 +7,13 @@ class CommandScaffold:
         :params args: type object
         """
         from netnir.constants import NR
+        from netnir.core.connection import register_connections
         import logging
 
         self.args = args
         self.logging = logging.getLogger("nornir")
         self.nr = NR
+        register_connections()
 
     @staticmethod
     def parser(parser):
