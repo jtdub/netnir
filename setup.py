@@ -17,6 +17,7 @@ setuptools.setup(
         "hier_config==v1.6.1",
         "keyring>=21.2.1",
         "keyrings.alt>=3.4.0",
+        "ntc-rosetta>=v0.2.0",
     ],
     tests_require=[
         "pytest",

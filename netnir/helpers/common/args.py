@@ -174,3 +174,23 @@ def netconf_capabilities(parser, required: bool = False):
         nargs="?",
         const=True,
     )
+
+
+def config_to_yang(parser, required: bool = False) -> None:
+    """
+    common argument to convert configuration text to a yang model via the
+    --config-to-yang flag.
+    """
+    parser.add_argument(
+        "--config-to-yang", help="convert configuration text to a yang model",
+    )
+
+
+def yang_to_config(parser, required: bool = False) -> None:
+    """
+    common argument to convert yang model to configuration text via the
+    --yang-to-config flag.
+    """
+    parser.add_argument(
+        "--yang-to-config", help="convert configuration text to a yang model",
+    )
