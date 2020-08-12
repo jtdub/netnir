@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>netnir.plugins.netmiko &mdash; netnir 0.0.19 0.0.19 documentation</title>
+  <title>netnir.plugins.netmiko &mdash; netnir 0.0.20 0.0.20 documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.19
+            <a href="../../../../" class="icon icon-home" alt="Documentation Home"> netnir 0.0.20
           
 
           
@@ -99,7 +99,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../">netnir 0.0.19</a>
+          <a href="../../../../">netnir 0.0.20</a>
         
       </nav>
 
@@ -149,8 +149,6 @@
             
   <h1>Source code for netnir.plugins.netmiko</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">nornir.core.task</span> <span class="kn">import</span> <span class="n">Task</span><span class="p">,</span> <span class="n">Result</span>
-<span class="kn">from</span> <span class="nn">netmiko</span> <span class="kn">import</span> <span class="n">ConnectHandler</span>
-<span class="kn">from</span> <span class="nn">netnir.helpers</span> <span class="kn">import</span> <span class="n">device_mapper</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
 
@@ -162,25 +160,16 @@
 
 <span class="sd">    :returns: nornir Result object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">secret</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">connection_options</span><span class="p">[</span><span class="s2">&quot;netmiko&quot;</span><span class="p">][</span><span class="s2">&quot;extras&quot;</span><span class="p">][</span><span class="s2">&quot;secret&quot;</span><span class="p">]</span>
-    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="n">secret</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="n">device_params</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">hostname</span><span class="p">,</span>
-        <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="n">device_mapper</span><span class="p">(</span><span class="n">os_type</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">platform</span><span class="p">,</span> <span class="n">proto</span><span class="o">=</span><span class="s2">&quot;netmiko&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
-        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
-        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
-        <span class="s2">&quot;secret&quot;</span><span class="p">:</span> <span class="n">secret</span><span class="p">,</span>
-        <span class="s2">&quot;ssh_config_file&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">nornir</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">ssh</span><span class="o">.</span><span class="n">config_file</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">}</span>
     <span class="n">output</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">get_connection</span><span class="p">(</span>
+        <span class="n">connection</span><span class="o">=</span><span class="s2">&quot;netmiko&quot;</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">nornir</span><span class="o">.</span><span class="n">config</span>
+    <span class="p">)</span>
 
-    <span class="k">with</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="n">device_params</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">commands</span><span class="p">:</span>
-            <span class="n">output</span> <span class="o">+=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">commands</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">commands</span> <span class="o">=</span> <span class="p">[</span><span class="n">commands</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">commands</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">output</span><span class="p">)</span></div>
 
@@ -193,24 +182,12 @@
 
 <span class="sd">    :returns: nornir Result object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">secret</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">connection_options</span><span class="p">[</span><span class="s2">&quot;netmiko&quot;</span><span class="p">][</span><span class="s2">&quot;extras&quot;</span><span class="p">][</span><span class="s2">&quot;secret&quot;</span><span class="p">]</span>
-    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="n">secret</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="n">device_params</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">hostname</span><span class="p">,</span>
-        <span class="s2">&quot;device_type&quot;</span><span class="p">:</span> <span class="n">device_mapper</span><span class="p">(</span><span class="n">os_type</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">platform</span><span class="p">,</span> <span class="n">proto</span><span class="o">=</span><span class="s2">&quot;netmiko&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
-        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
-        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
-        <span class="s2">&quot;secret&quot;</span><span class="p">:</span> <span class="n">secret</span><span class="p">,</span>
-        <span class="s2">&quot;ssh_config_file&quot;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">nornir</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">ssh</span><span class="o">.</span><span class="n">config_file</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">}</span>
-
-    <span class="k">with</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="n">device_params</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_config_set</span><span class="p">(</span><span class="n">commands</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">+=</span> <span class="n">conn</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">get_connection</span><span class="p">(</span>
+        <span class="n">connection</span><span class="o">=</span><span class="s2">&quot;netmiko&quot;</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">nornir</span><span class="o">.</span><span class="n">config</span>
+    <span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">send_config_set</span><span class="p">(</span><span class="n">commands</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">+=</span> <span class="n">conn</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">Result</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">output</span><span class="p">)</span></div>
 </pre></div>

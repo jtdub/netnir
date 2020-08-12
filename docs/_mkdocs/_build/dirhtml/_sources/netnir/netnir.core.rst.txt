@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   netnir.core.connection
    netnir.core.tasks
 
 Submodules
