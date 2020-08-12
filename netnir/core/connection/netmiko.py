@@ -23,7 +23,6 @@ class Netmiko(ConnectionPlugin):
     ) -> None:
         from netnir.helpers import device_mapper
         from netmiko import ConnectHandler
-        from pathlib import Path
 
         parameters = {
             "host": hostname,
