@@ -11,8 +11,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         "pytest-runner",
-        "nornir==2.4.0",
-        "netmiko==2.4.2",
+        "nornir>=v3.0.0a",
+        "netmiko>=v3.2.0",
         "ncclient>=0.6.7",
         "hier_config==v1.6.1",
         "keyring>=21.2.1",
