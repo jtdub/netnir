@@ -1,55 +1,41 @@
-from nornir.core.task import Task, Result
-from typing import Any
-
-
-def convert_config_to_yang(
-    task: Task, config_file: str = None, **kwargs: Any
-) -> Result:
+def convert_config_to_yang(operating_system: str, config_file: str):
     """
     convert a config string into a yang model
 
-    :param task: nornir task object
-    :param config_file: configuration file from OUTPUT_DIR
+    :param operating_system: type str
+    :param config_file: configuration file from CWD
 
-    :returns: nornir result object
+    :returns: YANG output in JSON format
     """
-    from netnir.constants import OUTPUT_DIR
     from ntc_rosetta import get_driver
     import json
 
-    config_path = "/".join([OUTPUT_DIR, task.host.name, config_file])
-
-    with open(config_path) as f:
+    with open(config_file) as f:
         config_string = f.read()
 
-    os_driver = get_driver(task.host.platform, "openconfig")
+    os_driver = get_driver(operating_system, "openconfig")
     driver = os_driver()
     parsed = driver.parse(native={"dev_conf": config_string})
 
-    return Result(host=task.host, result=json.dumps(parsed.raw_value(), indent=2))
+    return json.dumps(parsed.raw_value(), indent=2)
 
 
-def convert_yang_to_config(
-    task: Task, yang_model: dict = None, **kwargs: Any
-) -> Result:
+def convert_yang_to_config(operating_system: str, yang_file: str):
     """
     convert a yang model to configuration text
 
-    :param task: nornir task object
-    :param yang_model: type dict
+    :param operating_system: type str
+    :param yang_file: yang file from CWD
 
-    :returns: nornir result object
+    :returns: configuration text
     """
     from ntc_rosetta import get_driver
-    from netnir.constants import OUTPUT_DIR
 
-    yang_path = "/".join([OUTPUT_DIR, task.host.name, yang_model])
+    with open(yang_file) as f:
+        yang_string = f.read()
 
-    with open(yang_path) as f:
-        yang_data = f.read()
-
-    os_driver = get_driver(task.host.platform, "openconfig")
+    os_driver = get_driver(operating_system, "openconfig")
     driver = os_driver()
-    config_text = driver.translate(candidate=yang_data)
+    config_text = driver.translate(candidate=yang_string)
 
-    return Result(host=task.host, result=config_text)
+    return config_text

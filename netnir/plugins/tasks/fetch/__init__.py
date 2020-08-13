@@ -9,7 +9,7 @@ class Fetch(SubCommandParser):
     title = "fetch commands"
     tasks = {
         "config": {
-            "class": "netnir.core.tasks.fetch.config.FetchConfig",
+            "class": "netnir.plugins.tasks.fetch.config.FetchConfig",
             "description": "fetch current config from a network device",
         },
     }

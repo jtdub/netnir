@@ -1,5 +1,5 @@
 def test_tasks_config_plan():
-    from netnir.core.tasks.config_plan import ConfigPlan
+    from netnir.plugins.tasks.config_plan import ConfigPlan
     from netnir.helpers.common.args import (
         filter_group,
         filter_host,

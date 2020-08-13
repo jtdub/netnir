@@ -1,5 +1,5 @@
 def test_tasks_inventory():
-    from netnir.core.tasks.inventory import Inventory
+    from netnir.plugins.tasks.inventory import Inventory
     from netnir.helpers.common.args import (
         filter_group,
         filter_hosts,
