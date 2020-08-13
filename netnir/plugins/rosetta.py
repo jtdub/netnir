@@ -30,12 +30,14 @@ def convert_yang_to_config(operating_system: str, yang_file: str):
     :returns: configuration text
     """
     from ntc_rosetta import get_driver
+    import json
 
     with open(yang_file) as f:
         yang_string = f.read()
+        yang_model = json.loads(yang_string)
 
     os_driver = get_driver(operating_system, "openconfig")
     driver = os_driver()
-    config_text = driver.translate(candidate=yang_string)
+    config_text = driver.translate(candidate=yang_model)
 
     return config_text
