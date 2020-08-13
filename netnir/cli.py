@@ -21,7 +21,7 @@ class Cli:
         self.plugins = NETNIR_CONFIG["plugins"]
         self.parser = MyParser(prog="netnir")
         self.parser.add_argument(
-            "--version", default=False, action="store_true", help="display version"
+            "--version", default=False, action="store_true", help="display version",
         )
         subparsers = self.parser.add_subparsers(title="netnir commands", dest="command")
         self.loaded_plugins = plugins_import(tasks=self.plugins, subparsers=subparsers)
