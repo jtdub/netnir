@@ -1,0 +1,15 @@
+interface FastEthernet1
+   description This is Fa1
+   shutdown
+   exit
+!
+vlan 10
+   name prod
+   no shutdown
+   exit
+!
+vlan 20
+   name dev
+   shutdown
+   exit
+!

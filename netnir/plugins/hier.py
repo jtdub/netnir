@@ -49,7 +49,7 @@ def hier_host(
         )
 
     host = Host(
-        hostname=task.host.name, os=operating_system, hconfig_options=hier_options
+        hostname=task.host.name, os=operating_system, hconfig_options=hier_options,
     )
     host.load_config_from(
         config_type="running", name=running_config, load_file=load_file

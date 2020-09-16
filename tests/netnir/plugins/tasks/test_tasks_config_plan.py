@@ -1,5 +1,5 @@
 def test_tasks_config_plan():
-    from netnir.core.tasks.config_plan import ConfigPlan
+    from netnir.plugins.tasks.config_plan import ConfigPlan
     from netnir.helpers.common.args import (
         filter_group,
         filter_host,
@@ -8,6 +8,8 @@ def test_tasks_config_plan():
         verbose,
         num_workers,
         make_changes,
+        config_to_yang,
+        yang_to_config,
     )
     import argparse
 
@@ -19,6 +21,8 @@ def test_tasks_config_plan():
     verbose(parser)
     num_workers(parser)
     make_changes(parser)
+    config_to_yang(parser)
+    yang_to_config(parser)
     parser.add_argument("--compile", const=True, nargs="?")
     parser.add_argument("--include-tags", action="append")
     parser.add_argument("--exclude-tags", action="append")

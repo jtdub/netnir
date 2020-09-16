@@ -14,7 +14,7 @@ class NornirInventory(Inventory):
         initialize the NornirInventory class and load the data into nornir
         """
         super().__init__(
-            hosts=self.nhosts(), groups=self.ngroups(), defaults=self.ndefaults()
+            hosts=self.nhosts(), groups=self.ngroups(), defaults=self.ndefaults(),
         )
 
     def nhosts(self):

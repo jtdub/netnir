@@ -62,7 +62,7 @@ class ConfigPlan(CommandScaffold):
             to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="compiled.conf")
-        print_result(results)
+        print_result(result=results, severity_level=self._verbose()["level"])
 
         if self.args.compile:
             return results
@@ -77,7 +77,7 @@ class ConfigPlan(CommandScaffold):
             to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="running.conf")
-        print_result(results)
+        print_result(result=results, severity_level=self._verbose()["level"])
 
         results = self.nr.run(
             task=hier_host,
@@ -94,7 +94,6 @@ class ConfigPlan(CommandScaffold):
             to_console=self._verbose()["to_console"],
         )
         output_writer(nornir_results=results, output_file="remediation.conf")
-
         print_result(result=results, severity_level=self._verbose()["level"])
 
         return results

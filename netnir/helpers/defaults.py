@@ -6,31 +6,31 @@ default_config = {
         "output": "./output",
         "hier": "./conf/hier",
     },
-    "domain": "example.net",
+    "domain": None,
     "nornir": {"config": "./conf/nornir.yaml"},
     "plugins": {
         "user": {
-            "class": "netnir.core.tasks.user.User",
+            "class": "netnir.plugins.tasks.user.User",
             "description": "netnir user commands",
         },
         "inventory": {
-            "class": "netnir.core.tasks.inventory.Inventory",
+            "class": "netnir.plugins.tasks.inventory.Inventory",
             "description": "inventory search command",
         },
         "cp": {
-            "class": "netnir.core.tasks.config_plan.ConfigPlan",
+            "class": "netnir.plugins.tasks.config_plan.ConfigPlan",
             "description": "config plan commands",
         },
         "ssh": {
-            "class": "netnir.core.tasks.ssh.Ssh",
+            "class": "netnir.plugins.tasks.ssh.Ssh",
             "description": "command and config execution over SSH",
         },
         "netconf": {
-            "class": "netnir.core.tasks.netconf.NetConf",
+            "class": "netnir.plugins.tasks.netconf.NetConf",
             "description": "command and config execution over NETCONF",
         },
         "fetch": {
-            "class": "netnir.core.tasks.fetch.Fetch",
+            "class": "netnir.plugins.tasks.fetch.Fetch",
             "description": "fetch commands",
         },
     },
